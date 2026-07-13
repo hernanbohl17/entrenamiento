@@ -40,6 +40,10 @@ main{max-width:960px; margin:0 auto; padding:24px 16px 80px;}
 .eli5 b{color:var(--accent); font-family:'JetBrains Mono',monospace; font-size:.75rem; letter-spacing:.1em; text-transform:uppercase; display:block; margin-bottom:6px;}
 .card{background:var(--card); border:1px solid var(--card-border); border-radius:var(--radius); padding:18px 20px; margin-bottom:16px;}
 .card img{width:100%; max-height:220px; object-fit:cover; border-radius:10px; margin-bottom:14px; background:#1c2027;}
+.img-row{display:grid; grid-template-columns:repeat(auto-fit,minmax(110px,1fr)); gap:8px; margin-bottom:14px;}
+.img-row figure{margin:0;}
+.img-row img{width:100%; height:110px; object-fit:cover; border-radius:8px; background:#1c2027; margin-bottom:4px;}
+.img-row figcaption{font-family:'JetBrains Mono',monospace; font-size:.65rem; color:var(--text-faint); text-align:center; text-transform:uppercase; letter-spacing:.04em;}
 .card h3{font-size:1.15rem; margin-bottom:8px; color:var(--text);}
 .tags{display:flex; flex-wrap:wrap; gap:6px; margin-bottom:12px;}
 .tag{background:var(--bg2); border:1px solid var(--card-border); color:var(--text-dim); font-family:'JetBrains Mono',monospace; font-size:.72rem; padding:4px 9px; border-radius:6px;}
@@ -189,7 +193,12 @@ footer{text-align:center; color:var(--text-faint); font-family:'JetBrains Mono',
   <div class="day-header">Día 1 y 4 — Piernas Implacables (Secuencias 1 a 5, en orden)</div>
 
   <div class="card">
-    <img src="images/ja-f1-secuencia1-sentadilla-puntillas.png" alt="Secuencia 1 sentadilla de puntillas">
+    <div class="img-row">
+      <figure><img src="images/hidrantes.png" alt="Hidrantes"><figcaption>Hidrantes</figcaption></figure>
+      <figure><img src="images/f1-seq1-hold-sentadilla-puntillas.png" alt="Hold sentadilla de puntillas"><figcaption>Hold</figcaption></figure>
+      <figure><img src="images/f1-seq1-bomba-sentadilla-puntillas.png" alt="Bomba sentadilla de puntillas"><figcaption>Bomba</figcaption></figure>
+      <figure><img src="images/estiramiento-flexor-cadera.png" alt="Estiramiento flexor de cadera"><figcaption>Estiramiento</figcaption></figure>
+    </div>
     <h3>Secuencia 1 — Sentadilla de puntillas</h3>
     <div class="tags"><span class="tag">Hidrantes</span><span class="tag">Hold</span><span class="tag">Bomba</span><span class="tag">Estir. flexor cadera</span></div>
     <table class="progress-table">
@@ -204,7 +213,12 @@ footer{text-align:center; color:var(--text-faint); font-family:'JetBrains Mono',
   </div>
 
   <div class="card">
-    <img src="images/ja-f1-secuencia2-estocada.png" alt="Secuencia 2 estocada">
+    <div class="img-row">
+      <figure><img src="images/hidrantes.png" alt="Hidrantes"><figcaption>Hidrantes</figcaption></figure>
+      <figure><img src="images/f1-seq2-hold-estocada.png" alt="Hold estocada"><figcaption>Hold</figcaption></figure>
+      <figure><img src="images/f1-seq2-bomba-estocada.png" alt="Bomba estocada"><figcaption>Bomba</figcaption></figure>
+      <figure><img src="images/estiramiento-flexor-cadera.png" alt="Estiramiento flexor de cadera"><figcaption>Estiramiento</figcaption></figure>
+    </div>
     <h3>Secuencia 2 — Estocada (Lunge)</h3>
     <div class="tags"><span class="tag">Hidrantes</span><span class="tag">Hold</span><span class="tag">Bomba</span><span class="tag">Estir. flexor cadera</span></div>
     <table class="progress-table">
@@ -219,7 +233,12 @@ footer{text-align:center; color:var(--text-faint); font-family:'JetBrains Mono',
   </div>
 
   <div class="card">
-    <img src="images/ja-f1-secuencia3-estocada-bulgara.png" alt="Secuencia 3 estocada búlgara">
+    <div class="img-row">
+      <figure><img src="images/hidrantes.png" alt="Hidrantes"><figcaption>Hidrantes</figcaption></figure>
+      <figure><img src="images/f1-seq3-hold-bulgara.png" alt="Hold búlgara"><figcaption>Hold</figcaption></figure>
+      <figure><img src="images/f1-seq3-bomba-bulgara.png" alt="Bomba búlgara"><figcaption>Bomba</figcaption></figure>
+      <figure><img src="images/estiramiento-flexor-cadera.png" alt="Estiramiento flexor de cadera"><figcaption>Estiramiento</figcaption></figure>
+    </div>
     <h3>Secuencia 3 — Estocada búlgara elevada</h3>
     <div class="tags"><span class="tag">Hidrantes</span><span class="tag">Hold</span><span class="tag">Bomba</span><span class="tag">Estir. flexor cadera</span></div>
     <table class="progress-table">
@@ -234,7 +253,12 @@ footer{text-align:center; color:var(--text-faint); font-family:'JetBrains Mono',
   </div>
 
   <div class="card">
-    <img src="images/ja-f1-secuencia4-peso-muerto-piernas-rectas.png" alt="Secuencia 4 peso muerto piernas rectas">
+    <div class="img-row">
+      <figure><img src="images/hidrantes.png" alt="Hidrantes"><figcaption>Hidrantes</figcaption></figure>
+      <figure><img src="images/f1-seq4-hold-peso-muerto.png" alt="Hold peso muerto"><figcaption>Hold</figcaption></figure>
+      <figure><img src="images/f1-seq4-bomba-peso-muerto.png" alt="Bomba peso muerto"><figcaption>Bomba</figcaption></figure>
+      <figure><img src="images/estiramiento-flexor-cadera.png" alt="Estiramiento flexor de cadera"><figcaption>Estiramiento</figcaption></figure>
+    </div>
     <h3>Secuencia 4 — Peso muerto piernas rectas</h3>
     <div class="tags"><span class="tag">Hidrantes</span><span class="tag">Hold</span><span class="tag">Bomba</span><span class="tag">Estir. flexor cadera</span></div>
     <table class="progress-table">
@@ -249,7 +273,12 @@ footer{text-align:center; color:var(--text-faint); font-family:'JetBrains Mono',
   </div>
 
   <div class="card">
-    <img src="images/ja-f1-secuencia5-v-up.png" alt="Secuencia 5 V-up">
+    <div class="img-row">
+      <figure><img src="images/hidrantes.png" alt="Hidrantes"><figcaption>Hidrantes</figcaption></figure>
+      <figure><img src="images/f1-seq5-hold-vup.png" alt="Hold V-up"><figcaption>Hold</figcaption></figure>
+      <figure><img src="images/f1-seq5-bomba-vup.png" alt="Bomba V-up"><figcaption>Bomba</figcaption></figure>
+      <figure><img src="images/f1-seq5-estiramiento-pantorrilla-v.png" alt="Estiramiento pantorrilla en V"><figcaption>Estiramiento</figcaption></figure>
+    </div>
     <h3>Secuencia 5 — V-Up (core + pantorrilla)</h3>
     <div class="tags"><span class="tag">Hidrantes</span><span class="tag">Hold</span><span class="tag">Bomba</span><span class="tag">Estir. pantorrilla en V</span></div>
     <table class="progress-table">
