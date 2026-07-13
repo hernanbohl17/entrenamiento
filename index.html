@@ -7,1018 +7,627 @@
 <meta name="theme-color" content="#0B0D10">
 <title>PROTOCOLO — Entrenamiento Personal</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-  :root{
-    color-scheme: dark;
-    --bg:#0B0D10;
-    --surface:#15181D;
-    --surface-alt:#1B1F26;
-    --border:#262B33;
-    --text:#F2F1ED;
-    --text-muted:#8A929E;
-    --fire:#FF5A1F;
-    --fire-dim:#5A2812;
-    --strength:#3FA9F5;
-    --strength-dim:#153148;
-    --flight:#A78BFA;
-    --flight-dim:#2E2650;
-    --mobility:#2DD4BF;
-    --radius:10px;
-  }
-  *{box-sizing:border-box;}
-  html{background:var(--bg);}
-  html,body{margin:0;padding:0;}
-  body{
-    background:var(--bg);
-    color:var(--text);
-    font-family:'Inter',sans-serif;
-    line-height:1.5;
-    -webkit-font-smoothing:antialiased;
-    min-height:100vh;
-  }
-  ::selection{background:var(--fire);color:#0B0D10;}
+:root{
+  --bg:#0B0D10; --bg2:#12151A; --card:#161A20; --card-border:#242933;
+  --text:#EDEFF2; --text-dim:#9AA2AE; --text-faint:#5B6472;
+  --accent:#FF4B2B; --accent-dim:#7A2818;
+  --fuego:#FF6B35; --fuerza:#3BA7FF; --vuelo:#B26BFF;
+  --rest:#2A2E36; --deload:#3A3120;
+  --ok:#39D98A;
+  --radius:14px;
+  font-family:'Inter',sans-serif;
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+body{background:var(--bg); color:var(--text); line-height:1.55; padding-bottom:60px;}
+h1,h2,h3{font-family:'Oswald',sans-serif; letter-spacing:.02em; text-transform:uppercase;}
+header{padding:38px 20px 24px; text-align:center; border-bottom:1px solid var(--card-border); background:linear-gradient(180deg, #14171C, var(--bg));}
+header .kicker{color:var(--accent); font-family:'JetBrains Mono',monospace; font-size:.78rem; letter-spacing:.15em; text-transform:uppercase; margin-bottom:10px;}
+header h1{font-size:2.1rem; margin-bottom:14px;}
+header p{color:var(--text-dim); max-width:640px; margin:0 auto; font-size:.95rem;}
+nav{display:flex; overflow-x:auto; gap:8px; padding:16px 16px 0; max-width:960px; margin:0 auto; position:sticky; top:0; background:var(--bg); z-index:50; padding-bottom:16px;}
+nav button{flex:0 0 auto; background:var(--card); border:1px solid var(--card-border); color:var(--text-dim); padding:10px 16px; border-radius:999px; font-family:'JetBrains Mono',monospace; font-size:.78rem; letter-spacing:.05em; cursor:pointer; transition:.15s;}
+nav button.active{background:var(--accent); border-color:var(--accent); color:#fff;}
+main{max-width:960px; margin:0 auto; padding:24px 16px 80px;}
+.tab{display:none; animation:fade .25s ease;}
+.tab.active{display:block;}
+@keyframes fade{from{opacity:0; transform:translateY(6px)} to{opacity:1; transform:translateY(0)}}
+.section-title{font-size:1.5rem; margin:36px 0 6px;}
+.section-sub{color:var(--text-dim); font-size:.92rem; margin-bottom:20px;}
+.eli5{background:var(--bg2); border:1px dashed var(--card-border); border-radius:var(--radius); padding:16px 18px; margin:14px 0 26px; font-size:.95rem;}
+.eli5 b{color:var(--accent); font-family:'JetBrains Mono',monospace; font-size:.75rem; letter-spacing:.1em; text-transform:uppercase; display:block; margin-bottom:6px;}
+.card{background:var(--card); border:1px solid var(--card-border); border-radius:var(--radius); padding:18px 20px; margin-bottom:16px;}
+.card img{width:100%; max-height:220px; object-fit:cover; border-radius:10px; margin-bottom:14px; background:#1c2027;}
+.card h3{font-size:1.15rem; margin-bottom:8px; color:var(--text);}
+.tags{display:flex; flex-wrap:wrap; gap:6px; margin-bottom:12px;}
+.tag{background:var(--bg2); border:1px solid var(--card-border); color:var(--text-dim); font-family:'JetBrains Mono',monospace; font-size:.72rem; padding:4px 9px; border-radius:6px;}
+.tips-label{color:var(--accent); font-family:'JetBrains Mono',monospace; font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; display:block; margin-bottom:6px;}
+.tips{color:var(--text-dim); font-size:.9rem;}
+.progress-table{width:100%; border-collapse:collapse; margin-top:10px; font-size:.88rem;}
+.progress-table th,.progress-table td{padding:7px 10px; border-bottom:1px solid var(--card-border); text-align:left;}
+.progress-table th{color:var(--text-faint); font-family:'JetBrains Mono',monospace; font-weight:500; font-size:.72rem; text-transform:uppercase;}
+.progress-table td{color:var(--text-dim);}
+.progress-table td:first-child{color:var(--text); font-weight:600;}
 
-  /* ---------- Header ---------- */
-  header{
-    padding:32px 24px 0;
-    max-width:1100px;
-    margin:0 auto;
-  }
-  .eyebrow{
-    font-family:'JetBrains Mono',monospace;
-    font-size:12px;
-    letter-spacing:.18em;
-    color:var(--fire);
-    text-transform:uppercase;
-    margin-bottom:8px;
-  }
-  h1{
-    font-family:'Oswald',sans-serif;
-    font-weight:700;
-    text-transform:uppercase;
-    letter-spacing:.02em;
-    font-size:clamp(28px,5vw,44px);
-    margin:0 0 6px;
-  }
-  .subtitle{color:var(--text-muted);font-size:15px;margin-bottom:24px;max-width:640px;}
+/* calculator */
+.calc-box{background:var(--card); border:1px solid var(--card-border); border-radius:var(--radius); padding:20px; margin-bottom:24px;}
+.calc-box label{display:block; font-family:'JetBrains Mono',monospace; font-size:.78rem; color:var(--text-dim); margin-bottom:8px;}
+.calc-box input[type=date]{background:var(--bg2); border:1px solid var(--card-border); color:var(--text); padding:10px 12px; border-radius:8px; font-family:'Inter'; font-size:.95rem; margin-right:10px;}
+.calc-box button{background:var(--accent); border:none; color:#fff; padding:10px 18px; border-radius:8px; font-family:'JetBrains Mono',monospace; font-size:.8rem; letter-spacing:.05em; text-transform:uppercase; cursor:pointer;}
+.today-card{background:linear-gradient(135deg,#1D1108,#12151A); border:1px solid var(--accent-dim); border-radius:var(--radius); padding:20px; margin-bottom:24px;}
+.today-card .label{color:var(--accent); font-family:'JetBrains Mono',monospace; font-size:.72rem; letter-spacing:.1em; text-transform:uppercase;}
+.today-card h2{font-size:1.6rem; margin:8px 0 4px;}
+.today-card p{color:var(--text-dim); font-size:.9rem;}
+.legend{display:flex; flex-wrap:wrap; gap:14px; font-size:.78rem; color:var(--text-dim); margin-bottom:18px;}
+.legend span{display:inline-flex; align-items:center; gap:6px;}
+.dot{width:10px; height:10px; border-radius:3px; display:inline-block;}
+.calendar-grid{display:grid; grid-template-columns:repeat(7,1fr); gap:6px; margin-bottom:26px;}
+.cal-day{aspect-ratio:1; border-radius:8px; background:var(--bg2); border:1px solid var(--card-border); display:flex; flex-direction:column; align-items:center; justify-content:center; font-size:.68rem; color:var(--text-faint); padding:4px; text-align:center;}
+.cal-day .dnum{font-family:'JetBrains Mono',monospace; font-size:.85rem; color:var(--text-dim);}
+.cal-day.rest{opacity:.35;}
+.cal-day.fuego{background:rgba(255,107,53,.14); border-color:rgba(255,107,53,.35); color:#FFB08C;}
+.cal-day.fuerza{background:rgba(59,167,255,.14); border-color:rgba(59,167,255,.35); color:#9CCBFF;}
+.cal-day.vuelo{background:rgba(178,107,255,.14); border-color:rgba(178,107,255,.35); color:#D6B8FF;}
+.cal-day.deload{opacity:.45; filter:saturate(.4);}
+.cal-day.today{outline:2px solid var(--accent); outline-offset:2px;}
+.week-label{grid-column:1/-1; font-family:'JetBrains Mono',monospace; font-size:.72rem; color:var(--text-faint); margin:10px 0 -2px; text-transform:uppercase; letter-spacing:.08em;}
 
-  /* ---------- Tabs (scoreboard nav) ---------- */
-  nav.tabs{
-    display:flex;
-    gap:2px;
-    background:var(--surface);
-    border:1px solid var(--border);
-    border-radius:var(--radius);
-    padding:4px;
-    max-width:1100px;
-    margin:0 auto;
-    overflow-x:auto;
-    position:sticky;
-    top:12px;
-    z-index:50;
-    backdrop-filter:blur(6px);
-  }
-  nav.tabs button{
-    flex:1 1 auto;
-    white-space:nowrap;
-    background:transparent;
-    border:none;
-    color:var(--text-muted);
-    font-family:'JetBrains Mono',monospace;
-    font-size:12px;
-    letter-spacing:.06em;
-    text-transform:uppercase;
-    padding:12px 14px;
-    border-radius:7px;
-    cursor:pointer;
-    transition:background .15s ease,color .15s ease;
-  }
-  nav.tabs button .num{
-    color:var(--fire);
-    margin-right:6px;
-    font-weight:600;
-  }
-  nav.tabs button:hover{color:var(--text);}
-  nav.tabs button.active{
-    background:var(--surface-alt);
-    color:var(--text);
-    box-shadow:inset 0 0 0 1px var(--border);
-  }
-  nav.tabs button.active .num{color:var(--fire);}
+.phase-header{display:flex; align-items:center; gap:12px; margin:40px 0 4px;}
+.phase-pill{font-family:'JetBrains Mono',monospace; font-size:.72rem; padding:5px 12px; border-radius:999px; text-transform:uppercase; letter-spacing:.06em;}
+.phase-pill.fuego{background:rgba(255,107,53,.18); color:#FF9A6E;}
+.phase-pill.fuerza{background:rgba(59,167,255,.18); color:#7EC1FF;}
+.phase-pill.vuelo{background:rgba(178,107,255,.18); color:#C79CFF;}
+.day-header{font-family:'JetBrains Mono',monospace; font-size:.78rem; color:var(--text-faint); text-transform:uppercase; letter-spacing:.06em; margin:24px 0 10px; padding-top:16px; border-top:1px solid var(--card-border);}
 
-  main{max-width:1100px;margin:0 auto;padding:28px 24px 80px;}
-  section.panel{display:none;animation:fade .25s ease;}
-  section.panel.active{display:block;}
-  @keyframes fade{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:translateY(0);}}
+.table-wrap{overflow-x:auto;}
+table.plan{width:100%; border-collapse:collapse; margin-bottom:20px; font-size:.88rem;}
+table.plan th, table.plan td{padding:9px 10px; border-bottom:1px solid var(--card-border); text-align:left; white-space:nowrap;}
+table.plan th{color:var(--text-faint); font-family:'JetBrains Mono',monospace; font-size:.7rem; text-transform:uppercase;}
 
-  h2.panel-title{
-    font-family:'Oswald',sans-serif;
-    text-transform:uppercase;
-    font-size:24px;
-    letter-spacing:.03em;
-    margin:0 0 4px;
-  }
-  p.panel-desc{color:var(--text-muted);font-size:14px;margin:0 0 24px;max-width:680px;}
-
-  .note{
-    border:1px solid var(--border);
-    border-left:3px solid var(--strength);
-    background:var(--surface);
-    border-radius:0 8px 8px 0;
-    padding:12px 16px;
-    font-size:13px;
-    color:var(--text-muted);
-    margin-bottom:24px;
-  }
-  .note b{color:var(--text);}
-
-  /* ---------- Exercise cards ---------- */
-  .grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
-    gap:16px;
-  }
-  .card{
-    background:var(--surface);
-    border:1px solid var(--border);
-    border-radius:var(--radius);
-    overflow:hidden;
-    display:flex;
-    flex-direction:column;
-  }
-  .card img{
-    width:100%;
-    aspect-ratio:4/3;
-    object-fit:cover;
-    display:block;
-    background:var(--surface-alt);
-  }
-  .card-body{padding:14px 16px 16px;display:flex;flex-direction:column;gap:8px;flex:1;}
-  .card-body h3{
-    font-family:'Oswald',sans-serif;
-    text-transform:uppercase;
-    font-size:16px;
-    margin:0;
-    letter-spacing:.02em;
-  }
-  .meta-row{
-    display:flex;
-    gap:6px;
-    flex-wrap:wrap;
-    font-family:'JetBrains Mono',monospace;
-    font-size:11px;
-    color:var(--text-muted);
-  }
-  .meta-row span{
-    border:1px solid var(--border);
-    padding:2px 7px;
-    border-radius:20px;
-  }
-  details.tips{margin-top:auto;border-top:1px solid var(--border);padding-top:8px;}
-  details.tips summary{
-    cursor:pointer;
-    font-size:12px;
-    font-weight:600;
-    letter-spacing:.04em;
-    text-transform:uppercase;
-    color:var(--fire);
-    list-style:none;
-    display:flex;
-    align-items:center;
-    gap:6px;
-  }
-  details.tips summary::-webkit-details-marker{display:none;}
-  details.tips summary::before{content:"+";font-family:'JetBrains Mono',monospace;}
-  details.tips[open] summary::before{content:"–";}
-  details.tips p{font-size:12.5px;color:var(--text-muted);margin:8px 0 0;}
-
-  /* phase accent bars */
-  .card.phase-fuego{border-top:3px solid var(--fire);}
-  .card.phase-fuerza{border-top:3px solid var(--strength);}
-  .card.phase-vuelo{border-top:3px solid var(--flight);}
-
-  /* ---------- Jump Attack periodization ---------- */
-  .peri-box{
-    background:var(--surface);
-    border:1px solid var(--border);
-    border-radius:var(--radius);
-    padding:20px;
-    margin-bottom:28px;
-  }
-  .peri-box label{
-    display:block;
-    font-family:'JetBrains Mono',monospace;
-    font-size:12px;
-    color:var(--text-muted);
-    margin-bottom:8px;
-    text-transform:uppercase;
-    letter-spacing:.06em;
-  }
-  .peri-controls{display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end;}
-  input[type=date]{
-    background:var(--bg);
-    border:1px solid var(--border);
-    color:var(--text);
-    padding:10px 12px;
-    border-radius:7px;
-    font-family:'JetBrains Mono',monospace;
-    font-size:13px;
-  }
-  button.primary{
-    background:var(--fire);
-    color:#0B0D10;
-    border:none;
-    font-weight:700;
-    font-family:'Inter',sans-serif;
-    padding:11px 20px;
-    border-radius:7px;
-    cursor:pointer;
-    letter-spacing:.02em;
-  }
-  button.primary:hover{filter:brightness(1.08);}
-
-  #hoyCard{
-    margin-top:20px;
-    padding:16px 18px;
-    border-radius:8px;
-    background:var(--surface-alt);
-    border:1px solid var(--border);
-    display:none;
-  }
-  #hoyCard.show{display:block;}
-  #hoyCard .tag{
-    font-family:'JetBrains Mono',monospace;
-    font-size:11px;
-    text-transform:uppercase;
-    color:var(--text-muted);
-    letter-spacing:.08em;
-  }
-  #hoyCard h3{font-family:'Oswald',sans-serif;text-transform:uppercase;margin:4px 0 2px;font-size:20px;}
-  #hoyCard p{margin:0;color:var(--text-muted);font-size:13.5px;}
-
-  .calendar{
-    display:flex;
-    flex-direction:column;
-    gap:6px;
-    max-height:420px;
-    overflow-y:auto;
-    padding-right:4px;
-  }
-  .week-row{
-    display:grid;
-    grid-template-columns:64px repeat(7,1fr);
-    gap:4px;
-    align-items:center;
-  }
-  .week-label{
-    font-family:'JetBrains Mono',monospace;
-    font-size:11px;
-    color:var(--text-muted);
-  }
-  .day-cell{
-    aspect-ratio:1;
-    border-radius:5px;
-    background:var(--surface-alt);
-    border:1px solid var(--border);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-family:'JetBrains Mono',monospace;
-    font-size:10px;
-    color:var(--text-muted);
-  }
-  .day-cell.train{color:#0B0D10;font-weight:700;}
-  .day-cell.f1{background:var(--fire);}
-  .day-cell.f2{background:var(--strength);}
-  .day-cell.f3{background:var(--flight);}
-  .day-cell.today{outline:2px solid var(--text);outline-offset:1px;}
-
-  .legend{display:flex;gap:16px;flex-wrap:wrap;margin-top:14px;font-size:12px;color:var(--text-muted);}
-  .legend span{display:inline-flex;align-items:center;gap:6px;}
-  .legend i{width:10px;height:10px;border-radius:3px;display:inline-block;}
-
-  /* ---------- Gym day tables ---------- */
-  .day-block{
-    background:var(--surface);
-    border:1px solid var(--border);
-    border-radius:var(--radius);
-    margin-bottom:20px;
-    overflow:hidden;
-  }
-  .day-block .day-head{
-    padding:14px 18px;
-    background:var(--surface-alt);
-    border-bottom:1px solid var(--border);
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-  }
-  .day-head h3{font-family:'Oswald',sans-serif;text-transform:uppercase;margin:0;font-size:17px;}
-  .day-head span{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-muted);}
-  table{width:100%;border-collapse:collapse;font-size:13px;}
-  table th{
-    text-align:left;
-    font-family:'JetBrains Mono',monospace;
-    font-size:10.5px;
-    text-transform:uppercase;
-    letter-spacing:.05em;
-    color:var(--text-muted);
-    padding:10px 18px;
-    border-bottom:1px solid var(--border);
-  }
-  table td{padding:10px 18px;border-bottom:1px solid var(--border);color:var(--text);}
-  table tr:last-child td{border-bottom:none;}
-  .cat{font-size:11px;color:var(--text-muted);}
-
-  .progress-block{
-    background:var(--surface);
-    border:1px solid var(--border);
-    border-radius:var(--radius);
-    padding:18px 20px;
-    margin-bottom:24px;
-    font-size:13.5px;
-    color:var(--text-muted);
-  }
-  .progress-block h4{margin:0 0 8px;color:var(--text);font-family:'Oswald',sans-serif;text-transform:uppercase;font-size:14px;}
-  .progress-block ul{margin:6px 0 0;padding-left:18px;}
-  .progress-block li{margin-bottom:4px;}
-
-  /* running */
-  .run-flow{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-bottom:24px;}
-  .run-stage{
-    background:var(--surface);
-    border:1px solid var(--border);
-    border-radius:var(--radius);
-    padding:18px;
-    position:relative;
-  }
-  .run-stage .stage-tag{
-    font-family:'JetBrains Mono',monospace;
-    font-size:10.5px;
-    text-transform:uppercase;
-    letter-spacing:.08em;
-    color:var(--mobility);
-  }
-  .run-stage h3{font-family:'Oswald',sans-serif;text-transform:uppercase;margin:6px 0;font-size:17px;}
-  .run-stage p{color:var(--text-muted);font-size:13px;margin:0;}
-  .run-stage .num-badge{
-    position:absolute;top:14px;right:16px;
-    font-family:'JetBrains Mono',monospace;
-    font-size:22px;
-    color:var(--border);
-    font-weight:700;
-  }
-
-  footer{text-align:center;padding:30px 24px 50px;color:var(--text-muted);font-size:12px;font-family:'JetBrains Mono',monospace;}
-
-  @media(max-width:640px){
-    .week-row{grid-template-columns:48px repeat(7,1fr);}
-    nav.tabs{top:0;}
-  }
+footer{text-align:center; color:var(--text-faint); font-family:'JetBrains Mono',monospace; font-size:.72rem; letter-spacing:.1em; padding:30px 20px; text-transform:uppercase;}
+.note{font-size:.82rem; color:var(--text-faint); font-style:italic; margin:10px 0 20px;}
 </style>
 </head>
 <body>
 
 <header>
-  <div class="eyebrow">Programa personal · Fuerza / Salto / Movilidad</div>
+  <div class="kicker">Programa personal · Fuerza / Salto / Movilidad</div>
   <h1>Protocolo de Entrenamiento</h1>
-  <p class="subtitle">Fusión de Tim Grover (potencia explosiva), Ben Patrick / KneesOverToesGuy (salud articular), Jeff Cavaliere / Athlean-X (biomecánica) y Horacio Anselmi (potencia aplicada). Elegí la pestaña según lo que te toca hoy.</p>
+  <p>Fusión de Tim Grover (potencia explosiva), Ben Patrick / KneesOverToesGuy (salud articular), Jeff Cavaliere / Athlean-X (biomecánica) y Horacio Anselmi (potencia aplicada). Elegí la pestaña según lo que te toca hoy.</p>
 </header>
 
-<nav class="tabs" id="tabs">
-  <button class="active" data-tab="basico"><span class="num">01</span>Básico</button>
-  <button data-tab="jump"><span class="num">02</span>Jump Attack</button>
-  <button data-tab="correr"><span class="num">03</span>Correr</button>
-  <button data-tab="gym"><span class="num">04</span>Gimnasio</button>
-  <button data-tab="movilidad"><span class="num">05</span>Movilidad</button>
+<nav id="tabnav">
+  <button data-tab="basico" class="active">01 Básico</button>
+  <button data-tab="jump">02 Jump Attack</button>
+  <button data-tab="correr">03 Correr</button>
+  <button data-tab="gym">04 Gimnasio</button>
+  <button data-tab="movilidad">05 Movilidad</button>
 </nav>
 
 <main>
 
-  <!-- ================= TAB 1: BÁSICO ================= -->
-  <section class="panel active" id="basico">
-    <h2 class="panel-title">Entrenamiento Básico</h2>
-    <p class="panel-desc">Rutina mínima para días complicados: mantiene masa muscular y salud articular en 12–15 minutos.</p>
+<!-- ===================== BÁSICO ===================== -->
+<section class="tab active" id="tab-basico">
+  <h2 class="section-title">Entrenamiento Básico</h2>
+  <p class="section-sub">Rutina mínima para días complicados: mantiene masa muscular y salud articular en 12–15 minutos.</p>
 
-    <div class="grid">
+  <div class="eli5"><b>Para entenderlo fácil</b>Si hoy tenés poco tiempo, hacé estos 3 ejercicios y ya cumpliste. No hace falta más.</div>
 
-      <div class="card">
-        <img src="images/flexiones-brazos.png" onerror="this.onerror=null;this.src='https://placehold.co/600x450/1B1F26/FF5A1F?text=Flexiones+de+brazos'" alt="Flexiones de brazos">
-        <div class="card-body">
-          <h3>Flexiones de brazos</h3>
-          <div class="meta-row"><span>3 series</span><span>hasta 2 RIR</span><span>Variación mecánica</span></div>
-          <details class="tips">
-            <summary>Tips Pro de ejecución</summary>
-            <p>Codos a ~45° del torso, no pegados al cuerpo ni en cruz — es la posición que Athlean-X marca como la más segura para el hombro. Bajá hasta que el pecho casi toque el piso, escápulas libres (dejalas moverse), core y glúteos apretados como una tabla rígida. Si te resulta fácil, subí la dificultad con pies elevados o pausa de 1 segundo abajo antes de sumar peso.</p>
-          </details>
-        </div>
-      </div>
+  <div class="card">
+    <img src="images/flexiones-brazos.png" alt="Flexiones de brazos">
+    <h3>Flexiones de brazos</h3>
+    <div class="tags"><span class="tag">3 series</span><span class="tag">hasta 2 RIR</span><span class="tag">Variación mecánica</span></div>
+    <span class="tips-label">Tips Pro de ejecución</span>
+    <p class="tips">Codos a ~45° del torso, no pegados al cuerpo ni en cruz — es la posición que Athlean-X marca como la más segura para el hombro. Bajá hasta que el pecho casi toque el piso, escápulas libres, core y glúteos apretados como una tabla rígida. Si te resulta fácil, subí la dificultad con pies elevados o pausa de 1 segundo abajo antes de sumar peso.</p>
+  </div>
 
-      <div class="card">
-        <img src="images/halo-kettlebell.png" onerror="this.onerror=null;this.src='https://placehold.co/600x450/1B1F26/3FA9F5?text=Halo+con+Kettlebell'" alt="Halo con kettlebell">
-        <div class="card-body">
-          <h3>Halo con Kettlebell</h3>
-          <div class="meta-row"><span>2 series</span><span>8 vueltas x lado</span><span>Movilidad hombro</span></div>
-          <details class="tips">
-            <summary>Tips Pro de ejecución</summary>
-            <p>Peso liviano, la kettlebell viaja pegada a la cabeza en un círculo controlado. Core firme para que no se te vaya la zona lumbar hacia adelante al pasar la pesa por detrás — si sentís que arqueás la espalda, es señal de que el peso es demasiado. Movimiento lento, sin usar impulso: el objetivo es lubricar la articulación, no fatigar el hombro.</p>
-          </details>
-        </div>
-      </div>
+  <div class="card">
+    <img src="images/halo-kettlebell.png" alt="Halo con kettlebell">
+    <h3>Halo con Kettlebell</h3>
+    <div class="tags"><span class="tag">2 series</span><span class="tag">8 vueltas x lado</span><span class="tag">Movilidad hombro</span></div>
+    <span class="tips-label">Tips Pro de ejecución</span>
+    <p class="tips">Peso liviano, la kettlebell viaja pegada a la cabeza en un círculo controlado. Core firme para que no se te vaya la zona lumbar hacia adelante al pasar la pesa por detrás. Movimiento lento, sin usar impulso: el objetivo es lubricar la articulación, no fatigar el hombro.</p>
+  </div>
 
-      <div class="card">
-        <img src="images/abdominales-dead-bug.png" onerror="this.onerror=null;this.src='https://placehold.co/600x450/1B1F26/2DD4BF?text=Dead+Bug'" alt="Dead bug">
-        <div class="card-body">
-          <h3>Abdominales — Dead Bug</h3>
-          <div class="meta-row"><span>3 series</span><span>8–10 x lado</span><span>Anti-extensión</span></div>
-          <details class="tips">
-            <summary>Tips Pro de ejecución</summary>
-            <p>Es la variación que Athlean-X recomienda por sobre los abdominales tradicionales: la zona lumbar se mantiene pegada al piso durante todo el movimiento (esa es la clave, no la velocidad del brazo/pierna). Bajá el brazo y la pierna opuesta lento, exhalá al extender, y si la lumbar se despega, reducí el rango. Cero tensión en el cuello.</p>
-          </details>
-        </div>
-      </div>
+  <div class="card">
+    <img src="images/abdominales-dead-bug.png" alt="Dead bug">
+    <h3>Abdominales — Dead Bug</h3>
+    <div class="tags"><span class="tag">3 series</span><span class="tag">8–10 x lado</span><span class="tag">Anti-extensión</span></div>
+    <span class="tips-label">Tips Pro de ejecución</span>
+    <p class="tips">La zona lumbar se mantiene pegada al piso durante todo el movimiento — esa es la clave, no la velocidad del brazo/pierna. Bajá el brazo y la pierna opuesta lento, exhalá al extender, y si la lumbar se despega, reducí el rango.</p>
+  </div>
+</section>
 
-    </div>
-  </section>
+<!-- ===================== JUMP ATTACK ===================== -->
+<section class="tab" id="tab-jump">
+  <h2 class="section-title">Jump Attack</h2>
+  <p class="section-sub">Programa principal de salto — <b>12 semanas reales</b> (90 días), en 3 fases: Fuego, Fuerza y Vuelo. Cada fase dura 4 semanas: 3 semanas de trabajo + 1 semana de descarga.</p>
 
-  <!-- ================= TAB 2: JUMP ATTACK ================= -->
-  <section class="panel" id="jump">
-    <h2 class="panel-title">Jump Attack</h2>
-    <p class="panel-desc">Programa principal de salto — 16 semanas en 4 bloques: Fuego, Fuerza (Piernas Poderosas), Fuerza (Piernas Explosivas) y Vuelo.</p>
+  <div class="eli5">
+    <b>Para entenderlo fácil, como si tuvieras 5 años</b>
+    Este programa dura 3 meses (90 días), como 12 semanas seguidas. Se divide en 3 partes de 4 semanas cada una:<br><br>
+    🔥 <b>Mes 1 — Fuego:</b> aprendemos a sostener posiciones, como una estatua que tiembla un poquito.<br>
+    💪 <b>Mes 2 — Fuerza:</b> juntamos sostener + saltar, para que el cuerpo aprenda a explotar.<br>
+    🚀 <b>Mes 3 — Vuelo:</b> todo más rápido y más explosivo, como si tuvieras resortes en las piernas.<br><br>
+    Entrenás <b>Lunes, Martes, Jueves y Viernes</b>. Miércoles, Sábado y Domingo son de descanso — pero podés jugar a tu deporte, no te quedes en el sillón. Cada 4 semanas hay una <b>semana más suave</b> (de descarga) para que el cuerpo se recupere: ahí NO se levanta peso, solo se juega y se mueve.
+  </div>
 
-    <div class="note">
-      <b>Sobre las imágenes:</b> las fotos de cada ejercicio pertenecen al libro <i>Jump Attack</i> de Tim Grover y tienen derechos de autor, así que no las inserto directamente en el archivo. Dejé el nombre exacto de cada ejercicio, el orden real de las secuencias y los placeholders de imagen listos — si querés, reemplazá cada placeholder por tu propia foto (podés sacarle una foto vos mismo haciendo el ejercicio, por ejemplo).
-    </div>
+  <p class="note">Sobre las imágenes: las fotos de cada ejercicio pertenecen al libro <em>Jump Attack</em> de Tim Grover y tienen derechos de autor, así que no las inserto directamente. Dejé el nombre exacto de cada ejercicio y el placeholder de imagen listo para que reemplaces por tu propia foto.</p>
 
-    <div class="peri-box">
-      <label for="fechaInicio">¿Cuándo vas a comenzar el programa?</label>
-      <div class="peri-controls">
-        <input type="date" id="fechaInicio">
-        <button class="primary" onclick="calcularPeriodizacion()">Calcular calendario (16 semanas)</button>
-      </div>
+  <div class="calc-box">
+    <label>¿Cuándo vas a comenzar el programa?</label>
+    <input type="date" id="startDate">
+    <button onclick="buildCalendar()">Calcular calendario (12 semanas)</button>
+  </div>
 
-      <div id="hoyCard">
-        <div class="tag">Hoy te corresponde</div>
-        <h3 id="hoyTitulo">—</h3>
-        <p id="hoyDetalle">—</p>
-      </div>
+  <div class="today-card" id="todayCard">
+    <div class="label">Hoy te corresponde</div>
+    <h2 id="todayTitle">—</h2>
+    <p id="todaySub">Elegí una fecha de inicio para ver tu calendario.</p>
+  </div>
 
-      <div id="calendarioWrap" style="margin-top:18px;"></div>
+  <div class="legend">
+    <span><span class="dot" style="background:#FF6B35"></span>Fase 1 · Fuego (sem 1–4)</span>
+    <span><span class="dot" style="background:#3BA7FF"></span>Fase 2 · Fuerza (sem 5–8)</span>
+    <span><span class="dot" style="background:#B26BFF"></span>Fase 3 · Vuelo (sem 9–12)</span>
+    <span><span class="dot" style="background:#2A2E36"></span>Descanso (Mié/Sáb/Dom)</span>
+    <span><span class="dot" style="background:#3A3120"></span>Semana de descarga</span>
+  </div>
 
-      <div class="legend">
-        <span><i style="background:var(--fire)"></i>Fase 1 · Fuego (sem 1–4)</span>
-        <span><i style="background:var(--strength)"></i>Fase 2 · Fuerza (sem 5–12)</span>
-        <span><i style="background:var(--flight)"></i>Fase 3 · Vuelo (sem 13–16, estimado)</span>
-        <span><i style="background:var(--surface-alt);border:1px solid var(--border)"></i>Descanso (Mié/Sáb/Dom)</span>
-        <span><i style="background:var(--fire);opacity:.55"></i>Semana de descarga (color apagado)</span>
-      </div>
-      <p style="font-size:12px;color:var(--text-muted);margin-top:10px;">Piernas: Lunes y Jueves. Cuerpo Total: Martes y Viernes. Cada bloque de 4 semanas termina en descarga (semanas 4, 8, 12 y 16).</p>
-    </div>
+  <div id="calendarOut" class="calendar-grid"></div>
 
-    <h2 class="panel-title" style="font-size:19px;margin-top:32px;">Fase 1 · Fuego <span style="color:var(--text-muted);font-size:12px;font-family:'JetBrains Mono',monospace;text-transform:none;">— Semanas 1 a 4 · Piernas Implacables (Día 1 y 4) + Cuerpo Total Implacable (Día 2 y 5)</span></h2>
+  <!-- FASE 1 -->
+  <div class="phase-header"><span class="phase-pill fuego">Fase 1 · Fuego</span><h3 style="margin:0">Semanas 1 a 4</h3></div>
+  <p class="section-sub">Piernas Implacables (Día 1 y 4) + Cuerpo Total Implacable (Día 2 y 5). La Semana 4 es descarga.</p>
 
-    <div class="note" style="border-left-color:var(--fire);">
-      <b>Cómo se arma cada día de piernas:</b> son 5 secuencias, una atrás de la otra, sin cortar. Cada secuencia sigue siempre el mismo patrón: <b>Hidrantes</b> (pre-fatiga de glúteo) → <b>Hold</b> (mantenimiento isométrico) → <b>Bomba</b> (pulsos cortos en la misma posición) → <b>estiramiento</b>. El día de Cuerpo Total es distinto: son 7 ejercicios de mantenimiento isométrico encadenados sin secuencias ni estiramientos entre medio, y el tiempo de cada mantenimiento sube semana a semana (30s → 60s → 90s). La Semana 4 de cada fase es semana de descarga.
-    </div>
+  <div class="eli5"><b>Cómo se arma cada día — fácil</b>
+  <u>Día de piernas (Lun/Jue):</u> 5 secuencias, una atrás de la otra sin cortar. Cada secuencia siempre es igual: <b>Hidrantes</b> (despertás el glúteo) → <b>Hold</b> (te quedás quieto sosteniendo) → <b>Bomba</b> (movimientos cortitos en el mismo lugar) → <b>estiramiento</b>. Repetís 3 veces cada bloque hold/bomba.<br><br>
+  <u>Día de cuerpo entero (Mar/Vie):</u> 7 ejercicios de "quedarse quieto sosteniendo" (holds), uno atrás del otro, sin estiramiento entre medio. El tiempo que aguantás sube cada semana.</div>
 
-    <h3 style="font-family:'Oswald',sans-serif;text-transform:uppercase;font-size:16px;margin:24px 0 12px;color:var(--fire);">Día 1 y 4 — Piernas Implacables <span style="color:var(--text-muted);font-weight:400;font-size:12px;">(Secuencias 1 a 5, en orden)</span></h3>
+  <div class="day-header">Día 1 y 4 — Piernas Implacables (Secuencias 1 a 5, en orden)</div>
 
-    <div class="grid" style="margin-bottom:10px;">
-      <div class="card phase-fuego">
-        <img src="images/ja-f1-secuencia1-sentadilla-puntillas.png" onerror="this.onerror=null;this.src='https://placehold.co/600x450/1B1F26/FF5A1F?text=Secuencia+1%3A+Sentadilla+de+Puntillas'" alt="Secuencia 1 sentadilla de puntillas">
-        <div class="card-body">
-          <h3>Secuencia 1 — Sentadilla de puntillas</h3>
-          <div class="meta-row"><span>Hidrantes</span><span>Hold</span><span>Bomba</span><span>Estir. flexor cadera</span></div>
-          <details class="tips"><summary>Tips Pro</summary><p><b>Hidrantes:</b> apoyo en cuatro puntos, levantá la rodilla hacia el costado sin rotar la cadera, empujá con el glúteo medio, no con la zona lumbar. <b>Hold de sentadilla de puntillas:</b> sentadilla parcial parado en la punta de los pies, sostené la posición con el core firme y el peso repartido en los metatarsos. <b>Bomba:</b> mismos rangos, pulsos cortos y controlados sin perder la altura del talón. Cerrá con el estiramiento de flexor de cadera sin rebotar.</p></details>
-        </div>
-      </div>
-      <div class="card phase-fuego">
-        <img src="images/ja-f1-secuencia2-estocada.png" onerror="this.onerror=null;this.src='https://placehold.co/600x450/1B1F26/FF5A1F?text=Secuencia+2%3A+Estocada'" alt="Secuencia 2 estocada">
-        <div class="card-body">
-          <h3>Secuencia 2 — Estocada (Lunge)</h3>
-          <div class="meta-row"><span>Hidrantes</span><span>Hold</span><span>Bomba</span><span>Estir. flexor cadera</span></div>
-          <details class="tips"><summary>Tips Pro</summary><p><b>Hold de estocada:</b> rodilla de adelante alineada con el pie (no colapsa hacia adentro), torso alto, sostené la posición baja sin apoyar la rodilla trasera en el piso. <b>Bomba:</b> pulsos pequeños dentro del mismo rango, sin bloquear la respiración. El objetivo es agotar el cuádriceps y el glúteo antes de pasar al estiramiento.</p></details>
-        </div>
-      </div>
-      <div class="card phase-fuego">
-        <img src="images/ja-f1-secuencia3-estocada-bulgara.png" onerror="this.onerror=null;this.src='https://placehold.co/600x450/1B1F26/FF5A1F?text=Secuencia+3%3A+Estocada+B%C3%BAlgara'" alt="Secuencia 3 estocada búlgara">
-        <div class="card-body">
-          <h3>Secuencia 3 — Estocada búlgara elevada</h3>
-          <div class="meta-row"><span>Hidrantes</span><span>Hold</span><span>Bomba</span><span>Estir. flexor cadera</span></div>
-          <details class="tips"><summary>Tips Pro</summary><p>Pie trasero apoyado en un banco, peso casi todo en la pierna de adelante. En el <b>hold</b> mantené el torso ligeramente inclinado adelante sin perder el equilibrio; en la <b>bomba</b>, pulsos cortos controlando que la rodilla no se vaya hacia adentro. Es la variante unilateral que más carga el glúteo de un solo lado.</p></details>
-        </div>
-      </div>
-      <div class="card phase-fuego">
-        <img src="images/ja-f1-secuencia4-peso-muerto-piernas-rectas.png" onerror="this.onerror=null;this.src='https://placehold.co/600x450/1B1F26/FF5A1F?text=Secuencia+4%3A+Peso+Muerto+Piernas+Rectas'" alt="Secuencia 4 peso muerto piernas rectas">
-        <div class="card-body">
-          <h3>Secuencia 4 — Peso muerto piernas rectas</h3>
-          <div class="meta-row"><span>Hidrantes</span><span>Hold</span><span>Bomba</span><span>Estir. flexor cadera</span></div>
-          <details class="tips"><summary>Tips Pro</summary><p>Bisagra de cadera con piernas casi rectas, espalda neutra (no redondeada), el movimiento sale de la cadera y no de la zona lumbar. En el <b>hold</b> sostené el punto de máximo estiramiento de isquiotibiales que puedas controlar; en la <b>bomba</b>, pulsos chicos sin perder la posición de la espalda.</p></details>
-        </div>
-      </div>
-      <div class="card phase-fuego">
-        <img src="images/ja-f1-secuencia5-v-up.png" onerror="this.onerror=null;this.src='https://placehold.co/600x450/1B1F26/FF5A1F?text=Secuencia+5%3A+V-Up'" alt="Secuencia 5 V-up">
-        <div class="card-body">
-          <h3>Secuencia 5 — V-Up (core + pantorrilla)</h3>
-          <div class="meta-row"><span>Hidrantes</span><span>Hold</span><span>Bomba</span><span>Estir. pantorrilla en V</span></div>
-          <details class="tips"><summary>Tips Pro</summary><p>Acostado, elevá tronco y piernas formando una V, brazos buscando los pies. En el <b>hold</b> mantené la zona lumbar pegada al piso (no arqueada); en la <b>bomba</b>, pulsos cortos sin bajar del todo. Cerrás la secuencia con el estiramiento de pantorrilla en V en vez del estiramiento de cadera.</p></details>
-        </div>
-      </div>
-    </div>
+  <div class="card">
+    <img src="images/ja-f1-secuencia1-sentadilla-puntillas.png" alt="Secuencia 1 sentadilla de puntillas">
+    <h3>Secuencia 1 — Sentadilla de puntillas</h3>
+    <div class="tags"><span class="tag">Hidrantes</span><span class="tag">Hold</span><span class="tag">Bomba</span><span class="tag">Estir. flexor cadera</span></div>
+    <table class="progress-table">
+      <tr><th>Semana</th><th>Hold (sostener)</th><th>Bomba (pulsos)</th></tr>
+      <tr><td>Semana 1</td><td>60 seg</td><td>15 reps</td></tr>
+      <tr><td>Semana 2</td><td>90 seg</td><td>10 reps</td></tr>
+      <tr><td>Semana 3</td><td>120 seg</td><td>5 reps</td></tr>
+      <tr><td>Semana 4</td><td colspan="2">Descarga — bajá volumen</td></tr>
+    </table>
+    <span class="tips-label">Tips Pro</span>
+    <p class="tips"><b>Hidrantes:</b> apoyo en cuatro puntos, levantá la rodilla hacia el costado sin rotar la cadera, empujá con el glúteo medio, no con la zona lumbar (10 adelante, 10 atrás, 10 al costado, por pierna). <b>Hold de sentadilla de puntillas:</b> sentadilla parcial parado en la punta de los pies, core firme, peso repartido en los metatarsos. <b>Bomba:</b> mismos rangos, pulsos cortos sin perder la altura del talón. Cerrá con el estiramiento de flexor de cadera, 30s por lado, sin rebotar.</p>
+  </div>
 
-    <h3 style="font-family:'Oswald',sans-serif;text-transform:uppercase;font-size:16px;margin:28px 0 12px;color:var(--strength);">Día 2 y 5 — Cuerpo Total Implacable <span style="color:var(--text-muted);font-weight:400;font-size:12px;">(circuito de mantenimientos, sin secuencias)</span></h3>
+  <div class="card">
+    <img src="images/ja-f1-secuencia2-estocada.png" alt="Secuencia 2 estocada">
+    <h3>Secuencia 2 — Estocada (Lunge)</h3>
+    <div class="tags"><span class="tag">Hidrantes</span><span class="tag">Hold</span><span class="tag">Bomba</span><span class="tag">Estir. flexor cadera</span></div>
+    <table class="progress-table">
+      <tr><th>Semana</th><th>Hold</th><th>Bomba</th></tr>
+      <tr><td>Semana 1</td><td>60 seg</td><td>15 reps</td></tr>
+      <tr><td>Semana 2</td><td>90 seg</td><td>10 reps</td></tr>
+      <tr><td>Semana 3</td><td>120 seg</td><td>5 reps</td></tr>
+      <tr><td>Semana 4</td><td colspan="2">Descarga</td></tr>
+    </table>
+    <span class="tips-label">Tips Pro</span>
+    <p class="tips"><b>Hold de estocada:</b> rodilla de adelante alineada con el pie (no colapsa hacia adentro), torso alto, sostené la posición baja sin apoyar la rodilla trasera. <b>Bomba:</b> pulsos pequeños en el mismo rango, sin bloquear la respiración.</p>
+  </div>
 
-    <div class="note" style="border-left-color:var(--strength);">
-      Hacé los 7 ejercicios seguidos, sin ejercicio previo de pre-fatiga ni estiramiento entre medio. Cada ejercicio se sostiene por tiempo: <b>Semana 1: 30 segundos</b> · <b>Semana 2: 60 segundos</b> · <b>Semana 3: 90 segundos</b> · <b>Semana 4: descarga</b> (volvé a 30s o bajá el volumen).
-    </div>
+  <div class="card">
+    <img src="images/ja-f1-secuencia3-estocada-bulgara.png" alt="Secuencia 3 estocada búlgara">
+    <h3>Secuencia 3 — Estocada búlgara elevada</h3>
+    <div class="tags"><span class="tag">Hidrantes</span><span class="tag">Hold</span><span class="tag">Bomba</span><span class="tag">Estir. flexor cadera</span></div>
+    <table class="progress-table">
+      <tr><th>Semana</th><th>Hold</th><th>Bomba</th></tr>
+      <tr><td>Semana 1</td><td>60 seg</td><td>15 reps</td></tr>
+      <tr><td>Semana 2</td><td>90 seg</td><td>10 reps</td></tr>
+      <tr><td>Semana 3</td><td>120 seg</td><td>5 reps</td></tr>
+      <tr><td>Semana 4</td><td colspan="2">Descarga</td></tr>
+    </table>
+    <span class="tips-label">Tips Pro</span>
+    <p class="tips">Pie trasero apoyado en un banco, peso casi todo en la pierna de adelante. En el hold, torso ligeramente inclinado adelante sin perder el equilibrio; en la bomba, pulsos cortos controlando que la rodilla no se vaya hacia adentro.</p>
+  </div>
 
-    <div class="grid" style="margin-bottom:32px;">
-      <div class="card phase-fuerza">
-        <img src="images/ja-f1-tb-1-flexion-hold.png" onerror="this.onerror=null;this.src='https://placehold.co/600x450/1B1F26/3FA9F5?text=Mantener+la+Flexi%C3%B3n'" alt="Mantener la flexión">
-        <div class="card-body">
-          <h3>1. Mantener la flexión (push-up hold)</h3>
-          <div class="meta-row"><span>30/60/90s</span></div>
-          <details class="tips"><summary>Tips Pro</summary><p>Sostené la posición baja de la flexión, codos cerca del cuerpo (~45°), cuerpo en línea recta de cabeza a talones, sin que la cadera se hunda.</p></details>
-        </div>
-      </div>
-      <div class="card phase-fuerza">
-        <img src="images/ja-f1-tb-2-dominada-hold.png" onerror="this.onerror=null;this.src='https://placehold.co/600x450/1B1F26/3FA9F5?text=Soporte+de+Dominada'" alt="Soporte de dominada">
-        <div class="card-body">
-          <h3>2. Soporte de dominada (pull-up hold)</h3>
-          <div class="meta-row"><span>30/60/90s</span></div>
-          <details class="tips"><summary>Tips Pro</summary><p>Mentón sobre la barra, escápulas activas hacia abajo y atrás, evitá que los hombros se encojan hacia las orejas durante el mantenimiento.</p></details>
-        </div>
-      </div>
-      <div class="card phase-fuerza">
-        <img src="images/ja-f1-tb-3-aereo-hold.png" onerror="this.onerror=null;this.src='https://placehold.co/600x450/1B1F26/3FA9F5?text=Soporte+A%C3%A9reo'" alt="Soporte aéreo">
-        <div class="card-body">
-          <h3>3. Soporte aéreo</h3>
-          <div class="meta-row"><span>30/60/90s</span></div>
-          <details class="tips"><summary>Tips Pro</summary><p>Core y hombros son los que sostienen la posición, no el cuello. Buscá la técnica más controlada que puedas sostener el tiempo completo sin perder la forma.</p></details>
-        </div>
-      </div>
-      <div class="card phase-fuerza">
-        <img src="images/ja-f1-tb-4-bicep-hold.png" onerror="this.onerror=null;this.src='https://placehold.co/600x450/1B1F26/3FA9F5?text=Mantener+el+B%C3%ADcep'" alt="Mantener el bícep">
-        <div class="card-body">
-          <h3>4. Mantener el bícep</h3>
-          <div class="meta-row"><span>30/60/90s</span></div>
-          <details class="tips"><summary>Tips Pro</summary><p>Codo fijo pegado al torso durante todo el mantenimiento, sostené el ángulo medio de la flexión de codo sin que el brazo empiece a temblar y perder la posición.</p></details>
-        </div>
-      </div>
-      <div class="card phase-fuerza">
-        <img src="images/ja-f1-tb-5-triceps-hold.png" onerror="this.onerror=null;this.src='https://placehold.co/600x450/1B1F26/3FA9F5?text=Mantener+Tr%C3%ADceps'" alt="Mantener tríceps">
-        <div class="card-body">
-          <h3>5. Mantener la flexión de tríceps</h3>
-          <div class="meta-row"><span>30/60/90s</span></div>
-          <details class="tips"><summary>Tips Pro</summary><p>Codos apuntando hacia atrás (no hacia los costados), sostené el ángulo medio de extensión sin que el codo se abra.</p></details>
-        </div>
-      </div>
-      <div class="card phase-fuerza">
-        <img src="images/ja-f1-tb-6-rana-hold.png" onerror="this.onerror=null;this.src='https://placehold.co/600x450/1B1F26/3FA9F5?text=Soporte+Tabl%C3%B3n+de+Rana'" alt="Soporte tablón de rana">
-        <div class="card-body">
-          <h3>6. Soporte de tablón de rana</h3>
-          <div class="meta-row"><span>30/60/90s</span></div>
-          <details class="tips"><summary>Tips Pro</summary><p>Rodillas abiertas hacia los costados con los pies juntos, cadera baja y controlada, core firme para no dejar caer la zona lumbar.</p></details>
-        </div>
-      </div>
-      <div class="card phase-fuerza">
-        <img src="images/ja-f1-tb-7-lateral-hold.png" onerror="this.onerror=null;this.src='https://placehold.co/600x450/1B1F26/3FA9F5?text=Plancha+Lateral'" alt="Plancha lateral">
-        <div class="card-body">
-          <h3>7. Soporte en plancha lateral</h3>
-          <div class="meta-row"><span>30/60/90s x lado</span></div>
-          <details class="tips"><summary>Tips Pro</summary><p>Cadera elevada en línea recta con el torso, no dejes que se hunda hacia el piso. Repetí el tiempo completo de cada lado.</p></details>
-        </div>
-      </div>
-    </div>
+  <div class="card">
+    <img src="images/ja-f1-secuencia4-peso-muerto-piernas-rectas.png" alt="Secuencia 4 peso muerto piernas rectas">
+    <h3>Secuencia 4 — Peso muerto piernas rectas</h3>
+    <div class="tags"><span class="tag">Hidrantes</span><span class="tag">Hold</span><span class="tag">Bomba</span><span class="tag">Estir. flexor cadera</span></div>
+    <table class="progress-table">
+      <tr><th>Semana</th><th>Hold</th><th>Bomba</th></tr>
+      <tr><td>Semana 1</td><td>60 seg</td><td>15 reps</td></tr>
+      <tr><td>Semana 2</td><td>90 seg</td><td>10 reps</td></tr>
+      <tr><td>Semana 3</td><td>120 seg</td><td>5 reps</td></tr>
+      <tr><td>Semana 4</td><td colspan="2">Descarga</td></tr>
+    </table>
+    <span class="tips-label">Tips Pro</span>
+    <p class="tips">Bisagra de cadera con piernas casi rectas, espalda neutra (no redondeada), el movimiento sale de la cadera, no de la lumbar. En el hold, sostené el punto de máximo estiramiento de isquiotibiales que puedas controlar.</p>
+  </div>
 
-    <h2 class="panel-title" style="font-size:19px;">Fase 2 · Fuerza <span style="color:var(--text-muted);font-size:12px;font-family:'JetBrains Mono',monospace;text-transform:none;">— Semanas 5 a 12 · dos bloques de piernas + Cuerpo Total</span></h2>
+  <div class="card">
+    <img src="images/ja-f1-secuencia5-v-up.png" alt="Secuencia 5 V-up">
+    <h3>Secuencia 5 — V-Up (core + pantorrilla)</h3>
+    <div class="tags"><span class="tag">Hidrantes</span><span class="tag">Hold</span><span class="tag">Bomba</span><span class="tag">Estir. pantorrilla en V</span></div>
+    <table class="progress-table">
+      <tr><th>Semana</th><th>Hold</th><th>Bomba</th></tr>
+      <tr><td>Semana 1</td><td>60 seg</td><td>15 reps</td></tr>
+      <tr><td>Semana 2</td><td>90 seg</td><td>10 reps</td></tr>
+      <tr><td>Semana 3</td><td>120 seg</td><td>5 reps</td></tr>
+      <tr><td>Semana 4</td><td colspan="2">Descarga</td></tr>
+    </table>
+    <span class="tips-label">Tips Pro</span>
+    <p class="tips">Acostado, elevá tronco y piernas formando una V, brazos buscando los pies. En el hold, lumbar pegada al piso (no arqueada). Cerrás con estiramiento de pantorrilla en V en vez del estiramiento de cadera.</p>
+  </div>
 
-    <div class="note" style="border-left-color:var(--strength);">
-      Fase 2 tiene dos bloques de 4 semanas cada uno. <b>Semanas 5–8:</b> Piernas Poderosas (secuencias 6 a 10) + Cuerpo Total con hold progresivo, semana 8 de descarga. <b>Semanas 9–12:</b> Piernas Explosivas (secuencias 11 a 15) + Cuerpo Total de repeticiones máximas, semana 12 de descarga (en espejo con la semana 8 — confirmalo cuando tengas el dato exacto). Los días de piernas siguen siendo Lunes y Jueves, y Cuerpo Total Martes y Viernes.
-    </div>
+  <div class="day-header">Día 2 y 5 — Cuerpo Total Implacable (7 holds encadenados, sin secuencias)</div>
+  <p class="section-sub">Hacé los 7 ejercicios seguidos, sin pre-fatiga ni estiramiento entre medio. <b>Semana 1: 30s · Semana 2: 60s · Semana 3: 90s · Semana 4: descarga</b> (volvé a 30s o bajá volumen).</p>
 
-    <h3 style="font-family:'Oswald',sans-serif;text-transform:uppercase;font-size:16px;margin:24px 0 12px;color:var(--strength);">Semanas 5–8 · Día 1 y 4 — Piernas Poderosas <span style="color:var(--text-muted);font-weight:400;font-size:12px;">(Secuencias 6 a 10, en orden)</span></h3>
+  <div class="card"><img src="images/ja-f1-tb-1-flexion-hold.png" alt="Mantener la flexión"><h3>1. Mantener la flexión (push-up hold)</h3><div class="tags"><span class="tag">30/60/90s</span></div><span class="tips-label">Tips Pro</span><p class="tips">Sostené la posición baja de la flexión, codos cerca del cuerpo (~45°), cuerpo en línea recta de cabeza a talones, sin que la cadera se hunda.</p></div>
+  <div class="card"><img src="images/ja-f1-tb-2-dominada-hold.png" alt="Soporte de dominada"><h3>2. Soporte de dominada (pull-up hold)</h3><div class="tags"><span class="tag">30/60/90s</span></div><span class="tips-label">Tips Pro</span><p class="tips">Mentón sobre la barra, escápulas activas hacia abajo y atrás, evitá que los hombros se encojan hacia las orejas.</p></div>
+  <div class="card"><img src="images/ja-f1-tb-3-aereo-hold.png" alt="Soporte aéreo"><h3>3. Soporte aéreo</h3><div class="tags"><span class="tag">30/60/90s</span></div><span class="tips-label">Tips Pro</span><p class="tips">Core y hombros sostienen la posición, no el cuello. Buscá la técnica más controlada que puedas mantener todo el tiempo.</p></div>
+  <div class="card"><img src="images/ja-f1-tb-4-bicep-hold.png" alt="Mantener el bícep"><h3>4. Mantener el bícep</h3><div class="tags"><span class="tag">30/60/90s</span></div><span class="tips-label">Tips Pro</span><p class="tips">Codo fijo pegado al torso durante todo el mantenimiento, sostené el ángulo medio sin que el brazo empiece a temblar y perder la posición.</p></div>
+  <div class="card"><img src="images/ja-f1-tb-5-triceps-hold.png" alt="Mantener tríceps"><h3>5. Mantener la flexión de tríceps</h3><div class="tags"><span class="tag">30/60/90s</span></div><span class="tips-label">Tips Pro</span><p class="tips">Codos apuntando hacia atrás (no hacia los costados), sostené el ángulo medio de extensión sin que el codo se abra.</p></div>
+  <div class="card"><img src="images/ja-f1-tb-6-rana-hold.png" alt="Soporte tablón de rana"><h3>6. Soporte de tablón de rana</h3><div class="tags"><span class="tag">30/60/90s</span></div><span class="tips-label">Tips Pro</span><p class="tips">Rodillas abiertas hacia los costados con los pies juntos, cadera baja y controlada, core firme.</p></div>
+  <div class="card"><img src="images/ja-f1-tb-7-lateral-hold.png" alt="Plancha lateral"><h3>7. Soporte en plancha lateral</h3><div class="tags"><span class="tag">30/60/90s x lado</span></div><span class="tips-label">Tips Pro</span><p class="tips">Cadera elevada en línea recta con el torso, no dejes que se hunda. Repetí el tiempo completo de cada lado.</p></div>
 
-    <div class="grid" style="margin-bottom:10px;">
-      <div class="card phase-fuerza">
-        <img src="images/ja-f2-secuencia6-sentadillas-sentadas.png" onerror="this.onerror=null;this.src='https://placehold.co/600x450/1B1F26/3FA9F5?text=Secuencia+6'" alt="Secuencia 6">
-        <div class="card-body">
-          <h3>Secuencia 6 — Sentadillas sentadas</h3>
-          <div class="meta-row"><span>Puente glúteos</span><span>Hold</span><span>Estocada buttkicker</span><span>Estir. cadera</span></div>
-          <details class="tips"><summary>Tips Pro</summary><p><b>Puente de glúteos:</b> apretá fuerte arriba, empujando con el talón, sin arquear la lumbar. <b>Sentadillas sentadas (hold):</b> sentadilla profunda sostenida, pecho arriba, rodillas siguiendo la punta del pie. <b>Estocada buttkicker:</b> estocada dinámica combinada con talón al glúteo en cada repetición — controlá el aterrizaje antes de repetir.</p></details>
-        </div>
-      </div>
-      <div class="card phase-fuerza">
-        <img src="images/ja-f2-secuencia7-estocada-inversa.png" onerror="this.onerror=null;this.src='https://placehold.co/600x450/1B1F26/3FA9F5?text=Secuencia+7'" alt="Secuencia 7">
-        <div class="card-body">
-          <h3>Secuencia 7 — Estocada inversa</h3>
-          <div class="meta-row"><span>Puente glúteos</span><span>Hold</span><span>Salto tuck</span><span>Estir. cadera</span></div>
-          <details class="tips"><summary>Tips Pro</summary><p><b>Estocada inversa (hold):</b> paso hacia atrás, rodilla trasera casi al piso, peso en el talón delantero. <b>Salto tuck:</b> despegue con las dos piernas llevando las rodillas al pecho — aterrizá suave y con las rodillas alineadas, es el primer ejercicio explícitamente pliométrico del bloque.</p></details>
-        </div>
-      </div>
-      <div class="card phase-fuerza">
-        <img src="images/ja-f2-secuencia8-levantamiento-muerto-burpee.png" onerror="this.onerror=null;this.src='https://placehold.co/600x450/1B1F26/3FA9F5?text=Secuencia+8'" alt="Secuencia 8">
-        <div class="card-body">
-          <h3>Secuencia 8 — Levantamiento muerto burpee</h3>
-          <div class="meta-row"><span>Puente glúteos</span><span>Combo</span><span>Salto caja sentada</span><span>Estir. cadera</span></div>
-          <details class="tips"><summary>Tips Pro</summary><p><b>Levantamiento muerto burpee:</b> combina la bisagra de cadera del peso muerto con la bajada a plancha del burpee — mantené la espalda neutra en cada transición. <b>Salto de caja sentada:</b> arrancás sentado (sin impulso de brazos hacia atrás) y saltás al cajón — enfatiza la potencia desde cero, sin contramovimiento.</p></details>
-        </div>
-      </div>
-      <div class="card phase-fuerza">
-        <img src="images/ja-f2-secuencia9-peso-muerto-piernas-rectas.png" onerror="this.onerror=null;this.src='https://placehold.co/600x450/1B1F26/3FA9F5?text=Secuencia+9'" alt="Secuencia 9">
-        <div class="card-body">
-          <h3>Secuencia 9 — Peso muerto piernas rectas</h3>
-          <div class="meta-row"><span>Puente glúteos</span><span>Hold</span><span>Buttkicker 1 pierna</span><span>Estir. cadera</span></div>
-          <details class="tips"><summary>Tips Pro</summary><p><b>Peso muerto piernas rectas (hold):</b> igual que en Fase 1 pero con foco en tiempo bajo tensión. <b>Buttkicker a una pierna:</b> talón al glúteo en apoyo unilateral — controlá la cadera para que no rote, es un ejercicio de equilibrio y potencia a la vez.</p></details>
-        </div>
-      </div>
-      <div class="card phase-fuerza">
-        <img src="images/ja-f2-secuencia10-elevacion-pantorrillas.png" onerror="this.onerror=null;this.src='https://placehold.co/600x450/1B1F26/3FA9F5?text=Secuencia+10'" alt="Secuencia 10">
-        <div class="card-body">
-          <h3>Secuencia 10 — Elevación de pantorrillas con peso</h3>
-          <div class="meta-row"><span>Puente glúteos</span><span>Elevación c/ peso</span><span>Estir. pantorrilla</span></div>
-          <details class="tips"><summary>Tips Pro</summary><p><b>Elevación de pantorrilla con peso:</b> subida completa hasta la punta del pie, bajada lenta y controlada más allá del paralelo para trabajar rango completo. Esta secuencia cierra con estiramiento de pantorrilla en vez de flexor de cadera.</p></details>
-        </div>
-      </div>
-    </div>
+  <!-- FASE 2 -->
+  <div class="phase-header"><span class="phase-pill fuerza">Fase 2 · Fuerza</span><h3 style="margin:0">Semanas 5 a 8 — Piernas de Poder</h3></div>
+  <p class="section-sub">Acá se combina pesas + salto en la misma secuencia (superserie). El hold ahora <b>baja</b> de tiempo semana a semana mientras el ejercicio explosivo se vuelve más intenso — el cuerpo llega "precansado" al salto para aprender a ser explosivo bajo fatiga. Semana 8 es descarga.</p>
 
-    <h3 style="font-family:'Oswald',sans-serif;text-transform:uppercase;font-size:16px;margin:28px 0 12px;color:var(--strength);">Semanas 5–8 · Día 2 y 5 — Cuerpo Total <span style="color:var(--text-muted);font-weight:400;font-size:12px;">(hold + 10 repeticiones)</span></h3>
+  <div class="eli5"><b>Para entenderlo fácil</b>
+  Ahora cada secuencia tiene 4 pasos: <b>Puente de glúteos</b> (activación) → <b>Hold</b> (sostener, cada vez menos tiempo) → <b>Movimiento explosivo/salto</b> (cada vez con menos repeticiones pero más intenso) → <b>estiramiento</b>. La idea es: cuanto menos aguantás quieto, más tenés que explotar después. Descansá 1 minuto o menos entre ejercicios, y 2 minutos entre series completas.</div>
 
-    <div class="note" style="border-left-color:var(--strength);">
-      Cada ejercicio se sostiene en isometría y, apenas termina el tiempo, hacés 10 repeticiones dinámicas sin pausa. <b>Semana 5: 30s + 10 reps</b> · <b>Semana 6: 60s + 10 reps</b> · <b>Semana 7: 90s + 10 reps</b> · <b>Semana 8: descarga.</b>
-    </div>
+  <div class="day-header">Día 1 y 4 — Piernas de Poder (Secuencias 6 a 10, en orden)</div>
 
-    <div class="grid" style="margin-bottom:32px;">
-      <div class="card phase-fuerza"><img src="images/ja-f2-tba-1-flexion-10reps.png" onerror="this.onerror=null;this.src='https://placehold.co/600x450/1B1F26/3FA9F5?text=Flexiones+%2B+10+reps'" alt="Flexiones más 10 reps"><div class="card-body"><h3>1. Flexión: hold + 10 reps</h3><div class="meta-row"><span>30/60/90s + 10</span></div><details class="tips"><summary>Tips Pro</summary><p>Sostené abajo con los codos a 45°, y al cortar el tiempo hacé las 10 flexiones completas sin perder la técnica por la fatiga acumulada del hold.</p></details></div></div>
-      <div class="card phase-fuerza"><img src="images/ja-f2-tba-2-dominada-10reps.png" onerror="this.onerror=null;this.src='https://placehold.co/600x450/1B1F26/3FA9F5?text=Dominada+%2B+10+reps'" alt="Dominada más 10 reps"><div class="card-body"><h3>2. Dominada: hold + 10 reps</h3><div class="meta-row"><span>30/60/90s + 10</span></div><details class="tips"><summary>Tips Pro</summary><p>Mentón sobre la barra en el hold, escápulas activas. Las 10 repeticiones después del hold van a salir más lentas — priorizá el rango completo por sobre la velocidad.</p></details></div></div>
-      <div class="card phase-fuerza"><img src="images/ja-f2-tba-3-aereo-10reps.png" onerror="this.onerror=null;this.src='https://placehold.co/600x450/1B1F26/3FA9F5?text=Aereo+%2B+10+reps'" alt="Aéreo más 10 reps"><div class="card-body"><h3>3. Soporte aéreo: hold + 10 reps</h3><div class="meta-row"><span>30/60/90s + 10</span></div><details class="tips"><summary>Tips Pro</summary><p>El core sostiene la posición, no el cuello ni la zona lumbar. Bajá la exigencia de las 10 reps si notás que perdés la técnica del hold.</p></details></div></div>
-      <div class="card phase-fuerza"><img src="images/ja-f2-tba-4-bicep-10reps.png" onerror="this.onerror=null;this.src='https://placehold.co/600x450/1B1F26/3FA9F5?text=Bicep+%2B+10+reps'" alt="Bícep más 10 reps"><div class="card-body"><h3>4. Bícep: hold + 10 reps</h3><div class="meta-row"><span>30/60/90s + 10</span></div><details class="tips"><summary>Tips Pro</summary><p>Codo fijo durante el hold y durante las 10 repeticiones — no lo dejes viajar hacia adelante para "ayudarte" con impulso.</p></details></div></div>
-      <div class="card phase-fuerza"><img src="images/ja-f2-tba-5-triceps-10reps.png" onerror="this.onerror=null;this.src='https://placehold.co/600x450/1B1F26/3FA9F5?text=Triceps+%2B+10+reps'" alt="Tríceps más 10 reps"><div class="card-body"><h3>5. Tríceps: hold + 10 reps</h3><div class="meta-row"><span>30/60/90s + 10</span></div><details class="tips"><summary>Tips Pro</summary><p>Codos apuntando atrás durante todo el ejercicio, tanto en el hold como en las repeticiones dinámicas.</p></details></div></div>
-      <div class="card phase-fuerza"><img src="images/ja-f2-tba-6-rana-10reps.png" onerror="this.onerror=null;this.src='https://placehold.co/600x450/1B1F26/3FA9F5?text=Rana+%2B+10+reps'" alt="Rana más 10 reps"><div class="card-body"><h3>6. Plancha de rana: hold + 10 reps</h3><div class="meta-row"><span>30/60/90s + 10</span></div><details class="tips"><summary>Tips Pro</summary><p>Cadera baja y controlada en el hold; en las repeticiones, mové la cadera dentro del mismo rango sin perder la posición de rodillas abiertas.</p></details></div></div>
-      <div class="card phase-fuerza"><img src="images/ja-f2-tba-7-lateral-10reps.png" onerror="this.onerror=null;this.src='https://placehold.co/600x450/1B1F26/3FA9F5?text=Lateral+%2B+10+reps'" alt="Lateral más 10 reps"><div class="card-body"><h3>7. Plancha lateral: hold + 10 reps</h3><div class="meta-row"><span>30/60/90s + 10 x lado</span></div><details class="tips"><summary>Tips Pro</summary><p>Cadera elevada durante el hold; en las repeticiones, subí y bajá la cadera en rango corto sin tocar el piso. Repetí de ambos lados.</p></details></div></div>
-    </div>
+  <div class="card">
+    <img src="images/ja-f2-secuencia6-sentadillas-sentadas.png" alt="Secuencia 6">
+    <h3>Secuencia 6 — Sentadillas sentadas + Estocada Buttkicker</h3>
+    <div class="tags"><span class="tag">Puente glúteos</span><span class="tag">Hold sentadilla</span><span class="tag">Estocada buttkicker</span><span class="tag">Estir. cadera</span></div>
+    <table class="progress-table">
+      <tr><th>Semana</th><th>Hold sentadilla</th><th>Estocada buttkicker</th></tr>
+      <tr><td>Semana 5</td><td>30s + 10 reps</td><td>10 x lado</td></tr>
+      <tr><td>Semana 6</td><td>20s + 10 reps</td><td>8 x lado</td></tr>
+      <tr><td>Semana 7</td><td>10s + 10 reps</td><td>6 x lado</td></tr>
+      <tr><td>Semana 8</td><td colspan="2">Descarga</td></tr>
+    </table>
+    <span class="tips-label">Tips Pro</span>
+    <p class="tips"><b>Puente de glúteos:</b> apretá fuerte arriba, empujando con el talón, sin arquear la lumbar. <b>Sentadilla sentada (hold):</b> sentadilla profunda sostenida, pecho arriba, rodillas siguiendo la punta del pie — después del hold, directo a las repeticiones sin pausa. <b>Estocada buttkicker:</b> estocada dinámica combinada con talón al glúteo — controlá el aterrizaje antes de repetir.</p>
+  </div>
 
-    <h3 style="font-family:'Oswald',sans-serif;text-transform:uppercase;font-size:16px;margin:28px 0 12px;color:var(--strength);">Semanas 9–12 · Día 1 y 4 — Piernas Explosivas <span style="color:var(--text-muted);font-weight:400;font-size:12px;">(Secuencias 11 a 15, en orden)</span></h3>
+  <div class="card">
+    <img src="images/ja-f2-secuencia7-estocada-inversa.png" alt="Secuencia 7">
+    <h3>Secuencia 7 — Estocada inversa + Salto Tuck</h3>
+    <div class="tags"><span class="tag">Puente glúteos</span><span class="tag">Hold estocada</span><span class="tag">Salto tuck</span><span class="tag">Estir. cadera</span></div>
+    <table class="progress-table">
+      <tr><th>Semana</th><th>Hold estocada</th><th>Salto tuck</th></tr>
+      <tr><td>Semana 5</td><td>30s + 10 reps</td><td>10 reps</td></tr>
+      <tr><td>Semana 6</td><td>20s + 10 reps</td><td>8 reps</td></tr>
+      <tr><td>Semana 7</td><td>10s + 10 reps</td><td>6 reps</td></tr>
+      <tr><td>Semana 8</td><td colspan="2">Descarga</td></tr>
+    </table>
+    <span class="tips-label">Tips Pro</span>
+    <p class="tips"><b>Estocada inversa (hold):</b> paso hacia atrás, rodilla trasera casi al piso, peso en el talón delantero. <b>Salto tuck:</b> despegue con las dos piernas llevando las rodillas al pecho — aterrizá suave con las rodillas alineadas.</p>
+  </div>
 
-    <div class="grid" style="margin-bottom:10px;">
-      <div class="card phase-fuerza"><img src="images/ja-f2-secuencia11-levantamiento-muerto.png" onerror="this.onerror=null;this.src='https://placehold.co/600x450/1B1F26/3FA9F5?text=Secuencia+11'" alt="Secuencia 11"><div class="card-body"><h3>Secuencia 11 — Levantamiento muerto</h3><div class="meta-row"><span>Combo hidrante/puente</span><span>Peso muerto</span><span>Tijeras buttkicker</span><span>Estir. cadera</span></div><details class="tips"><summary>Tips Pro</summary><p><b>Combo hidrante/puente:</b> encadena la activación de glúteo medio del hidrante con el puente de glúteo en una sola serie continua. <b>Tijeras alternadas buttkicker:</b> alternás pierna adelante/atrás en el aire llevando el talón al glúteo — es el paso siguiente en dificultad respecto al buttkicker a una pierna de la secuencia 9.</p></details></div></div>
-      <div class="card phase-fuerza"><img src="images/ja-f2-secuencia12-sentadillas.png" onerror="this.onerror=null;this.src='https://placehold.co/600x450/1B1F26/3FA9F5?text=Secuencia+12'" alt="Secuencia 12"><div class="card-body"><h3>Secuencia 12 — Sentadillas</h3><div class="meta-row"><span>Combo hidrante/puente</span><span>Sentadillas</span><span>Salto rodamiento atrás</span><span>Estir. cadera</span></div><details class="tips"><summary>Tips Pro</summary><p><b>Salto con rodamiento hacia atrás:</b> después del salto, absorbés el aterrizaje rodando suavemente hacia atrás sobre la espalda (sin golpear la cabeza) y volvés a pararte — trabaja el control del cuerpo en el aire y la desaceleración.</p></details></div></div>
-      <div class="card phase-fuerza"><img src="images/ja-f2-secuencia13-estocada-bulgara-elevada.png" onerror="this.onerror=null;this.src='https://placehold.co/600x450/1B1F26/3FA9F5?text=Secuencia+13'" alt="Secuencia 13"><div class="card-body"><h3>Secuencia 13 — Estocada búlgara elevada</h3><div class="meta-row"><span>Combo hidrante/puente</span><span>Búlgara elevada</span><span>Bronco kick tuck</span><span>Estir. cadera</span></div><details class="tips"><summary>Tips Pro</summary><p><b>Salto bronco kick tuck:</b> combina una patada tipo "bronco" (manos al piso, patada de las piernas hacia atrás) con un salto tuck — es de los ejercicios más exigentes del bloque, priorizá la técnica antes que la velocidad.</p></details></div></div>
-      <div class="card phase-fuerza"><img src="images/ja-f2-secuencia14-peso-muerto-piernas-rectas.png" onerror="this.onerror=null;this.src='https://placehold.co/600x450/1B1F26/3FA9F5?text=Secuencia+14'" alt="Secuencia 14"><div class="card-body"><h3>Secuencia 14 — Peso muerto piernas rectas</h3><div class="meta-row"><span>Combo hidrante/puente</span><span>Peso muerto</span><span>Salto profundidad ataque</span><span>Estir. cadera</span></div><details class="tips"><summary>Tips Pro</summary><p><b>Salto de profundidad de ataque:</b> caída desde una superficie elevada con rebote inmediato hacia arriba con máxima intención — contacto mínimo con el piso, exactamente el patrón "reactivo" que va a transferir directo al salto vertical en la Fase 3.</p></details></div></div>
-      <div class="card phase-fuerza"><img src="images/ja-f2-secuencia15-elevacion-pantorrillas.png" onerror="this.onerror=null;this.src='https://placehold.co/600x450/1B1F26/3FA9F5?text=Secuencia+15'" alt="Secuencia 15"><div class="card-body"><h3>Secuencia 15 — Elevación de pantorrillas con peso</h3><div class="meta-row"><span>Combo hidrante/puente</span><span>Elevación c/ peso</span><span>Estir. pantorrilla</span></div><details class="tips"><summary>Tips Pro</summary><p>Mismo ejercicio que la secuencia 10, cerrando el bloque de piernas explosivas con el mismo trabajo de pantorrilla y su estiramiento correspondiente.</p></details></div></div>
-    </div>
+  <div class="card">
+    <img src="images/ja-f2-secuencia8-levantamiento-muerto-burpee.png" alt="Secuencia 8">
+    <h3>Secuencia 8 — Levantamiento muerto burpee + Salto a caja sentada</h3>
+    <div class="tags"><span class="tag">Puente glúteos</span><span class="tag">Combo</span><span class="tag">Salto caja sentada</span><span class="tag">Estir. cadera</span></div>
+    <table class="progress-table">
+      <tr><th>Semana</th><th>Hold plancha + combo</th><th>Salto caja</th></tr>
+      <tr><td>Semana 5</td><td>30s + 10 combos</td><td>10 reps (caja 18-24")</td></tr>
+      <tr><td>Semana 6</td><td>20s + 10 combos</td><td>8 reps (caja 24-36")</td></tr>
+      <tr><td>Semana 7</td><td>10s + 10 combos</td><td>6 reps (caja 36-42")</td></tr>
+      <tr><td>Semana 8</td><td colspan="2">Descarga</td></tr>
+    </table>
+    <span class="tips-label">Tips Pro</span>
+    <p class="tips"><b>Levantamiento muerto burpee:</b> combina la bisagra de cadera del peso muerto con la bajada a plancha del burpee — mantené la espalda neutra en cada transición. <b>Salto de caja sentada:</b> arrancás sentado (sin impulso de brazos) y saltás al cajón — la caja sube de altura cada semana mientras bajan las repeticiones: menos volumen, más intensidad.</p>
+  </div>
 
-    <h3 style="font-family:'Oswald',sans-serif;text-transform:uppercase;font-size:16px;margin:28px 0 12px;color:var(--strength);">Semanas 9–12 · Día 2 y 5 — Cuerpo Total <span style="color:var(--text-muted);font-weight:400;font-size:12px;">(repeticiones máximas en 30s)</span></h3>
+  <div class="card">
+    <img src="images/ja-f2-secuencia9-peso-muerto-piernas-rectas.png" alt="Secuencia 9">
+    <h3>Secuencia 9 — Peso muerto piernas rectas + Buttkicker 1 pierna</h3>
+    <div class="tags"><span class="tag">Puente glúteos</span><span class="tag">Hold peso muerto</span><span class="tag">Buttkicker 1 pierna</span><span class="tag">Estir. cadera</span></div>
+    <table class="progress-table">
+      <tr><th>Semana</th><th>Hold peso muerto</th><th>Buttkicker 1 pierna</th></tr>
+      <tr><td>Semana 5</td><td>30s + 10 reps</td><td>10 x lado</td></tr>
+      <tr><td>Semana 6</td><td>20s + 10 reps</td><td>8 x lado</td></tr>
+      <tr><td>Semana 7</td><td>10s + 10 reps</td><td>6 x lado</td></tr>
+      <tr><td>Semana 8</td><td colspan="2">Descarga</td></tr>
+    </table>
+    <span class="tips-label">Tips Pro</span>
+    <p class="tips"><b>Peso muerto piernas rectas (hold):</b> igual que en Fase 1 pero con foco en tiempo bajo tensión, seguido de reps dinámicas. <b>Buttkicker a una pierna:</b> talón al glúteo en apoyo unilateral — controlá la cadera para que no rote.</p>
+  </div>
 
-    <div class="note" style="border-left-color:var(--strength);">
-      Acá cambia el formato: nada de holds, son <b>repeticiones máximas en 30 segundos</b> por ejercicio. El objetivo semana a semana es superar tu propia marca de repeticiones. Semana 12 de descarga (asumido en espejo con la semana 8 — confirmalo si tenés el dato real).
-    </div>
+  <div class="card">
+    <img src="images/ja-f2-secuencia10-elevacion-pantorrillas.png" alt="Secuencia 10">
+    <h3>Secuencia 10 — Elevación de pantorrillas con peso</h3>
+    <div class="tags"><span class="tag">Puente glúteos</span><span class="tag">Elevación c/peso</span><span class="tag">Estir. pantorrilla</span></div>
+    <span class="tips-label">Tips Pro</span>
+    <p class="tips">Subida completa hasta la punta del pie, bajada lenta y controlada más allá del paralelo para trabajar rango completo. Cierra el bloque con estiramiento de pantorrilla en vez de flexor de cadera.</p>
+  </div>
 
-    <div class="grid" style="margin-bottom:32px;">
-      <div class="card phase-fuerza"><img src="images/ja-f2-tbb-1-flexiones-palmada.png" onerror="this.onerror=null;this.src='https://placehold.co/600x450/1B1F26/3FA9F5?text=Flexiones+con+Palmada'" alt="Flexiones con palmada"><div class="card-body"><h3>1. Flexiones con palmada</h3><div class="meta-row"><span>Máx reps / 30s</span></div><details class="tips"><summary>Tips Pro</summary><p>Empuje explosivo para despegar las manos del piso y dar la palmada, aterrizaje suave con los codos listos para absorber antes de la siguiente repetición.</p></details></div></div>
-      <div class="card phase-fuerza"><img src="images/ja-f2-tbb-2-combo-dominada.png" onerror="this.onerror=null;this.src='https://placehold.co/600x450/1B1F26/3FA9F5?text=Combo+Dominada'" alt="Combo dominada"><div class="card-body"><h3>2. Combo liberación de dominada</h3><div class="meta-row"><span>Máx reps / 30s</span></div><details class="tips"><summary>Tips Pro</summary><p>Alterná entre dominada estricta y el componente de liberación/impulso que marca el ejercicio, siempre controlando la bajada para proteger el hombro.</p></details></div></div>
-      <div class="card phase-fuerza"><img src="images/ja-f2-tbb-3-limpio-prensa-aerea.png" onerror="this.onerror=null;this.src='https://placehold.co/600x450/1B1F26/3FA9F5?text=Limpio+a+Prensa+Aerea'" alt="Limpio a prensa aérea"><div class="card-body"><h3>3. Limpio a la prensa aérea</h3><div class="meta-row"><span>Máx reps / 30s</span></div><details class="tips"><summary>Tips Pro</summary><p>Con mancuernas o el peso que uses: tirón desde el piso o la cadera hasta los hombros ("limpio"), después empuje directo arriba de la cabeza. Cadera y core estabilizan todo el movimiento.</p></details></div></div>
-      <div class="card phase-fuerza"><img src="images/ja-f2-tbb-4-curl-biceps.png" onerror="this.onerror=null;this.src='https://placehold.co/600x450/1B1F26/3FA9F5?text=Curl+de+Biceps'" alt="Curl de bíceps"><div class="card-body"><h3>4. Curl de bíceps</h3><div class="meta-row"><span>Máx reps / 30s</span></div><details class="tips"><summary>Tips Pro</summary><p>Codos fijos, rango completo, sin usar impulso de cadera para levantar el peso — la velocidad viene de la contracción del bícep, no del balanceo del cuerpo.</p></details></div></div>
-      <div class="card phase-fuerza"><img src="images/ja-f2-tbb-5-flexion-pike-elevada.png" onerror="this.onerror=null;this.src='https://placehold.co/600x450/1B1F26/3FA9F5?text=Flexion+Pike+Elevada'" alt="Flexión pike elevada"><div class="card-body"><h3>5. Flexiones de pike elevadas</h3><div class="meta-row"><span>Máx reps / 30s</span></div><details class="tips"><summary>Tips Pro</summary><p>Pies elevados, cadera alta formando una V invertida — la carga se traslada al hombro, similar a una flexión de press militar parcial. Cabeza entre los brazos, sin colapsar el cuello.</p></details></div></div>
-      <div class="card phase-fuerza"><img src="images/ja-f2-tbb-6-rana-alterna.png" onerror="this.onerror=null;this.src='https://placehold.co/600x450/1B1F26/3FA9F5?text=Rana+Alterna'" alt="Rana alterna"><div class="card-body"><h3>6. Plancha de rana alterna</h3><div class="meta-row"><span>Máx reps / 30s</span></div><details class="tips"><summary>Tips Pro</summary><p>Desde la posición de rana, alterná llevando una rodilla hacia el pecho y después la otra, manteniendo la cadera baja y estable todo el tiempo.</p></details></div></div>
-      <div class="card phase-fuerza"><img src="images/ja-f2-tbb-7-plancha-lateral-dinamica.png" onerror="this.onerror=null;this.src='https://placehold.co/600x450/1B1F26/3FA9F5?text=Plancha+Lateral+Dinamica'" alt="Plancha lateral dinámica"><div class="card-body"><h3>7. Plancha lateral eléctrica</h3><div class="meta-row"><span>Máx reps / 30s x lado</span></div><details class="tips"><summary>Tips Pro</summary><p>Versión dinámica de la plancha lateral: subís y bajás la cadera en rango corto y rápido sin tocar el piso, manteniendo el torso alineado todo el tiempo.</p></details></div></div>
-    </div>
+  <div class="day-header">Día 2 y 5 — Cuerpo Total (hold + 10 repeticiones)</div>
+  <p class="section-sub">Cada ejercicio se sostiene en isometría y, apenas termina el tiempo, hacés 10 repeticiones dinámicas sin pausa. El hold baja de tiempo cada semana, no sube. <b>Semana 5: 30s+10 · Semana 6: 20s+10 · Semana 7: 10s+10 · Semana 8: descarga.</b></p>
 
-    <h2 class="panel-title" style="font-size:19px;">Fase 3 · Vuelo <span style="color:var(--text-muted);font-size:12px;font-family:'JetBrains Mono',monospace;text-transform:none;">— Semanas 13 a 16 (estimado) · placeholder, esperando tus documentos reales</span></h2>
-    <div class="grid">
-      <div class="card phase-vuelo">
-        <img src="images/ja-f3-salto-cajon.png" onerror="this.onerror=null;this.src='https://placehold.co/600x450/1B1F26/A78BFA?text=Salto+al+Caj%C3%B3n'" alt="Salto al cajón">
-        <div class="card-body">
-          <h3>Salto al cajón (Box Jump)</h3>
-          <div class="meta-row"><span>4 x 5</span><span>Reemplazable</span></div>
-          <details class="tips"><summary>Tips Pro</summary><p>Máxima intención en el despegue, aterrizaje silencioso y controlado arriba del cajón. Bajate caminando, nunca saltando hacia atrás — reseteá entre repeticiones para que cada salto sea de calidad máxima, no de fatiga acumulada.</p></details>
-        </div>
-      </div>
-      <div class="card phase-vuelo">
-        <img src="images/ja-f3-salto-profundidad.png" onerror="this.onerror=null;this.src='https://placehold.co/600x450/1B1F26/A78BFA?text=Salto+en+Profundidad'" alt="Salto en profundidad">
-        <div class="card-body">
-          <h3>Salto en profundidad (Depth Jump)</h3>
-          <div class="meta-row"><span>3 x 4</span><span>Reemplazable</span></div>
-          <details class="tips"><summary>Tips Pro</summary><p>Caída desde un cajón bajo (30–40cm), contacto mínimo con el piso y rebote inmediato hacia arriba. Buscá reactividad, no altura de caída — más alto no es mejor si perdés la técnica de aterrizaje.</p></details>
-        </div>
-      </div>
-      <div class="card phase-vuelo">
-        <img src="images/ja-f3-lanzamiento-balon-medicinal.png" onerror="this.onerror=null;this.src='https://placehold.co/600x450/1B1F26/A78BFA?text=Lanzamiento+Balon+Medicinal'" alt="Lanzamiento balón medicinal">
-        <div class="card-body">
-          <h3>Lanzamiento de balón medicinal</h3>
-          <div class="meta-row"><span>3 x 6</span><span>Reemplazable</span></div>
-          <details class="tips"><summary>Tips Pro</summary><p>Transferí fuerza desde las piernas y la cadera hacia los brazos en un solo movimiento explosivo — es el mismo patrón de transferencia de fuerza que trabaja Anselmi para potencia aplicada al deporte.</p></details>
-        </div>
-      </div>
-      <div class="card phase-vuelo">
-        <img src="images/ja-f3-sprint-corto.png" onerror="this.onerror=null;this.src='https://placehold.co/600x450/1B1F26/A78BFA?text=Sprint+Corto'" alt="Sprint corto">
-        <div class="card-body">
-          <h3>Sprint corto (10–20m)</h3>
-          <div class="meta-row"><span>4 x 15m</span><span>Reemplazable</span></div>
-          <details class="tips"><summary>Tips Pro</summary><p>Aceleración máxima desde parado, pasos cortos y potentes al inicio, extensión completa de cadera en cada zancada. Recuperación completa entre repeticiones (60–90s) para mantener la calidad explosiva.</p></details>
-        </div>
-      </div>
-    </div>
-  </section>
+  <div class="card"><img src="images/ja-f2-tba-1-flexion-10reps.png" alt="Flexiones más 10 reps"><h3>1. Flexión: hold + 10 reps</h3><div class="tags"><span class="tag">30/20/10s + 10</span></div><span class="tips-label">Tips Pro</span><p class="tips">Sostené abajo con los codos a 45°, y al cortar el tiempo hacé las 10 flexiones completas sin perder la técnica.</p></div>
+  <div class="card"><img src="images/ja-f2-tba-2-dominada-10reps.png" alt="Dominada más 10 reps"><h3>2. Dominada: hold + 10 reps</h3><div class="tags"><span class="tag">30/20/10s + 10</span></div><span class="tips-label">Tips Pro</span><p class="tips">Mentón sobre la barra en el hold, escápulas activas. Priorizá el rango completo por sobre la velocidad en las 10 reps.</p></div>
+  <div class="card"><img src="images/ja-f2-tba-3-aereo-10reps.png" alt="Aéreo más 10 reps"><h3>3. Soporte aéreo: hold + 10 reps</h3><div class="tags"><span class="tag">30/20/10s + 10</span></div><span class="tips-label">Tips Pro</span><p class="tips">El core sostiene la posición, no el cuello ni la lumbar. Bajá la exigencia si notás que perdés técnica.</p></div>
+  <div class="card"><img src="images/ja-f2-tba-4-bicep-10reps.png" alt="Bícep más 10 reps"><h3>4. Bícep: hold + 10 reps</h3><div class="tags"><span class="tag">30/20/10s + 10</span></div><span class="tips-label">Tips Pro</span><p class="tips">Codo fijo durante el hold y las 10 repeticiones — no lo dejes viajar hacia adelante para ayudarte con impulso.</p></div>
+  <div class="card"><img src="images/ja-f2-tba-5-triceps-10reps.png" alt="Tríceps más 10 reps"><h3>5. Tríceps: hold + 10 reps</h3><div class="tags"><span class="tag">30/20/10s + 10</span></div><span class="tips-label">Tips Pro</span><p class="tips">Codos apuntando atrás durante todo el ejercicio, tanto en el hold como en las repeticiones.</p></div>
+  <div class="card"><img src="images/ja-f2-tba-6-rana-10reps.png" alt="Rana más 10 reps"><h3>6. Plancha de rana: hold + 10 reps</h3><div class="tags"><span class="tag">30/20/10s + 10</span></div><span class="tips-label">Tips Pro</span><p class="tips">Cadera baja y controlada en el hold; en las repeticiones, mové la cadera sin perder la posición de rodillas abiertas.</p></div>
+  <div class="card"><img src="images/ja-f2-tba-7-lateral-10reps.png" alt="Lateral más 10 reps"><h3>7. Plancha lateral: hold + 10 reps</h3><div class="tags"><span class="tag">30/20/10s + 10 x lado</span></div><span class="tips-label">Tips Pro</span><p class="tips">Cadera elevada durante el hold; en las repeticiones, subí y bajá en rango corto sin tocar el piso. Ambos lados.</p></div>
 
-  <!-- ================= TAB 3: CORRER ================= -->
-  <section class="panel" id="correr">
-    <h2 class="panel-title">Correr — Método Noruego de Lactato</h2>
-    <p class="panel-desc">Una sesión semanal de control de umbral, basada en el enfoque de doble umbral popularizado por el fondismo noruego (Ingebrigtsen).</p>
+  <!-- FASE 3 -->
+  <div class="phase-header"><span class="phase-pill vuelo">Fase 3 · Vuelo</span><h3 style="margin:0">Semanas 9 a 12 — Piernas Explosivas</h3></div>
+  <p class="section-sub">Última fase: máxima velocidad y explosividad. El "hold" ahora se mide en repeticiones máximas dentro de una ventana de tiempo que se acorta cada semana. Semana 12 es descarga — y ahí termina el programa (día 90).</p>
 
-    <div class="run-flow">
-      <div class="run-stage">
-        <span class="num-badge">01</span>
-        <div class="stage-tag">Calentamiento</div>
-        <h3>15–20 min</h3>
-        <p>Trote suave (zona 1, conversación fluida) + 4–6 progresiones de 80m aumentando el ritmo gradualmente. Movilidad dinámica de cadera y tobillo antes de entrar al bloque principal.</p>
-      </div>
-      <div class="run-stage">
-        <span class="num-badge">02</span>
-        <div class="stage-tag">Bloque de intervalos</div>
-        <h3>Umbral de lactato</h3>
-        <p><b>4–6 x 6–8 min</b> a esfuerzo controlado (lactato ~2–3 mmol, sensación de "cómodamente duro", no al máximo). Frecuencia cardíaca objetivo: 85–89% de tu FC máxima. Recuperación trote suave 1–2 min entre series.</p>
-      </div>
-      <div class="run-stage">
-        <span class="num-badge">03</span>
-        <div class="stage-tag">Vuelta a la calma</div>
-        <h3>10–15 min</h3>
-        <p>Trote muy suave (zona 1) para bajar pulsaciones + estiramientos activos de isquios, cuádriceps y gemelos. Cerrá con respiración controlada para acelerar la recuperación.</p>
-      </div>
-    </div>
+  <div class="eli5"><b>Para entenderlo fácil</b>
+  Ya no contás cuánto aguantás quieto: contás <b>cuántas repeticiones hacés en poco tiempo</b>, y ese tiempo se hace cada vez más corto. Es la fase donde el cuerpo va más rápido que nunca. Cuando termine la semana 12, ¡terminaste los 3 meses completos!</div>
 
-    <div class="note">
-      <b>Idea central del método:</b> corriendo por debajo del umbral (esfuerzo "cómodo-duro" y no al máximo) podés acumular mucho más volumen de calidad sin quemarte, controlando el esfuerzo por sensación y frecuencia cardíaca en vez de por velocidad pura. Si no tenés cardio, usá la prueba del habla: deberías poder decir una frase corta, pero no mantener una conversación.
-    </div>
-  </section>
+  <div class="day-header">Día 1 y 4 — Piernas Explosivas (Secuencias 11 a 15, en orden)</div>
 
-  <!-- ================= TAB 4: GIMNASIO ================= -->
-  <section class="panel" id="gym">
-    <h2 class="panel-title">Gimnasio — Fuerza y Potencia</h2>
-    <p class="panel-desc">2 veces por semana, basado en tu rutina Push/Pull/Legs con progresión de cargas.</p>
+  <div class="card">
+    <img src="images/ja-f2-secuencia11-levantamiento-muerto.png" alt="Secuencia 11">
+    <h3>Secuencia 11 — Levantamiento muerto + Tijeras Buttkicker</h3>
+    <div class="tags"><span class="tag">Combo hidrante/puente</span><span class="tag">Peso muerto</span><span class="tag">Tijeras buttkicker</span><span class="tag">Estir. cadera</span></div>
+    <table class="progress-table">
+      <tr><th>Semana</th><th>Peso muerto (reps máx.)</th><th>Tijeras buttkicker</th></tr>
+      <tr><td>Semana 9</td><td>en 30s</td><td>10 reps alternando</td></tr>
+      <tr><td>Semana 10</td><td>en 20s</td><td>8 reps alternando</td></tr>
+      <tr><td>Semana 11</td><td>en 15s</td><td>6 reps alternando</td></tr>
+      <tr><td>Semana 12</td><td colspan="2">Descarga — fin del programa</td></tr>
+    </table>
+    <span class="tips-label">Tips Pro</span>
+    <p class="tips"><b>Combo hidrante/puente:</b> encadena la activación de glúteo medio del hidrante con el puente de glúteo en una sola serie continua. <b>Tijeras alternadas buttkicker:</b> alternás pierna adelante/atrás en el aire llevando el talón al glúteo — más difícil que el buttkicker a una pierna de la Fase 2.</p>
+  </div>
 
-    <div class="day-block">
-      <div class="day-head">
-        <h3>Día 1 — Parte Superior</h3>
-        <span>Fuerza + hipertrofia atlética</span>
-      </div>
-      <table>
-        <thead><tr><th>Ejercicio</th><th>Tipo</th><th>Rango</th></tr></thead>
-        <tbody>
-          <tr><td>Press banca</td><td class="cat">Compuesto</td><td>4–6 rep (fuerza) / 6–8 (hipertrofia pesada)</td></tr>
-          <tr><td>Press militar</td><td class="cat">Compuesto</td><td>4–6 / 6–8</td></tr>
-          <tr><td>Dominadas lastradas</td><td class="cat">Compuesto</td><td>4–6 / 6–8</td></tr>
-          <tr><td>Remo con barra</td><td class="cat">Compuesto</td><td>4–6 / 6–8</td></tr>
-          <tr><td>Press inclinado mancuernas</td><td class="cat">Accesorio</td><td>8–12</td></tr>
-          <tr><td>Curls de bíceps</td><td class="cat">Accesorio</td><td>8–12</td></tr>
-          <tr><td>Elevaciones laterales</td><td class="cat">Accesorio</td><td>8–12</td></tr>
-          <tr><td>Extensiones de tríceps</td><td class="cat">Accesorio</td><td>8–12</td></tr>
-          <tr><td>Face pulls</td><td class="cat">Preventivo</td><td>15–20, sin sobrecargar</td></tr>
-        </tbody>
-      </table>
-    </div>
+  <div class="card">
+    <img src="images/ja-f2-secuencia12-sentadillas.png" alt="Secuencia 12">
+    <h3>Secuencia 12 — Sentadillas + Salto con rodamiento atrás</h3>
+    <div class="tags"><span class="tag">Combo hidrante/puente</span><span class="tag">Sentadillas</span><span class="tag">Salto rodamiento atrás</span><span class="tag">Estir. cadera</span></div>
+    <span class="tips-label">Tips Pro</span>
+    <p class="tips"><b>Salto con rodamiento hacia atrás:</b> después del salto, absorbés el aterrizaje rodando suavemente hacia atrás sobre la espalda (sin golpear la cabeza) y volvés a pararte — trabaja el control del cuerpo en el aire y la desaceleración.</p>
+  </div>
 
-    <div class="day-block">
-      <div class="day-head">
-        <h3>Día 2 — Parte Inferior</h3>
-        <span>Potencia de salto (Anselmi) + protección de tendones (KOT)</span>
-      </div>
-      <table>
-        <thead><tr><th>Ejercicio</th><th>Tipo</th><th>Rango</th></tr></thead>
-        <tbody>
-          <tr><td>Sentadilla trasera</td><td class="cat">Compuesto</td><td>4–6 / 6–8</td></tr>
-          <tr><td>Peso muerto rumano</td><td class="cat">Compuesto</td><td>4–6 / 6–8</td></tr>
-          <tr><td>Hip thrust</td><td class="cat">Accesorio</td><td>8–12</td></tr>
-          <tr><td>Prensa</td><td class="cat">Accesorio</td><td>8–12</td></tr>
-          <tr><td>ATG split squat</td><td class="cat">Accesorio / tendón</td><td>8–12, énfasis excéntrico</td></tr>
-          <tr><td>Gemelos</td><td class="cat">Accesorio</td><td>15–20</td></tr>
-          <tr><td>Planchas / rollouts</td><td class="cat">Core</td><td>Aumentar tiempo/rango, no peso</td></tr>
-        </tbody>
-      </table>
-    </div>
+  <div class="card">
+    <img src="images/ja-f2-secuencia13-estocada-bulgara-elevada.png" alt="Secuencia 13">
+    <h3>Secuencia 13 — Estocada búlgara elevada + Bronco kick tuck</h3>
+    <div class="tags"><span class="tag">Combo hidrante/puente</span><span class="tag">Búlgara elevada</span><span class="tag">Bronco kick tuck</span><span class="tag">Estir. cadera</span></div>
+    <span class="tips-label">Tips Pro</span>
+    <p class="tips"><b>Salto bronco kick tuck:</b> combina una patada tipo "bronco" (manos al piso, patada de las piernas hacia atrás) con un salto tuck — de los ejercicios más exigentes del bloque, priorizá técnica antes que velocidad.</p>
+  </div>
 
-    <div class="progress-block">
-      <h4>¿Qué es el RIR?</h4>
-      <p style="margin:0;">RIR = "Reps in Reserve" (repeticiones en reserva). Es cuántas repeticiones más creés que podrías haber hecho antes de llegar al fallo muscular. <b>RIR 2</b> significa que terminaste la serie sintiendo que te quedaban 2 repeticiones en el tanque. <b>RIR 0</b> es fallo total, no podés hacer una más con buena técnica. Se usa para regular la intensidad real de cada serie sin depender solo del peso o de las repeticiones.</p>
-    </div>
+  <div class="card">
+    <img src="images/ja-f2-secuencia14-peso-muerto-piernas-rectas.png" alt="Secuencia 14">
+    <h3>Secuencia 14 — Peso muerto piernas rectas + Salto de profundidad de ataque</h3>
+    <div class="tags"><span class="tag">Combo hidrante/puente</span><span class="tag">Peso muerto</span><span class="tag">Salto profundidad</span><span class="tag">Estir. cadera</span></div>
+    <span class="tips-label">Tips Pro</span>
+    <p class="tips"><b>Salto de profundidad de ataque:</b> caída desde una superficie elevada con rebote inmediato hacia arriba con máxima intención — contacto mínimo con el piso, el patrón "reactivo" que transfiere directo al salto vertical.</p>
+  </div>
 
-    <div class="progress-block">
-      <h4>Progresión de cargas</h4>
-      <ul>
-        <li><b>Compuestos (4–6 / 6–8 reps):</b> elegí un peso al que llegues a 6 reps casi al fallo. Cada semana sumá +1 repetición por serie. Al llegar al tope (ej. 8 reps con buena técnica en todas las series), subí el peso 2,5–5% y volvé al mínimo del rango.</li>
-        <li><b>Accesorios (8–12 reps):</b> sobrecarga progresiva doble — primero subí repeticiones (8→12), y recién cuando completes 12 reps en todas las series con buena forma, subí el peso (1–2kg en mancuernas, 5–10% en poleas/máquinas).</li>
-        <li><b>Piernas/core preventivo (15–20 reps):</b> subí peso solo cuando logres 20 reps fáciles con buena forma. En planchas, progresá tiempo o rango, nunca peso.</li>
-        <li><b>Regla de oro:</b> nunca sacrifiques forma por peso. Anotá cargas, reps y descansos — el progreso medible es progreso real.</li>
-        <li><b>Microciclos:</b> cada 6–8 semanas hacé una semana de descarga bajando el peso un 20–30%.</li>
-      </ul>
-    </div>
-  </section>
+  <div class="card">
+    <img src="images/ja-f2-secuencia15-elevacion-pantorrillas.png" alt="Secuencia 15">
+    <h3>Secuencia 15 — Elevación de pantorrillas con peso</h3>
+    <div class="tags"><span class="tag">Combo hidrante/puente</span><span class="tag">Elevación c/peso</span><span class="tag">Estir. pantorrilla</span></div>
+    <span class="tips-label">Tips Pro</span>
+    <p class="tips">Mismo ejercicio que la secuencia 10, cerrando el bloque de piernas explosivas con el mismo trabajo de pantorrilla y su estiramiento.</p>
+  </div>
 
-  <!-- ================= TAB 5: MOVILIDAD ================= -->
-  <section class="panel" id="movilidad">
-    <h2 class="panel-title">Elongación y Movilidad</h2>
-    <p class="panel-desc">Rutina semanal de flexibilidad activa y descompresión, después de entrenamientos intensos.</p>
+  <div class="day-header">Día 2 y 5 — Cuerpo Total Explosivo (repeticiones máximas en 30s)</div>
+  <p class="section-sub">Nada de holds: son <b>repeticiones máximas en 30 segundos</b> por ejercicio, semanas 9, 10 y 11. Objetivo: superar tu propia marca cada semana. Semana 12: descarga, cierre del programa.</p>
 
-    <div class="grid">
-      <div class="card">
-        <img src="images/couch-stretch.png" onerror="this.onerror=null;this.src='https://placehold.co/600x450/1B1F26/2DD4BF?text=Couch+Stretch'" alt="Couch stretch">
-        <div class="card-body">
-          <h3>Couch Stretch</h3>
-          <div class="meta-row"><span>2 x 60–90s x lado</span></div>
-          <details class="tips"><summary>Tips Pro</summary><p>Estiramiento clásico de KneesOverToesGuy para el psoas y cuádriceps. Cadera del lado que estirás debe quedar por debajo (no adelantada), apretá el glúteo para profundizar sin forzar la zona lumbar.</p></details>
-        </div>
-      </div>
-      <div class="card">
-        <img src="images/movilidad-rotaciones-toracicas.png" onerror="this.onerror=null;this.src='https://placehold.co/600x450/1B1F26/2DD4BF?text=Rotaciones+Toracicas'" alt="Rotaciones torácicas">
-        <div class="card-body">
-          <h3>Rotaciones torácicas (90/90)</h3>
-          <div class="meta-row"><span>2 x 8 x lado</span></div>
-          <details class="tips"><summary>Tips Pro</summary><p>Cadera fija en el piso, rotá solo desde la espalda alta llevando el brazo hacia atrás siguiendo la mirada. Movimiento lento y controlado, sin rebotes.</p></details>
-        </div>
-      </div>
-      <div class="card">
-        <img src="images/movilidad-perro-boca-abajo.png" onerror="this.onerror=null;this.src='https://placehold.co/600x450/1B1F26/2DD4BF?text=Perro+Boca+Abajo'" alt="Perro boca abajo">
-        <div class="card-body">
-          <h3>Perro boca abajo (descompresión)</h3>
-          <div class="meta-row"><span>3 x 30–45s</span></div>
-          <details class="tips"><summary>Tips Pro</summary><p>Empujá el piso con las manos para alargar la columna, talones buscando el piso sin forzar. Ideal para descomprimir después de sentadillas y saltos pesados.</p></details>
-        </div>
-      </div>
-      <div class="card">
-        <img src="images/movilidad-tobillo.png" onerror="this.onerror=null;this.src='https://placehold.co/600x450/1B1F26/2DD4BF?text=Movilidad+de+Tobillo'" alt="Movilidad de tobillo">
-        <div class="card-body">
-          <h3>Rodilla al frente (dorsiflexión)</h3>
-          <div class="meta-row"><span>2 x 10 x lado</span></div>
-          <details class="tips"><summary>Tips Pro</summary><p>Talón siempre pegado al piso, empujá la rodilla hacia adelante sobre el pie. Directamente ligado a la salud de rodilla que trabaja KneesOverToesGuy — mejora el rango sin el cual no hay buena técnica de aterrizaje.</p></details>
-        </div>
-      </div>
-      <div class="card">
-        <img src="images/movilidad-isquios.png" onerror="this.onerror=null;this.src='https://placehold.co/600x450/1B1F26/2DD4BF?text=Estiramiento+de+Isquios'" alt="Estiramiento de isquios">
-        <div class="card-body">
-          <h3>Isquiotibiales activo (pierna elevada)</h3>
-          <div class="meta-row"><span>2 x 45s x lado</span></div>
-          <details class="tips"><summary>Tips Pro</summary><p>Pierna apoyada en una superficie a la altura de la cadera, espalda recta (no redondeada) inclinándote desde la cadera. Estiramiento funcional recomendado por Athlean-X para no cargar la zona lumbar.</p></details>
-        </div>
-      </div>
-      <div class="card">
-        <img src="images/movilidad-foam-roller-cuadriceps.png" onerror="this.onerror=null;this.src='https://placehold.co/600x450/1B1F26/2DD4BF?text=Foam+Roller+Cuadriceps'" alt="Foam roller cuádriceps">
-        <div class="card-body">
-          <h3>Foam roller — cuádriceps/gemelos</h3>
-          <div class="meta-row"><span>1–2 min x zona</span></div>
-          <details class="tips"><summary>Tips Pro</summary><p>Pasadas lentas, pausando 15–20s en puntos de mayor tensión sin llegar a dolor agudo. Ayuda a la recuperación neuromuscular entre sesiones de salto intensas.</p></details>
-        </div>
-      </div>
-    </div>
-  </section>
+  <div class="card"><img src="images/ja-f2-tbb-1-flexiones-palmada.png" alt="Flexiones con palmada"><h3>1. Flexiones con palmada</h3><div class="tags"><span class="tag">Máx reps / 30s</span></div><span class="tips-label">Tips Pro</span><p class="tips">Empuje explosivo para despegar las manos del piso y dar la palmada, aterrizaje suave con los codos listos para absorber.</p></div>
+  <div class="card"><img src="images/ja-f2-tbb-2-combo-dominada.png" alt="Combo dominada"><h3>2. Combo liberación de dominada</h3><div class="tags"><span class="tag">Máx reps / 30s</span></div><span class="tips-label">Tips Pro</span><p class="tips">Alterná entre dominada estricta y el componente de liberación/impulso, siempre controlando la bajada para proteger el hombro.</p></div>
+  <div class="card"><img src="images/ja-f2-tbb-3-limpio-prensa-aerea.png" alt="Limpio a prensa aérea"><h3>3. Limpio a la prensa aérea</h3><div class="tags"><span class="tag">Máx reps / 30s</span></div><span class="tips-label">Tips Pro</span><p class="tips">Tirón desde el piso o la cadera hasta los hombros ("limpio"), después empuje directo arriba de la cabeza. Cadera y core estabilizan.</p></div>
+  <div class="card"><img src="images/ja-f2-tbb-4-curl-biceps.png" alt="Curl de bíceps"><h3>4. Curl de bíceps</h3><div class="tags"><span class="tag">Máx reps / 30s</span></div><span class="tips-label">Tips Pro</span><p class="tips">Codos fijos, rango completo, sin usar impulso de cadera — la velocidad viene de la contracción del bícep.</p></div>
+  <div class="card"><img src="images/ja-f2-tbb-5-flexion-pike-elevada.png" alt="Flexión pike elevada"><h3>5. Flexiones de pike elevadas</h3><div class="tags"><span class="tag">Máx reps / 30s</span></div><span class="tips-label">Tips Pro</span><p class="tips">Pies elevados, cadera alta formando una V invertida — cabeza entre los brazos, sin colapsar el cuello.</p></div>
+  <div class="card"><img src="images/ja-f2-tbb-6-rana-alterna.png" alt="Rana alterna"><h3>6. Plancha de rana alterna</h3><div class="tags"><span class="tag">Máx reps / 30s</span></div><span class="tips-label">Tips Pro</span><p class="tips">Desde la posición de rana, alterná llevando una rodilla hacia el pecho y después la otra, cadera baja y estable.</p></div>
+  <div class="card"><img src="images/ja-f2-tbb-7-plancha-lateral-dinamica.png" alt="Plancha lateral dinámica"><h3>7. Plancha lateral eléctrica</h3><div class="tags"><span class="tag">Máx reps / 30s x lado</span></div><span class="tips-label">Tips Pro</span><p class="tips">Versión dinámica: subís y bajás la cadera en rango corto y rápido sin tocar el piso, torso alineado todo el tiempo.</p></div>
+
+  <div class="eli5" style="margin-top:30px"><b>¿Y después del día 90?</b>
+  El libro recomienda no volver a entrenar con pesas en la semana de descarga final: jugá tu deporte, movete, disfrutá. Si querés medir tu salto vertical, es el mejor momento — 5 a 7 días después del último entrenamiento de piernas, con las piernas 100% descansadas.</div>
+</section>
+
+<!-- ===================== CORRER ===================== -->
+<section class="tab" id="tab-correr">
+  <h2 class="section-title">Correr — Método Noruego de Lactato</h2>
+  <p class="section-sub">Una sesión semanal de control de umbral, basada en el enfoque de doble umbral popularizado por el fondismo noruego (Ingebrigtsen).</p>
+
+  <div class="eli5"><b>Para entenderlo fácil</b>Corré a un ritmo "cómodo-duro": no tan lento que sea paseo, no tan rápido que no puedas respirar. Si podés decir una frase corta pero no mantener una charla, vas bien.</div>
+
+  <div class="card"><h3>01 · Calentamiento — 15–20 min</h3><p class="tips">Trote suave (zona 1, conversación fluida) + 4–6 progresiones de 80m aumentando el ritmo gradualmente. Movilidad dinámica de cadera y tobillo antes de entrar al bloque principal.</p></div>
+  <div class="card"><h3>02 · Bloque de intervalos — Umbral de lactato</h3><p class="tips"><b>4–6 x 6–8 min</b> a esfuerzo controlado (lactato ~2–3 mmol, sensación de "cómodamente duro", no al máximo). Frecuencia cardíaca objetivo: 85–89% de tu FC máxima. Recuperación trote suave 1–2 min entre series.</p></div>
+  <div class="card"><h3>03 · Vuelta a la calma — 10–15 min</h3><p class="tips">Trote muy suave (zona 1) para bajar pulsaciones + estiramientos activos de isquios, cuádriceps y gemelos. Cerrá con respiración controlada para acelerar la recuperación.</p></div>
+
+  <div class="eli5"><b>Idea central del método</b>Corriendo por debajo del umbral podés acumular mucho más volumen de calidad sin quemarte, controlando el esfuerzo por sensación y frecuencia cardíaca en vez de por velocidad pura.</div>
+</section>
+
+<!-- ===================== GIMNASIO ===================== -->
+<section class="tab" id="tab-gym">
+  <h2 class="section-title">Gimnasio — Fuerza y Potencia</h2>
+  <p class="section-sub">2 veces por semana, basado en tu rutina Push/Pull/Legs con progresión de cargas.</p>
+
+  <div class="day-header">Día 1 — Parte Superior · Fuerza + hipertrofia atlética</div>
+  <div class="table-wrap"><table class="plan">
+    <tr><th>Ejercicio</th><th>Tipo</th><th>Rango</th></tr>
+    <tr><td>Press banca</td><td>Compuesto</td><td>4–6 (fuerza) / 6–8 (hipertrofia)</td></tr>
+    <tr><td>Press militar</td><td>Compuesto</td><td>4–6 / 6–8</td></tr>
+    <tr><td>Dominadas lastradas</td><td>Compuesto</td><td>4–6 / 6–8</td></tr>
+    <tr><td>Remo con barra</td><td>Compuesto</td><td>4–6 / 6–8</td></tr>
+    <tr><td>Press inclinado mancuernas</td><td>Accesorio</td><td>8–12</td></tr>
+    <tr><td>Curls de bíceps</td><td>Accesorio</td><td>8–12</td></tr>
+    <tr><td>Elevaciones laterales</td><td>Accesorio</td><td>8–12</td></tr>
+    <tr><td>Extensiones de tríceps</td><td>Accesorio</td><td>8–12</td></tr>
+    <tr><td>Face pulls</td><td>Preventivo</td><td>15–20, sin sobrecargar</td></tr>
+  </table></div>
+
+  <div class="day-header">Día 2 — Parte Inferior · Potencia de salto (Anselmi) + protección de tendones (KOT)</div>
+  <div class="table-wrap"><table class="plan">
+    <tr><th>Ejercicio</th><th>Tipo</th><th>Rango</th></tr>
+    <tr><td>Sentadilla trasera</td><td>Compuesto</td><td>4–6 / 6–8</td></tr>
+    <tr><td>Peso muerto rumano</td><td>Compuesto</td><td>4–6 / 6–8</td></tr>
+    <tr><td>Hip thrust</td><td>Accesorio</td><td>8–12</td></tr>
+    <tr><td>Prensa</td><td>Accesorio</td><td>8–12</td></tr>
+    <tr><td>ATG split squat</td><td>Accesorio / tendón</td><td>8–12, énfasis excéntrico</td></tr>
+    <tr><td>Gemelos</td><td>Accesorio</td><td>15–20</td></tr>
+    <tr><td>Planchas / rollouts</td><td>Core</td><td>Aumentar tiempo/rango, no peso</td></tr>
+  </table></div>
+
+  <div class="card">
+    <h3>¿Qué es el RIR?</h3>
+    <p class="tips">RIR = "Reps in Reserve" (repeticiones en reserva). Cuántas repeticiones más creés que podrías haber hecho antes de llegar al fallo muscular. <b>RIR 2</b> = terminaste sintiendo que te quedaban 2 reps en el tanque. <b>RIR 0</b> = fallo total.</p>
+  </div>
+
+  <div class="card">
+    <h3>Progresión de cargas</h3>
+    <p class="tips"><b>Compuestos (4–6/6–8):</b> elegí un peso al que llegues a 6 reps casi al fallo. Sumá +1 rep por serie cada semana; al tope, subí el peso 2,5–5% y volvé al mínimo.<br><br>
+    <b>Accesorios (8–12):</b> primero subí reps (8→12), y recién al completar 12 en todas las series, subí peso (1–2kg mancuernas, 5–10% máquinas).<br><br>
+    <b>Piernas/core preventivo (15–20):</b> subí peso solo al lograr 20 reps fáciles. En planchas, progresá tiempo o rango, nunca peso.<br><br>
+    <b>Regla de oro:</b> nunca sacrifiques forma por peso. Anotá cargas, reps y descansos.<br><br>
+    <b>Microciclos:</b> cada 6–8 semanas, semana de descarga bajando el peso 20–30%.</p>
+  </div>
+</section>
+
+<!-- ===================== MOVILIDAD ===================== -->
+<section class="tab" id="tab-movilidad">
+  <h2 class="section-title">Elongación y Movilidad</h2>
+  <p class="section-sub">Rutina semanal de flexibilidad activa y descompresión, después de entrenamientos intensos.</p>
+
+  <div class="card"><img src="images/couch-stretch.png" alt="Couch stretch"><h3>Couch Stretch</h3><div class="tags"><span class="tag">2 x 60–90s x lado</span></div><span class="tips-label">Tips Pro</span><p class="tips">Estiramiento clásico de KneesOverToesGuy para el psoas y cuádriceps. Cadera del lado que estirás debe quedar por debajo (no adelantada), apretá el glúteo para profundizar sin forzar la lumbar.</p></div>
+  <div class="card"><img src="images/movilidad-rotaciones-toracicas.png" alt="Rotaciones torácicas"><h3>Rotaciones torácicas (90/90)</h3><div class="tags"><span class="tag">2 x 8 x lado</span></div><span class="tips-label">Tips Pro</span><p class="tips">Cadera fija en el piso, rotá solo desde la espalda alta llevando el brazo hacia atrás siguiendo la mirada. Movimiento lento, sin rebotes.</p></div>
+  <div class="card"><img src="images/movilidad-perro-boca-abajo.png" alt="Perro boca abajo"><h3>Perro boca abajo (descompresión)</h3><div class="tags"><span class="tag">3 x 30–45s</span></div><span class="tips-label">Tips Pro</span><p class="tips">Empujá el piso con las manos para alargar la columna, talones buscando el piso sin forzar. Ideal para descomprimir después de sentadillas y saltos pesados.</p></div>
+  <div class="card"><img src="images/movilidad-tobillo.png" alt="Movilidad de tobillo"><h3>Rodilla al frente (dorsiflexión)</h3><div class="tags"><span class="tag">2 x 10 x lado</span></div><span class="tips-label">Tips Pro</span><p class="tips">Talón siempre pegado al piso, empujá la rodilla hacia adelante sobre el pie. Mejora el rango sin el cual no hay buena técnica de aterrizaje.</p></div>
+  <div class="card"><img src="images/movilidad-isquios.png" alt="Estiramiento de isquios"><h3>Isquiotibiales activo (pierna elevada)</h3><div class="tags"><span class="tag">2 x 45s x lado</span></div><span class="tips-label">Tips Pro</span><p class="tips">Pierna apoyada en una superficie a la altura de la cadera, espalda recta inclinándote desde la cadera.</p></div>
+  <div class="card"><img src="images/movilidad-foam-roller-cuadriceps.png" alt="Foam roller cuádriceps"><h3>Foam roller — cuádriceps/gemelos</h3><div class="tags"><span class="tag">1–2 min x zona</span></div><span class="tips-label">Tips Pro</span><p class="tips">Pasadas lentas, pausando 15–20s en puntos de mayor tensión sin llegar a dolor agudo. Ayuda a la recuperación entre sesiones de salto intensas.</p></div>
+</section>
 
 </main>
 
 <footer>PROTOCOLO DE ENTRENAMIENTO — USO PERSONAL</footer>
 
 <script>
-  // ---------- Tabs ----------
-  const tabButtons = document.querySelectorAll('nav.tabs button');
-  const panels = document.querySelectorAll('section.panel');
-  tabButtons.forEach(btn=>{
-    btn.addEventListener('click',()=>{
-      tabButtons.forEach(b=>b.classList.remove('active'));
-      panels.forEach(p=>p.classList.remove('active'));
-      btn.classList.add('active');
-      document.getElementById(btn.dataset.tab).classList.add('active');
-    });
+// ---- Tabs ----
+document.querySelectorAll('#tabnav button').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('#tabnav button').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('tab-'+btn.dataset.tab).classList.add('active');
   });
+});
 
-  // ---------- Periodización Jump Attack ----------
-  const DIAS_SEMANA = ['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'];
-  const PIERNAS_WEEKDAYS = [1,4];      // Lunes y Jueves -> día de piernas
-  const TOTAL_BODY_WEEKDAYS = [2,5];   // Martes y Viernes -> día de cuerpo total
-  const TOTAL_WEEKS = 16;
+// ---- Jump Attack calendar ----
+const PHASES = [
+  {name:'Fase 1 · Fuego', cls:'fuego', weeks:[1,2,3,4]},
+  {name:'Fase 2 · Fuerza', cls:'fuerza', weeks:[5,6,7,8]},
+  {name:'Fase 3 · Vuelo', cls:'vuelo', weeks:[9,10,11,12]},
+];
+function phaseForWeek(w){
+  return PHASES.find(p=>p.weeks.includes(w));
+}
+function isDeloadWeek(w){ return w%4===0; }
 
-  // Bloques reales del programa (índices de semana 1-based)
-  const BLOQUES = [
-    {desde:1,  hasta:4,  fase:1, nombreFase:'Fase 1 · Fuego',                       piernas:'Piernas Implacables',  totalBody:'Cuerpo Total Implacable'},
-    {desde:5,  hasta:8,  fase:2, nombreFase:'Fase 2 · Fuerza (Piernas Poderosas)',   piernas:'Piernas Poderosas',    totalBody:'Cuerpo Total (hold + 10 reps)'},
-    {desde:9,  hasta:12, fase:2, nombreFase:'Fase 2 · Fuerza (Piernas Explosivas)',  piernas:'Piernas Explosivas',   totalBody:'Cuerpo Total (reps máx. 30s)'},
-    {desde:13, hasta:16, fase:3, nombreFase:'Fase 3 · Vuelo (estimado)',             piernas:'Piernas — Vuelo',      totalBody:'Cuerpo Total — Vuelo'}
-  ];
-
-  function bloqueOfWeek(weekNum){ // 1-based
-    return BLOQUES.find(b => weekNum >= b.desde && weekNum <= b.hasta);
+function dayLabel(dow, week, phase){
+  // dow: 1=Mon,2=Tue,4=Thu,5=Fri are training days
+  const deload = isDeloadWeek(week);
+  if(dow===1 || dow===4){
+    if(phase.cls==='fuego') return {title:'Piernas Implacables', sub:deload?'Semana de descarga':'Secuencias 1–5'};
+    if(phase.cls==='fuerza') return {title:'Piernas de Poder', sub:deload?'Semana de descarga':'Secuencias 6–10'};
+    if(phase.cls==='vuelo') return {title:'Piernas Explosivas', sub:deload?'Semana de descarga · Fin del programa':'Secuencias 11–15'};
   }
-  function phaseClass(p){
-    return p===1?'f1':p===2?'f2':'f3';
+  if(dow===2 || dow===5){
+    if(phase.cls==='fuego') return {title:'Cuerpo Total Implacable', sub:deload?'Semana de descarga':'7 holds encadenados'};
+    if(phase.cls==='fuerza') return {title:'Cuerpo Total (hold + 10 reps)', sub:deload?'Semana de descarga':'7 ejercicios'};
+    if(phase.cls==='vuelo') return {title:'Cuerpo Total Explosivo', sub:deload?'Semana de descarga · Fin del programa':'Máx. reps en 30s'};
   }
-  function isRecoveryWeek(weekNum){
-    const b = bloqueOfWeek(weekNum);
-    return b ? weekNum === b.hasta : false; // última semana de cada bloque es descarga
-  }
-  function totalBodyDetail(weekNum, bloque){
-    const posInBlock = weekNum - bloque.desde + 1; // 1..4
-    if(bloque.desde === 1){ // Fase 1
-      if(posInBlock===1) return '30s por ejercicio';
-      if(posInBlock===2) return '60s por ejercicio';
-      if(posInBlock===3) return '90s por ejercicio';
-      return 'descarga';
-    }
-    if(bloque.desde === 5){ // Fase 2 - hold + 10 reps
-      if(posInBlock===1) return '30s + 10 reps';
-      if(posInBlock===2) return '60s + 10 reps';
-      if(posInBlock===3) return '90s + 10 reps';
-      return 'descarga';
-    }
-    if(bloque.desde === 9){ // Fase 2 - reps máximas
-      if(posInBlock<=3) return 'repeticiones máximas en 30s (superá tu marca anterior)';
-      return 'descarga';
-    }
-    return posInBlock===4 ? 'descarga' : 'por confirmar';
-  }
-  function dayTypeLabel(weekday, bloque, recovery){
-    const esDiaEntreno = PIERNAS_WEEKDAYS.includes(weekday) || TOTAL_BODY_WEEKDAYS.includes(weekday);
-    if(!esDiaEntreno) return {tipo:'Descanso'};
-    if(recovery) return {tipo:'Descarga'};
-    if(PIERNAS_WEEKDAYS.includes(weekday)) return {tipo:'Piernas', nombre:bloque.piernas};
-    return {tipo:'TotalBody', nombre:bloque.totalBody};
-  }
+  return {title:'Descanso', sub:'Practicá tu deporte / movete'};
+}
 
-  function calcularPeriodizacion(){
-    const input = document.getElementById('fechaInicio').value;
-    if(!input){ alert('Elegí primero una fecha de inicio.'); return; }
-    const start = new Date(input + 'T00:00:00');
+function buildCalendar(){
+  const startVal = document.getElementById('startDate').value;
+  if(!startVal) return;
+  const start = new Date(startVal+'T00:00:00');
+  // find the Monday of the start week
+  const startDow = start.getDay(); // 0=Sun..6=Sat
+  const offsetToMonday = (startDow===0)? -6 : (1-startDow);
+  const monday = new Date(start);
+  monday.setDate(start.getDate()+offsetToMonday);
 
-    const today = new Date();
-    today.setHours(0,0,0,0);
+  const out = document.getElementById('calendarOut');
+  out.innerHTML = '';
+  const today = new Date(); today.setHours(0,0,0,0);
+  let foundToday = null;
 
-    const wrap = document.getElementById('calendarioWrap');
-    wrap.innerHTML = '';
-    const cal = document.createElement('div');
-    cal.className = 'calendar';
+  for(let week=1; week<=12; week++){
+    const label = document.createElement('div');
+    label.className='week-label';
+    const ph = phaseForWeek(week);
+    label.textContent = `Semana ${week} — ${ph.name}${isDeloadWeek(week)?' · Descarga':''}`;
+    out.appendChild(label);
 
-    let todayMatch = null;
-
-    for(let w=0; w<TOTAL_WEEKS; w++){
-      const weekNum = w+1;
-      const row = document.createElement('div');
-      row.className = 'week-row';
-      const label = document.createElement('div');
-      label.className = 'week-label';
-      label.textContent = 'Sem ' + weekNum;
-      row.appendChild(label);
-
-      const bloque = bloqueOfWeek(weekNum);
-      const recovery = isRecoveryWeek(weekNum);
-
-      for(let d=0; d<7; d++){
-        const dayDate = new Date(start);
-        dayDate.setDate(start.getDate() + w*7 + d);
-        const weekday = dayDate.getDay();
-        const info = dayTypeLabel(weekday, bloque, recovery);
-
-        const cell = document.createElement('div');
-        const isTrain = info.tipo !== 'Descanso';
-        cell.className = 'day-cell' + (isTrain ? ' train ' + phaseClass(bloque.fase) : '');
-        if(isTrain && recovery){ cell.style.opacity = '0.55'; }
-        cell.textContent = dayDate.getDate();
-
-        if(dayDate.getTime() === today.getTime()){
-          cell.classList.add('today');
-          todayMatch = {weekday, weekNum, bloque, recovery, info};
-        }
-
-        row.appendChild(cell);
-      }
-      cal.appendChild(row);
-    }
-    wrap.appendChild(cal);
-
-    const hoyCard = document.getElementById('hoyCard');
-    const hoyTitulo = document.getElementById('hoyTitulo');
-    const hoyDetalle = document.getElementById('hoyDetalle');
-
-    if(todayMatch){
-      hoyCard.classList.add('show');
-      const faseTxt = todayMatch.bloque.nombreFase + ' — Semana ' + todayMatch.weekNum + ' de 16';
-
-      if(todayMatch.info.tipo === 'Piernas'){
-        hoyTitulo.textContent = todayMatch.info.nombre;
-        hoyDetalle.textContent = faseTxt + '. Hacé las secuencias de este bloque en orden, una atrás de la otra.';
-      } else if(todayMatch.info.tipo === 'TotalBody'){
-        hoyTitulo.textContent = todayMatch.info.nombre;
-        hoyDetalle.textContent = faseTxt + '. Hoy: ' + totalBodyDetail(todayMatch.weekNum, todayMatch.bloque) + '.';
-      } else if(todayMatch.info.tipo === 'Descarga'){
-        hoyTitulo.textContent = 'Semana de Descarga';
-        hoyDetalle.textContent = faseTxt + '. Bajá el volumen o la intensidad — es la semana de recuperación antes del próximo bloque.';
+    for(let d=0; d<7; d++){
+      const dayDate = new Date(monday);
+      dayDate.setDate(monday.getDate() + (week-1)*7 + d);
+      const dow = dayDate.getDay(); // 0 Sun..6 Sat
+      const isTraining = (dow===1||dow===2||dow===4||dow===5);
+      const cell = document.createElement('div');
+      cell.className = 'cal-day';
+      if(isTraining){
+        cell.classList.add(ph.cls);
+        if(isDeloadWeek(week)) cell.classList.add('deload');
       } else {
-        hoyTitulo.textContent = 'Descanso';
-        hoyDetalle.textContent = faseTxt + '. Hoy no entrenás Jump Attack. Aprovechá para movilidad o descanso activo.';
+        cell.classList.add('rest');
       }
-    } else {
-      hoyCard.classList.add('show');
-      hoyTitulo.textContent = 'Fuera de rango';
-      hoyDetalle.textContent = 'La fecha de hoy está fuera de las 16 semanas del programa que calculaste. Ajustá la fecha de inicio si querés ver otro período.';
+      const isToday = dayDate.getTime()===today.getTime();
+      if(isToday){ cell.classList.add('today'); }
+
+      const dnum = document.createElement('div');
+      dnum.className='dnum';
+      dnum.textContent = dayDate.getDate()+'/'+(dayDate.getMonth()+1);
+      cell.appendChild(dnum);
+
+      const dl = document.createElement('div');
+      if(isTraining){
+        const info = dayLabel(dow, week, ph);
+        dl.textContent = info.title.split(' ').slice(0,2).join(' ');
+      } else {
+        dl.textContent = 'Descanso';
+      }
+      cell.appendChild(dl);
+      out.appendChild(cell);
+
+      if(isToday){
+        foundToday = {dayDate, dow, week, phase:ph, isTraining};
+      }
     }
   }
-</script>
 
+  const todayTitle = document.getElementById('todayTitle');
+  const todaySub = document.getElementById('todaySub');
+  if(foundToday){
+    if(foundToday.isTraining){
+      const info = dayLabel(foundToday.dow, foundToday.week, foundToday.phase);
+      todayTitle.textContent = info.title;
+      todaySub.textContent = `${info.sub} · Semana ${foundToday.week} de 12 · ${foundToday.phase.name}`;
+    } else {
+      todayTitle.textContent = 'Descanso';
+      todaySub.textContent = `Semana ${foundToday.week} de 12 · Practicá tu deporte o movete libremente.`;
+    }
+  } else {
+    const beforeStart = today < monday;
+    todayTitle.textContent = beforeStart ? 'Todavía no empezaste' : '¡Programa terminado!';
+    todaySub.textContent = beforeStart ? 'Esperá a la fecha de inicio.' : 'Completaste las 12 semanas (90 días) de Jump Attack.';
+  }
+}
+
+// Default: today
+document.getElementById('startDate').valueAsDate = new Date();
+buildCalendar();
+</script>
 </body>
 </html>
