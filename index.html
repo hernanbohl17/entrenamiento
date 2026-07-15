@@ -11,25 +11,27 @@
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#0B0D10; --bg2:#12151A; --card:#161A20; --card-border:#242933;
+  --bg:#0B0D10; --bg2:#12151A; --card:#161A20; --card-border:rgba(255,255,255,0.05);
   --text:#EDEFF2; --text-dim:#9AA2AE; --text-faint:#5B6472;
   --accent:#FF4B2B; --accent-dim:#7A2818;
   --fuego:#FF6B35; --fuerza:#3BA7FF; --vuelo:#B26BFF;
   --rest:#2A2E36; --deload:#3A3120;
   --ok:#39D98A;
-  --radius:14px;
+  --radius:8px; --radius-btn:4px;
+  --kinetic-gradient:linear-gradient(135deg, #FF4B2B 0%, #3BA7FF 100%);
   font-family:'Inter',sans-serif;
 }
 *{box-sizing:border-box; margin:0; padding:0;}
 body{background:var(--bg); color:var(--text); line-height:1.55; padding-bottom:60px;}
 h1,h2,h3{font-family:'Oswald',sans-serif; letter-spacing:.02em; text-transform:uppercase;}
 header{padding:38px 20px 24px; text-align:center; border-bottom:1px solid var(--card-border); background:linear-gradient(180deg, #14171C, var(--bg));}
-header .kicker{color:var(--accent); font-family:'JetBrains Mono',monospace; font-size:.78rem; letter-spacing:.15em; text-transform:uppercase; margin-bottom:10px;}
-header h1{font-size:2.1rem; margin-bottom:14px;}
+header .kicker{display:inline-block; background:rgba(59,167,255,.12); border:1px solid rgba(59,167,255,.3); color:var(--fuerza); font-family:'JetBrains Mono',monospace; font-size:.72rem; letter-spacing:.15em; text-transform:uppercase; margin-bottom:14px; padding:5px 12px;}
+header h1{font-size:2.3rem; margin-bottom:14px; font-weight:700;}
 header p{color:var(--text-dim); max-width:640px; margin:0 auto; font-size:.95rem;}
-nav{display:flex; overflow-x:auto; gap:8px; padding:16px 16px 0; max-width:960px; margin:0 auto; position:sticky; top:0; background:var(--bg); z-index:50; padding-bottom:16px;}
-nav button{flex:0 0 auto; background:var(--card); border:1px solid var(--card-border); color:var(--text-dim); padding:10px 16px; border-radius:999px; font-family:'JetBrains Mono',monospace; font-size:.78rem; letter-spacing:.05em; cursor:pointer; transition:.15s;}
+nav{display:flex; overflow-x:auto; gap:6px; padding:16px 16px 0; max-width:960px; margin:0 auto; position:sticky; top:0; background:rgba(11,13,16,0.85); backdrop-filter:blur(12px); z-index:50; padding-bottom:16px;}
+nav button{flex:0 0 auto; background:var(--card); border:1px solid var(--card-border); color:var(--text-dim); padding:10px 16px; border-radius:var(--radius-btn); font-family:'JetBrains Mono',monospace; font-size:.78rem; letter-spacing:.05em; cursor:pointer; transition:.15s; text-transform:uppercase;}
 nav button.active{background:var(--accent); border-color:var(--accent); color:#fff;}
+nav button:not(.active):hover{border-color:var(--accent); color:var(--text);}
 main{max-width:960px; margin:0 auto; padding:24px 16px 80px;}
 .tab{display:none; animation:fade .25s ease;}
 .tab.active{display:block;}
@@ -38,15 +40,17 @@ main{max-width:960px; margin:0 auto; padding:24px 16px 80px;}
 .section-sub{color:var(--text-dim); font-size:.92rem; margin-bottom:20px;}
 .eli5{background:var(--bg2); border:1px dashed var(--card-border); border-radius:var(--radius); padding:16px 18px; margin:14px 0 26px; font-size:.95rem;}
 .eli5 b{color:var(--accent); font-family:'JetBrains Mono',monospace; font-size:.75rem; letter-spacing:.1em; text-transform:uppercase; display:block; margin-bottom:6px;}
-.card{background:var(--card); border:1px solid var(--card-border); border-radius:var(--radius); padding:18px 20px; margin-bottom:16px;}
-.card img{width:100%; max-height:260px; object-fit:contain; object-position:center; border-radius:10px; margin-bottom:14px; background:#1c2027;}
+.card{background:rgba(22,26,32,0.7); backdrop-filter:blur(12px); border:1px solid var(--card-border); border-radius:var(--radius); padding:18px 20px; margin-bottom:16px; transition:border-color .3s ease, transform .3s ease; overflow:hidden;}
+.card:hover{border-color:var(--accent); transform:scale(1.01);}
+.card img{width:100%; max-height:260px; object-fit:contain; object-position:center; border-radius:6px; margin-bottom:14px; background:#1c2027; transition:transform .5s ease;}
+.card:hover img{transform:scale(1.04);}
 .img-row{display:grid; grid-template-columns:repeat(auto-fit,minmax(110px,1fr)); gap:8px; margin-bottom:14px;}
 .img-row figure{margin:0;}
-.img-row img{width:100%; height:130px; object-fit:contain; object-position:center; border-radius:8px; background:#1c2027; margin-bottom:4px;}
+.img-row img{width:100%; height:130px; object-fit:contain; object-position:center; border-radius:6px; background:#1c2027; margin-bottom:4px;}
 .img-row figcaption{font-family:'JetBrains Mono',monospace; font-size:.65rem; color:var(--text-faint); text-align:center; text-transform:uppercase; letter-spacing:.04em;}
-.card h3{font-size:1.15rem; margin-bottom:8px; color:var(--text);}
+.card h3{font-size:1.15rem; margin-bottom:8px; color:var(--text); border-top:1px solid rgba(255,255,255,0.05); padding-top:12px;}
 .tags{display:flex; flex-wrap:wrap; gap:6px; margin-bottom:12px;}
-.tag{background:var(--bg2); border:1px solid var(--card-border); color:var(--text-dim); font-family:'JetBrains Mono',monospace; font-size:.72rem; padding:4px 9px; border-radius:6px;}
+.tag{background:rgba(59,167,255,.12); border:1px solid rgba(59,167,255,.25); color:var(--fuerza); font-family:'JetBrains Mono',monospace; font-weight:700; font-size:.68rem; letter-spacing:.04em; text-transform:uppercase; padding:4px 8px; border-radius:0;}
 .tips-label{color:var(--accent); font-family:'JetBrains Mono',monospace; font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; display:block; margin-bottom:6px;}
 .tips{color:var(--text-dim); font-size:.9rem;}
 .progress-table{width:100%; border-collapse:collapse; margin-top:10px; font-size:.88rem;}
@@ -56,18 +60,22 @@ main{max-width:960px; margin:0 auto; padding:24px 16px 80px;}
 .progress-table td:first-child{color:var(--text); font-weight:600;}
 
 /* calculator */
-.calc-box{background:var(--card); border:1px solid var(--card-border); border-radius:var(--radius); padding:20px; margin-bottom:24px;}
+.calc-box{background:rgba(22,26,32,0.7); backdrop-filter:blur(12px); border:1px solid var(--card-border); border-radius:var(--radius); padding:20px; margin-bottom:24px;}
 .calc-box label{display:block; font-family:'JetBrains Mono',monospace; font-size:.78rem; color:var(--text-dim); margin-bottom:8px;}
-.calc-box input[type=date]{background:var(--bg2); border:1px solid var(--card-border); color:var(--text); padding:10px 12px; border-radius:8px; font-family:'Inter'; font-size:.95rem; margin-right:10px;}
-.calc-box button{background:var(--accent); border:none; color:#fff; padding:10px 18px; border-radius:8px; font-family:'JetBrains Mono',monospace; font-size:.8rem; letter-spacing:.05em; text-transform:uppercase; cursor:pointer;}
-.today-card{background:linear-gradient(135deg,#1D1108,#12151A); border:1px solid var(--accent-dim); border-radius:var(--radius); padding:20px; margin-bottom:24px;}
+.calc-box input[type=date]{background:var(--bg); border:1px solid var(--card-border); border-bottom:2px solid var(--card-border); color:var(--text); padding:10px 12px; border-radius:var(--radius-btn); font-family:'Inter'; font-size:.95rem; margin-right:10px; transition:border-color .2s;}
+.calc-box input[type=date]:focus{outline:none; border-bottom-color:var(--fuerza);}
+.calc-box button{background:var(--accent); border:none; color:#fff; padding:10px 18px; border-radius:var(--radius-btn); font-family:'JetBrains Mono',monospace; font-weight:700; font-size:.8rem; letter-spacing:.05em; text-transform:uppercase; cursor:pointer; transition:filter .15s, transform .15s;}
+.calc-box button:hover{filter:brightness(1.12); transform:scale(1.02);}
+.today-card{position:relative; background:var(--card); border:1px solid var(--card-border); border-left:3px solid var(--accent); border-radius:var(--radius); padding:20px; margin-bottom:24px; overflow:hidden;}
+.today-card::before{content:''; position:absolute; inset:0; background:var(--kinetic-gradient); opacity:.06; pointer-events:none;}
 .today-card .label{color:var(--accent); font-family:'JetBrains Mono',monospace; font-size:.72rem; letter-spacing:.1em; text-transform:uppercase;}
 .today-card h2{font-size:1.6rem; margin:8px 0 4px;}
 .today-card p{color:var(--text-dim); font-size:.9rem;}
 .legend{display:flex; flex-wrap:wrap; gap:14px; font-size:.78rem; color:var(--text-dim); margin-bottom:18px;}
 .legend span{display:inline-flex; align-items:center; gap:6px;}
-.dot{width:10px; height:10px; border-radius:3px; display:inline-block;}
-.cal-day{flex:0 0 76px; aspect-ratio:1; border-radius:8px; background:var(--bg2); border:1px solid var(--card-border); display:flex; flex-direction:column; align-items:center; justify-content:center; font-size:.65rem; color:var(--text-faint); padding:4px; text-align:center;}
+.dot{width:10px; height:10px; border-radius:2px; display:inline-block;}
+.cal-day{flex:0 0 76px; aspect-ratio:1; border-radius:var(--radius-btn); background:var(--bg2); border:1px solid var(--card-border); display:flex; flex-direction:column; align-items:center; justify-content:center; font-size:.65rem; color:var(--text-faint); padding:4px; text-align:center; transition:transform .15s;}
+.cal-day:hover{transform:scale(1.05);}
 .cal-day .dnum{font-family:'JetBrains Mono',monospace; font-size:.85rem; color:var(--text-dim);}
 .cal-day.rest{opacity:.35;}
 .cal-day.fuego{background:rgba(255,107,53,.14); border-color:rgba(255,107,53,.35); color:#FFB08C;}
@@ -78,9 +86,11 @@ main{max-width:960px; margin:0 auto; padding:24px 16px 80px;}
 
 /* Horizontal phase accordion */
 .phases-container{display:flex; gap:16px; overflow-x:auto; padding:4px 4px 16px; margin-bottom:20px; scroll-snap-type:x proximity;}
-.phase-col{flex:0 0 88%; max-width:420px; scroll-snap-align:start; background:var(--card); border:1px solid var(--card-border); border-radius:var(--radius); overflow:hidden; align-self:flex-start;}
+.phase-col{flex:0 0 88%; max-width:420px; scroll-snap-align:start; background:rgba(22,26,32,0.7); backdrop-filter:blur(12px); border:1px solid var(--card-border); border-radius:var(--radius); overflow:hidden; align-self:flex-start; transition:border-color .2s;}
+.phase-col.open{border-color:rgba(255,255,255,0.12);}
 @media(min-width:720px){ .phase-col{flex:1 1 0; max-width:none;} }
-.phase-toggle{width:100%; display:flex; justify-content:space-between; align-items:center; gap:10px; background:var(--bg2); border:none; cursor:pointer; padding:16px 18px; font-family:'Oswald',sans-serif; font-size:1.05rem; text-transform:uppercase; letter-spacing:.03em; color:var(--text); border-left:4px solid var(--card-border);}
+.phase-toggle{width:100%; display:flex; justify-content:space-between; align-items:center; gap:10px; background:var(--bg2); border:none; cursor:pointer; padding:16px 18px; font-family:'Oswald',sans-serif; font-size:1.05rem; text-transform:uppercase; letter-spacing:.03em; color:var(--text); border-left:4px solid var(--card-border); transition:border-left-color .2s;}
+.phase-toggle:hover{border-left-color:var(--accent);}
 .phase-toggle.fuego{border-left-color:var(--fuego);}
 .phase-toggle.fuerza{border-left-color:var(--fuerza);}
 .phase-toggle.vuelo{border-left-color:var(--vuelo);}
@@ -94,7 +104,7 @@ main{max-width:960px; margin:0 auto; padding:24px 16px 80px;}
 .week-days-scroll{display:flex; gap:6px; overflow-x:auto; padding-bottom:10px;}
 
 .phase-header{display:flex; align-items:center; gap:12px; margin:40px 0 4px;}
-.phase-pill{font-family:'JetBrains Mono',monospace; font-size:.72rem; padding:5px 12px; border-radius:999px; text-transform:uppercase; letter-spacing:.06em;}
+.phase-pill{font-family:'JetBrains Mono',monospace; font-weight:700; font-size:.7rem; padding:5px 12px; border-radius:0; text-transform:uppercase; letter-spacing:.06em;}
 .phase-pill.fuego{background:rgba(255,107,53,.18); color:#FF9A6E;}
 .phase-pill.fuerza{background:rgba(59,167,255,.18); color:#7EC1FF;}
 .phase-pill.vuelo{background:rgba(178,107,255,.18); color:#C79CFF;}
@@ -105,7 +115,7 @@ table.plan{width:100%; border-collapse:collapse; margin-bottom:20px; font-size:.
 table.plan th, table.plan td{padding:9px 10px; border-bottom:1px solid var(--card-border); text-align:left; white-space:nowrap;}
 table.plan th{color:var(--text-faint); font-family:'JetBrains Mono',monospace; font-size:.7rem; text-transform:uppercase;}
 
-footer{text-align:center; color:var(--text-faint); font-family:'JetBrains Mono',monospace; font-size:.72rem; letter-spacing:.1em; padding:30px 20px; text-transform:uppercase;}
+footer{text-align:center; color:var(--text-faint); font-family:'JetBrains Mono',monospace; font-size:.72rem; letter-spacing:.1em; padding:30px 20px; text-transform:uppercase; border-top:1px solid var(--card-border);}
 .note{font-size:.82rem; color:var(--text-faint); font-style:italic; margin:10px 0 20px;}
 </style>
 </head>
