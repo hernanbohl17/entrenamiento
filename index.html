@@ -39,10 +39,10 @@ main{max-width:960px; margin:0 auto; padding:24px 16px 80px;}
 .eli5{background:var(--bg2); border:1px dashed var(--card-border); border-radius:var(--radius); padding:16px 18px; margin:14px 0 26px; font-size:.95rem;}
 .eli5 b{color:var(--accent); font-family:'JetBrains Mono',monospace; font-size:.75rem; letter-spacing:.1em; text-transform:uppercase; display:block; margin-bottom:6px;}
 .card{background:var(--card); border:1px solid var(--card-border); border-radius:var(--radius); padding:18px 20px; margin-bottom:16px;}
-.card img{width:100%; max-height:220px; object-fit:cover; border-radius:10px; margin-bottom:14px; background:#1c2027;}
+.card img{width:100%; max-height:260px; object-fit:contain; object-position:center; border-radius:10px; margin-bottom:14px; background:#1c2027;}
 .img-row{display:grid; grid-template-columns:repeat(auto-fit,minmax(110px,1fr)); gap:8px; margin-bottom:14px;}
 .img-row figure{margin:0;}
-.img-row img{width:100%; height:110px; object-fit:cover; border-radius:8px; background:#1c2027; margin-bottom:4px;}
+.img-row img{width:100%; height:130px; object-fit:contain; object-position:center; border-radius:8px; background:#1c2027; margin-bottom:4px;}
 .img-row figcaption{font-family:'JetBrains Mono',monospace; font-size:.65rem; color:var(--text-faint); text-align:center; text-transform:uppercase; letter-spacing:.04em;}
 .card h3{font-size:1.15rem; margin-bottom:8px; color:var(--text);}
 .tags{display:flex; flex-wrap:wrap; gap:6px; margin-bottom:12px;}
@@ -67,8 +67,7 @@ main{max-width:960px; margin:0 auto; padding:24px 16px 80px;}
 .legend{display:flex; flex-wrap:wrap; gap:14px; font-size:.78rem; color:var(--text-dim); margin-bottom:18px;}
 .legend span{display:inline-flex; align-items:center; gap:6px;}
 .dot{width:10px; height:10px; border-radius:3px; display:inline-block;}
-.calendar-grid{display:grid; grid-template-columns:repeat(7,1fr); gap:6px; margin-bottom:26px;}
-.cal-day{aspect-ratio:1; border-radius:8px; background:var(--bg2); border:1px solid var(--card-border); display:flex; flex-direction:column; align-items:center; justify-content:center; font-size:.68rem; color:var(--text-faint); padding:4px; text-align:center;}
+.cal-day{flex:0 0 76px; aspect-ratio:1; border-radius:8px; background:var(--bg2); border:1px solid var(--card-border); display:flex; flex-direction:column; align-items:center; justify-content:center; font-size:.65rem; color:var(--text-faint); padding:4px; text-align:center;}
 .cal-day .dnum{font-family:'JetBrains Mono',monospace; font-size:.85rem; color:var(--text-dim);}
 .cal-day.rest{opacity:.35;}
 .cal-day.fuego{background:rgba(255,107,53,.14); border-color:rgba(255,107,53,.35); color:#FFB08C;}
@@ -76,7 +75,23 @@ main{max-width:960px; margin:0 auto; padding:24px 16px 80px;}
 .cal-day.vuelo{background:rgba(178,107,255,.14); border-color:rgba(178,107,255,.35); color:#D6B8FF;}
 .cal-day.deload{opacity:.45; filter:saturate(.4);}
 .cal-day.today{outline:2px solid var(--accent); outline-offset:2px;}
-.week-label{grid-column:1/-1; font-family:'JetBrains Mono',monospace; font-size:.72rem; color:var(--text-faint); margin:10px 0 -2px; text-transform:uppercase; letter-spacing:.08em;}
+
+/* Horizontal phase accordion */
+.phases-container{display:flex; gap:16px; overflow-x:auto; padding:4px 4px 16px; margin-bottom:20px; scroll-snap-type:x proximity;}
+.phase-col{flex:0 0 88%; max-width:420px; scroll-snap-align:start; background:var(--card); border:1px solid var(--card-border); border-radius:var(--radius); overflow:hidden; align-self:flex-start;}
+@media(min-width:720px){ .phase-col{flex:1 1 0; max-width:none;} }
+.phase-toggle{width:100%; display:flex; justify-content:space-between; align-items:center; gap:10px; background:var(--bg2); border:none; cursor:pointer; padding:16px 18px; font-family:'Oswald',sans-serif; font-size:1.05rem; text-transform:uppercase; letter-spacing:.03em; color:var(--text); border-left:4px solid var(--card-border);}
+.phase-toggle.fuego{border-left-color:var(--fuego);}
+.phase-toggle.fuerza{border-left-color:var(--fuerza);}
+.phase-toggle.vuelo{border-left-color:var(--vuelo);}
+.phase-toggle .sub{display:block; font-family:'JetBrains Mono',monospace; font-size:.68rem; color:var(--text-faint); text-transform:none; letter-spacing:0; margin-top:3px;}
+.phase-toggle .chev{font-family:'JetBrains Mono',monospace; font-size:1rem; color:var(--text-faint); transition:transform .2s ease; flex:0 0 auto;}
+.phase-col.open .chev{transform:rotate(180deg);}
+.phase-body{max-height:0; overflow:hidden; transition:max-height .35s ease;}
+.phase-col.open .phase-body{max-height:3000px;}
+.week-block{padding:14px 16px 4px;}
+.week-block .week-label{font-family:'JetBrains Mono',monospace; font-size:.7rem; color:var(--text-faint); text-transform:uppercase; letter-spacing:.07em; margin-bottom:8px;}
+.week-days-scroll{display:flex; gap:6px; overflow-x:auto; padding-bottom:10px;}
 
 .phase-header{display:flex; align-items:center; gap:12px; margin:40px 0 4px;}
 .phase-pill{font-family:'JetBrains Mono',monospace; font-size:.72rem; padding:5px 12px; border-radius:999px; text-transform:uppercase; letter-spacing:.06em;}
@@ -150,15 +165,12 @@ footer{text-align:center; color:var(--text-faint); font-family:'JetBrains Mono',
   <p class="section-sub">Programa principal de salto — <b>12 semanas reales</b> (90 días), en 3 fases: Fuego, Fuerza y Vuelo. Cada fase dura 4 semanas: 3 semanas de trabajo + 1 semana de descarga.</p>
 
   <div class="eli5">
-    <b>Para entenderlo fácil, como si tuvieras 5 años</b>
     Este programa dura 3 meses (90 días), como 12 semanas seguidas. Se divide en 3 partes de 4 semanas cada una:<br><br>
     🔥 <b>Mes 1 — Fuego:</b> aprendemos a sostener posiciones, como una estatua que tiembla un poquito.<br>
     💪 <b>Mes 2 — Fuerza:</b> juntamos sostener + saltar, para que el cuerpo aprenda a explotar.<br>
     🚀 <b>Mes 3 — Vuelo:</b> todo más rápido y más explosivo, como si tuvieras resortes en las piernas.<br><br>
     Entrenás <b>Lunes, Martes, Jueves y Viernes</b>. Miércoles, Sábado y Domingo son de descanso — pero podés jugar a tu deporte, no te quedes en el sillón. Cada 4 semanas hay una <b>semana más suave</b> (de descarga) para que el cuerpo se recupere: ahí NO se levanta peso, solo se juega y se mueve.
   </div>
-
-  <p class="note">Sobre las imágenes: las fotos de cada ejercicio pertenecen al libro <em>Jump Attack</em> de Tim Grover y tienen derechos de autor, así que no las inserto directamente. Dejé el nombre exacto de cada ejercicio y el placeholder de imagen listo para que reemplaces por tu propia foto.</p>
 
   <div class="calc-box">
     <label>¿Cuándo vas a comenzar el programa?</label>
@@ -180,7 +192,7 @@ footer{text-align:center; color:var(--text-faint); font-family:'JetBrains Mono',
     <span><span class="dot" style="background:#3A3120"></span>Semana de descarga</span>
   </div>
 
-  <div id="calendarOut" class="calendar-grid"></div>
+  <div id="calendarOut" class="phases-container"></div>
 
   <!-- FASE 1 -->
   <div class="phase-header"><span class="phase-pill fuego">Fase 1 · Fuego</span><h3 style="margin:0">Semanas 1 a 4</h3></div>
@@ -577,6 +589,10 @@ function dayLabel(dow, week, phase){
   return {title:'Descanso', sub:'Practicá tu deporte / movete'};
 }
 
+function togglePhase(colEl){
+  colEl.classList.toggle('open');
+}
+
 function buildCalendar(){
   const startVal = document.getElementById('startDate').value;
   if(!startVal) return;
@@ -591,49 +607,83 @@ function buildCalendar(){
   out.innerHTML = '';
   const today = new Date(); today.setHours(0,0,0,0);
   let foundToday = null;
+  let todayPhaseCls = null;
 
-  for(let week=1; week<=12; week++){
-    const label = document.createElement('div');
-    label.className='week-label';
-    const ph = phaseForWeek(week);
-    label.textContent = `Semana ${week} — ${ph.name}${isDeloadWeek(week)?' · Descarga':''}`;
-    out.appendChild(label);
+  PHASES.forEach(ph=>{
+    const col = document.createElement('div');
+    col.className = 'phase-col';
+    col.dataset.phase = ph.cls;
 
-    for(let d=0; d<7; d++){
-      const dayDate = new Date(monday);
-      dayDate.setDate(monday.getDate() + (week-1)*7 + d);
-      const dow = dayDate.getDay(); // 0 Sun..6 Sat
-      const isTraining = (dow===1||dow===2||dow===4||dow===5);
-      const cell = document.createElement('div');
-      cell.className = 'cal-day';
-      if(isTraining){
-        cell.classList.add(ph.cls);
-        if(isDeloadWeek(week)) cell.classList.add('deload');
-      } else {
-        cell.classList.add('rest');
+    const toggle = document.createElement('button');
+    toggle.className = 'phase-toggle ' + ph.cls;
+    toggle.innerHTML = `<span>${ph.name}<span class="sub">Semanas ${ph.weeks[0]} a ${ph.weeks[ph.weeks.length-1]}</span></span><span class="chev">▾</span>`;
+    toggle.addEventListener('click', ()=>togglePhase(col));
+    col.appendChild(toggle);
+
+    const body = document.createElement('div');
+    body.className = 'phase-body';
+
+    ph.weeks.forEach(week=>{
+      const block = document.createElement('div');
+      block.className = 'week-block';
+
+      const label = document.createElement('div');
+      label.className='week-label';
+      label.textContent = `Semana ${week}${isDeloadWeek(week)?' · Descarga':''}`;
+      block.appendChild(label);
+
+      const scroller = document.createElement('div');
+      scroller.className = 'week-days-scroll';
+
+      for(let d=0; d<7; d++){
+        const dayDate = new Date(monday);
+        dayDate.setDate(monday.getDate() + (week-1)*7 + d);
+        const dow = dayDate.getDay(); // 0 Sun..6 Sat
+        const isTraining = (dow===1||dow===2||dow===4||dow===5);
+        const cell = document.createElement('div');
+        cell.className = 'cal-day';
+        if(isTraining){
+          cell.classList.add(ph.cls);
+          if(isDeloadWeek(week)) cell.classList.add('deload');
+        } else {
+          cell.classList.add('rest');
+        }
+        const isToday = dayDate.getTime()===today.getTime();
+        if(isToday){ cell.classList.add('today'); }
+
+        const dnum = document.createElement('div');
+        dnum.className='dnum';
+        dnum.textContent = dayDate.getDate()+'/'+(dayDate.getMonth()+1);
+        cell.appendChild(dnum);
+
+        const dl = document.createElement('div');
+        if(isTraining){
+          const info = dayLabel(dow, week, ph);
+          dl.textContent = info.title.split(' ').slice(0,2).join(' ');
+        } else {
+          dl.textContent = 'Descanso';
+        }
+        cell.appendChild(dl);
+        scroller.appendChild(cell);
+
+        if(isToday){
+          foundToday = {dayDate, dow, week, phase:ph, isTraining};
+          todayPhaseCls = ph.cls;
+        }
       }
-      const isToday = dayDate.getTime()===today.getTime();
-      if(isToday){ cell.classList.add('today'); }
+      block.appendChild(scroller);
+      body.appendChild(block);
+    });
 
-      const dnum = document.createElement('div');
-      dnum.className='dnum';
-      dnum.textContent = dayDate.getDate()+'/'+(dayDate.getMonth()+1);
-      cell.appendChild(dnum);
+    col.appendChild(body);
+    out.appendChild(col);
+  });
 
-      const dl = document.createElement('div');
-      if(isTraining){
-        const info = dayLabel(dow, week, ph);
-        dl.textContent = info.title.split(' ').slice(0,2).join(' ');
-      } else {
-        dl.textContent = 'Descanso';
-      }
-      cell.appendChild(dl);
-      out.appendChild(cell);
-
-      if(isToday){
-        foundToday = {dayDate, dow, week, phase:ph, isTraining};
-      }
-    }
+  // auto-expand the phase containing today (or the first phase if none matches)
+  const colToOpen = out.querySelector(`.phase-col[data-phase="${todayPhaseCls || PHASES[0].cls}"]`);
+  if(colToOpen){
+    colToOpen.classList.add('open');
+    setTimeout(()=>colToOpen.scrollIntoView({behavior:'smooth', inline:'start', block:'nearest'}), 50);
   }
 
   const todayTitle = document.getElementById('todayTitle');
