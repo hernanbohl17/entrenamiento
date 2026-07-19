@@ -107,6 +107,11 @@ main{max-width:960px; margin:0 auto; padding:24px 16px 80px;}
 .week-block .week-label{font-family:'Inter',sans-serif; font-weight:700; font-size:.68rem; color:var(--text-faint); text-transform:uppercase; letter-spacing:.06em; margin-bottom:8px;}
 .week-days-scroll{display:flex; gap:6px; overflow-x:auto; padding-bottom:10px;}
 
+/* Horizontal exercise card rows (Básico) */
+.cards-row{display:flex; gap:16px; overflow-x:auto; padding:4px 4px 14px; margin-bottom:8px; scroll-snap-type:x proximity;}
+.cards-row .card{flex:0 0 84%; max-width:340px; scroll-snap-align:start; margin-bottom:0;}
+@media(min-width:720px){ .cards-row .card{flex:0 0 300px;} }
+
 .phase-header{display:flex; align-items:center; gap:12px; margin:44px 0 4px;}
 .phase-pill{font-family:'Inter',sans-serif; font-weight:700; font-size:.68rem; padding:5px 12px; border-radius:4px; text-transform:uppercase; letter-spacing:.06em;}
 .phase-pill.fuego{background:rgba(255,69,0,.16); color:#FF8A50;}
@@ -149,28 +154,30 @@ footer{text-align:center; color:var(--text-faint); font-family:'Inter',sans-seri
 
   <div class="eli5"><b>Para entenderlo fácil</b>Si hoy tenés poco tiempo, hacé estos 3 ejercicios y ya cumpliste. No hace falta más.</div>
 
-  <div class="card">
-    <img src="images/flexiones-brazos.png" alt="Flexiones de brazos">
-    <h3>Flexiones de brazos</h3>
-    <div class="tags"><span class="tag">3 series</span><span class="tag">hasta 2 RIR</span><span class="tag">Variación mecánica</span></div>
-    <span class="tips-label">Tips Pro de ejecución</span>
-    <p class="tips">Codos a ~45° del torso, no pegados al cuerpo ni en cruz — es la posición que Athlean-X marca como la más segura para el hombro. Bajá hasta que el pecho casi toque el piso, escápulas libres, core y glúteos apretados como una tabla rígida. Si te resulta fácil, subí la dificultad con pies elevados o pausa de 1 segundo abajo antes de sumar peso.</p>
-  </div>
+  <div class="cards-row">
+    <div class="card">
+      <img src="images/flexiones-brazos.png" alt="Flexiones de brazos">
+      <h3>Flexiones de brazos</h3>
+      <div class="tags"><span class="tag">3 series</span><span class="tag">hasta 2 RIR</span><span class="tag">Variación mecánica</span></div>
+      <span class="tips-label">Tips Pro de ejecución</span>
+      <p class="tips">Codos a ~45° del torso, no pegados al cuerpo ni en cruz — es la posición que Athlean-X marca como la más segura para el hombro. Bajá hasta que el pecho casi toque el piso, escápulas libres, core y glúteos apretados como una tabla rígida. Si te resulta fácil, subí la dificultad con pies elevados o pausa de 1 segundo abajo antes de sumar peso.</p>
+    </div>
 
-  <div class="card">
-    <img src="images/halo-kettlebell.png" alt="Halo con kettlebell">
-    <h3>Halo con Kettlebell</h3>
-    <div class="tags"><span class="tag">2 series</span><span class="tag">8 vueltas x lado</span><span class="tag">Movilidad hombro</span></div>
-    <span class="tips-label">Tips Pro de ejecución</span>
-    <p class="tips">Peso liviano, la kettlebell viaja pegada a la cabeza en un círculo controlado. Core firme para que no se te vaya la zona lumbar hacia adelante al pasar la pesa por detrás. Movimiento lento, sin usar impulso: el objetivo es lubricar la articulación, no fatigar el hombro.</p>
-  </div>
+    <div class="card">
+      <img src="images/halo-kettlebell.png" alt="Halo con kettlebell">
+      <h3>Halo con Kettlebell</h3>
+      <div class="tags"><span class="tag">2 series</span><span class="tag">8 vueltas x lado</span><span class="tag">Movilidad hombro</span></div>
+      <span class="tips-label">Tips Pro de ejecución</span>
+      <p class="tips">Peso liviano, la kettlebell viaja pegada a la cabeza en un círculo controlado. Core firme para que no se te vaya la zona lumbar hacia adelante al pasar la pesa por detrás. Movimiento lento, sin usar impulso: el objetivo es lubricar la articulación, no fatigar el hombro.</p>
+    </div>
 
-  <div class="card">
-    <img src="images/abdominales-dead-bug.png" alt="Dead bug">
-    <h3>Abdominales — Dead Bug</h3>
-    <div class="tags"><span class="tag">3 series</span><span class="tag">8–10 x lado</span><span class="tag">Anti-extensión</span></div>
-    <span class="tips-label">Tips Pro de ejecución</span>
-    <p class="tips">La zona lumbar se mantiene pegada al piso durante todo el movimiento — esa es la clave, no la velocidad del brazo/pierna. Bajá el brazo y la pierna opuesta lento, exhalá al extender, y si la lumbar se despega, reducí el rango.</p>
+    <div class="card">
+      <img src="images/abdominales-dead-bug.png" alt="Dead bug">
+      <h3>Abdominales — Dead Bug</h3>
+      <div class="tags"><span class="tag">3 series</span><span class="tag">8–10 x lado</span><span class="tag">Anti-extensión</span></div>
+      <span class="tips-label">Tips Pro de ejecución</span>
+      <p class="tips">La zona lumbar se mantiene pegada al piso durante todo el movimiento — esa es la clave, no la velocidad del brazo/pierna. Bajá el brazo y la pierna opuesta lento, exhalá al extender, y si la lumbar se despega, reducí el rango.</p>
+    </div>
   </div>
 
   <div class="day-header">Rutina de 10 minutos — Salud de rodilla (Ben Patrick, "Knees Over Toes Guy")</div>
@@ -178,44 +185,46 @@ footer{text-align:center; color:var(--text-faint); font-family:'Inter',sans-seri
 
   <div class="eli5"><b>Para entenderlo fácil</b>La idea de Ben Patrick es simple: la mayoría de la gente entrena la pierna "hacia adelante" (sentadillas, caminar) pero nunca la entrena "hacia atrás" o en las posiciones más estiradas. Estos 5 ejercicios trabajan justo esas partes que se descuidan, y por eso previenen dolores de rodilla.</div>
 
-  <div class="card">
-    <img src="images/kot-reverse-nordic.png" alt="Reverse Nordic - lean back arrodillado">
-    <h3>Reverse Nordic (Lean Back)</h3>
-    <div class="tags"><span class="tag">3 series</span><span class="tag">6–8 reps</span><span class="tag">~2 min</span><span class="tag">Cuádriceps excéntrico</span></div>
-    <span class="tips-label">Tips Pro de ejecución</span>
-    <p class="tips">Arrodillado sobre una superficie blanda, rodillas a lo ancho de la cadera, glúteos y abdomen apretados. Mantené una línea recta entre rodillas, cadera y hombros, e inclinate hacia atrás lo más lento y controlado que puedas sin que la cadera se doble — ahí es donde trabaja el cuádriceps. Volvé a subir con el mismo control. <b>Para empezar:</b> hacelo con menos rango de movimiento, o poné un sillón/banco detrás tuyo como red de seguridad para no tener miedo de caer. No hace falta llegar muy atrás las primeras semanas.</p>
-  </div>
+  <div class="cards-row">
+    <div class="card">
+      <img src="images/kot-reverse-nordic.png" alt="Reverse Nordic - lean back arrodillado">
+      <h3>Reverse Nordic (Lean Back)</h3>
+      <div class="tags"><span class="tag">3 series</span><span class="tag">6–8 reps</span><span class="tag">~2 min</span><span class="tag">Cuádriceps excéntrico</span></div>
+      <span class="tips-label">Tips Pro de ejecución</span>
+      <p class="tips">Arrodillado sobre una superficie blanda, rodillas a lo ancho de la cadera, glúteos y abdomen apretados. Mantené una línea recta entre rodillas, cadera y hombros, e inclinate hacia atrás lo más lento y controlado que puedas sin que la cadera se doble — ahí es donde trabaja el cuádriceps. Volvé a subir con el mismo control. <b>Para empezar:</b> hacelo con menos rango de movimiento, o poné un sillón/banco detrás tuyo como red de seguridad para no tener miedo de caer. No hace falta llegar muy atrás las primeras semanas.</p>
+    </div>
 
-  <div class="card">
-    <img src="images/kot-atg-split-squat.png" alt="ATG Split Squat">
-    <h3>ATG Split Squat (Estocada profunda con talón elevado)</h3>
-    <div class="tags"><span class="tag">2 series</span><span class="tag">10 x pierna</span><span class="tag">~2 min</span><span class="tag">Rodilla + tobillo</span></div>
-    <span class="tips-label">Tips Pro de ejecución</span>
-    <p class="tips">Pie de adelante sobre una cuña o disco chico (talón elevado unos centímetros), pie de atrás relajado detrás tuyo. Bajá dejando que la rodilla de adelante viaje hacia adelante, más allá de la punta del pie ("knees over toes"), hasta donde te resulte cómodo — no hace falta tocar el piso. Subí controlado. <b>Para empezar:</b> sin elevar el talón y con rango parcial, sumando profundidad de a poco semana a semana.</p>
-  </div>
+    <div class="card">
+      <img src="images/kot-atg-split-squat.png" alt="ATG Split Squat">
+      <h3>ATG Split Squat (Estocada profunda con talón elevado)</h3>
+      <div class="tags"><span class="tag">2 series</span><span class="tag">10 x pierna</span><span class="tag">~2 min</span><span class="tag">Rodilla + tobillo</span></div>
+      <span class="tips-label">Tips Pro de ejecución</span>
+      <p class="tips">Pie de adelante sobre una cuña o disco chico (talón elevado unos centímetros), pie de atrás relajado detrás tuyo. Bajá dejando que la rodilla de adelante viaje hacia adelante, más allá de la punta del pie ("knees over toes"), hasta donde te resulte cómodo — no hace falta tocar el piso. Subí controlado. <b>Para empezar:</b> sin elevar el talón y con rango parcial, sumando profundidad de a poco semana a semana.</p>
+    </div>
 
-  <div class="card">
-    <img src="images/kot-tibialis-raise.png" alt="Tibialis raise apoyado en la pared">
-    <h3>Tibialis Raise (elevación de tibiales)</h3>
-    <div class="tags"><span class="tag">2 series</span><span class="tag">15–20 reps</span><span class="tag">~1.5 min</span><span class="tag">Tobillo/espinilla</span></div>
-    <span class="tips-label">Tips Pro de ejecución</span>
-    <p class="tips">Parado, espalda apoyada contra la pared, talones a unos 20-30cm de distancia de la pared. Sin mover la pierna, llevá la punta del pie hacia arriba (hacia la espinilla) tan lejos como puedas, y bajá controlado. Es un ejercicio que casi nadie entrena y que, según Ben Patrick, protege la espinilla y el tobillo en saltos y carrera.</p>
-  </div>
+    <div class="card">
+      <img src="images/kot-tibialis-raise.png" alt="Tibialis raise apoyado en la pared">
+      <h3>Tibialis Raise (elevación de tibiales)</h3>
+      <div class="tags"><span class="tag">2 series</span><span class="tag">15–20 reps</span><span class="tag">~1.5 min</span><span class="tag">Tobillo/espinilla</span></div>
+      <span class="tips-label">Tips Pro de ejecución</span>
+      <p class="tips">Parado, espalda apoyada contra la pared, talones a unos 20-30cm de distancia de la pared. Sin mover la pierna, llevá la punta del pie hacia arriba (hacia la espinilla) tan lejos como puedas, y bajá controlado. Es un ejercicio que casi nadie entrena y que, según Ben Patrick, protege la espinilla y el tobillo en saltos y carrera.</p>
+    </div>
 
-  <div class="card">
-    <img src="images/kot-caminata-atras.png" alt="Caminata hacia atrás">
-    <h3>Caminata hacia atrás (Backward Walking)</h3>
-    <div class="tags"><span class="tag">2 min</span><span class="tag">Ritmo suave</span><span class="tag">Rodilla</span></div>
-    <span class="tips-label">Tips Pro de ejecución</span>
-    <p class="tips">Caminá hacia atrás en línea recta (afuera, en una cinta, o yendo y viniendo en una habitación libre de obstáculos), pasos cortos y controlados, mirando por encima del hombro cada tanto para orientarte. Es uno de los ejercicios más simples que recomienda Ben Patrick: reduce la fuerza de corte en la rodilla comparado con caminar hacia adelante, ideal para gente con dolor de rodilla activo.</p>
-  </div>
+    <div class="card">
+      <img src="images/kot-caminata-atras.png" alt="Caminata hacia atrás">
+      <h3>Caminata hacia atrás (Backward Walking)</h3>
+      <div class="tags"><span class="tag">2 min</span><span class="tag">Ritmo suave</span><span class="tag">Rodilla</span></div>
+      <span class="tips-label">Tips Pro de ejecución</span>
+      <p class="tips">Caminá hacia atrás en línea recta (afuera, en una cinta, o yendo y viniendo en una habitación libre de obstáculos), pasos cortos y controlados, mirando por encima del hombro cada tanto para orientarte. Es uno de los ejercicios más simples que recomienda Ben Patrick: reduce la fuerza de corte en la rodilla comparado con caminar hacia adelante, ideal para gente con dolor de rodilla activo.</p>
+    </div>
 
-  <div class="card">
-    <img src="images/kot-nordic-curl-asistido.png" alt="Nordic curl asistido">
-    <h3>Nordic Curl asistido ("Poor Man's Nordic")</h3>
-    <div class="tags"><span class="tag">2 series</span><span class="tag">5 reps</span><span class="tag">~1.5 min</span><span class="tag">Isquiotibiales</span></div>
-    <span class="tips-label">Tips Pro de ejecución</span>
-    <p class="tips">Arrodillado, con alguien sosteniéndote los tobillos (o los pies trabados debajo de un mueble pesado/sofá), bajá el torso hacia adelante lo más lento posible controlando con los isquiotibiales, usando las manos para frenar el último tramo y amortiguar contra el piso. Con solo 5 repeticiones alcanza — es un ejercicio muy intenso. <b>Para empezar:</b> apoyate en las manos desde antes en el recorrido, cuanto menos rango, más fácil.</p>
+    <div class="card">
+      <img src="images/kot-nordic-curl-asistido.png" alt="Nordic curl asistido">
+      <h3>Nordic Curl asistido ("Poor Man's Nordic")</h3>
+      <div class="tags"><span class="tag">2 series</span><span class="tag">5 reps</span><span class="tag">~1.5 min</span><span class="tag">Isquiotibiales</span></div>
+      <span class="tips-label">Tips Pro de ejecución</span>
+      <p class="tips">Arrodillado, con alguien sosteniéndote los tobillos (o los pies trabados debajo de un mueble pesado/sofá), bajá el torso hacia adelante lo más lento posible controlando con los isquiotibiales, usando las manos para frenar el último tramo y amortiguar contra el piso. Con solo 5 repeticiones alcanza — es un ejercicio muy intenso. <b>Para empezar:</b> apoyate en las manos desde antes en el recorrido, cuanto menos rango, más fácil.</p>
+    </div>
   </div>
 </section>
 
