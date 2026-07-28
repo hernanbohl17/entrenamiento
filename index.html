@@ -36,10 +36,46 @@ header{padding:38px 20px 24px; text-align:center; border-bottom:1px solid var(--
 header .kicker{display:inline-block; background:rgba(255,69,0,.1); border:1px solid rgba(255,69,0,.3); color:var(--accent); font-family:'Inter',sans-serif; font-weight:700; font-size:.7rem; letter-spacing:.14em; text-transform:uppercase; margin-bottom:14px; padding:5px 12px;}
 header h1{font-size:2.3rem; margin-bottom:14px; font-weight:900; letter-spacing:-.02em;}
 header p{color:var(--text-dim); max-width:640px; margin:0 auto; font-size:.95rem; font-weight:400;}
-nav{display:flex; overflow-x:auto; gap:4px; padding:16px 16px 0; max-width:960px; margin:0 auto; position:sticky; top:0; background:rgba(31,15,11,0.9); backdrop-filter:blur(12px); z-index:50; padding-bottom:0; border-bottom:1px solid var(--card-border);}
-nav button{flex:0 0 auto; background:transparent; border:none; border-bottom:2px solid transparent; color:var(--text-dim); padding:14px 16px; font-family:'Inter',sans-serif; font-weight:600; font-size:.82rem; letter-spacing:.03em; text-transform:uppercase; cursor:pointer; transition:.15s;}
-nav button.active{color:var(--text); border-bottom-color:var(--accent);}
-nav button:not(.active):hover{color:var(--text);}
+nav{display:flex; align-items:stretch; gap:6px; padding:0 16px; max-width:960px; margin:0 auto; position:sticky; top:0; background:rgba(31,15,11,0.9); backdrop-filter:blur(12px); z-index:50; border-bottom:1px solid var(--card-border);}
+.tabs-scroll{display:flex; overflow-x:auto; flex:1 1 auto; min-width:0;}
+.tabs-scroll button{flex:0 0 auto; background:transparent; border:none; border-bottom:2px solid transparent; color:var(--text-dim); padding:14px 16px; font-family:'Inter',sans-serif; font-weight:600; font-size:.82rem; letter-spacing:.03em; text-transform:uppercase; cursor:pointer; transition:.15s;}
+.tabs-scroll button.active{color:var(--text); border-bottom-color:var(--accent);}
+.tabs-scroll button:not(.active):hover{color:var(--text);}
+#searchOpenBtn{flex:0 0 auto; display:flex; align-items:center; justify-content:center; width:44px; background:transparent; border:none; border-left:1px solid var(--card-border); color:var(--text-dim); cursor:pointer; transition:color .15s;}
+#searchOpenBtn:hover{color:var(--accent);}
+#searchOpenBtn .material-symbols-outlined{font-size:1.3rem;}
+
+/* Search overlay */
+.search-overlay{display:none; position:fixed; inset:0; background:var(--bg); z-index:200; flex-direction:column;}
+.search-overlay.open{display:flex;}
+.search-topbar{display:flex; align-items:center; gap:10px; padding:16px; border-bottom:1px solid var(--card-border); flex:0 0 auto;}
+.search-topbar .search-icon{color:var(--text-faint); font-size:1.3rem;}
+.search-topbar input{flex:1; background:transparent; border:none; color:var(--text); font-family:'Inter',sans-serif; font-size:1rem; outline:none;}
+.search-topbar input::placeholder{color:var(--text-faint);}
+#searchCloseBtn{background:transparent; border:none; color:var(--text-dim); cursor:pointer; display:flex; padding:4px;}
+#searchCloseBtn .material-symbols-outlined{font-size:1.4rem;}
+.search-results{flex:1 1 auto; overflow-y:auto; padding:8px 16px 24px;}
+.search-result-item{display:flex; align-items:center; gap:12px; padding:12px 4px; border-bottom:1px solid var(--card-border); cursor:pointer;}
+.search-result-item:hover{background:var(--bg2);}
+.search-result-item img{width:52px; height:52px; object-fit:cover; border-radius:6px; background:#0f0906; flex:0 0 auto;}
+.search-result-item .sri-text{min-width:0;}
+.search-result-item .sri-name{color:var(--text); font-weight:700; font-size:.92rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+.search-result-item .sri-tab{color:var(--text-faint); font-size:.72rem; text-transform:uppercase; letter-spacing:.05em; font-weight:700;}
+.search-empty{color:var(--text-faint); text-align:center; padding:40px 20px; font-size:.9rem;}
+.search-hint{color:var(--text-faint); text-align:center; padding:40px 20px; font-size:.85rem;}
+
+.search-detail{display:none; flex:1 1 auto; overflow-y:auto; padding:0 16px 40px;}
+.search-detail.open{display:block;}
+.search-detail .sd-back{display:flex; align-items:center; gap:6px; background:transparent; border:none; color:var(--accent); font-family:'Inter'; font-weight:700; font-size:.85rem; text-transform:uppercase; letter-spacing:.04em; cursor:pointer; padding:16px 0;}
+.search-detail .sd-back .material-symbols-outlined{font-size:1.1rem;}
+.search-detail .sd-images{display:flex; gap:8px; overflow-x:auto; margin-bottom:16px;}
+.search-detail .sd-images img{height:220px; border-radius:8px; background:#0f0906; flex:0 0 auto;}
+.search-detail h2{font-size:1.4rem; margin-bottom:6px;}
+.search-detail .sd-tab-label{color:var(--text-faint); font-size:.75rem; text-transform:uppercase; letter-spacing:.06em; font-weight:700; margin-bottom:16px;}
+.search-detail .sd-desc{color:var(--text-dim); font-size:.95rem; line-height:1.7; margin-bottom:18px;}
+.search-detail .sd-source{background:var(--bg2); border-left:3px solid var(--accent); border-radius:6px; padding:12px 16px; font-size:.82rem; color:var(--text-dim);}
+.search-detail .sd-source b{color:var(--accent); display:block; font-size:.7rem; text-transform:uppercase; letter-spacing:.06em; margin-bottom:4px;}
+
 main{max-width:960px; margin:0 auto; padding:24px 16px 80px;}
 .tab{display:none; animation:fade .25s ease;}
 .tab.active{display:block;}
@@ -144,12 +180,27 @@ footer{text-align:center; color:var(--text-faint); font-family:'Inter',sans-seri
 </header>
 
 <nav id="tabnav">
-  <button data-tab="basico" class="active">01 Básico</button>
-  <button data-tab="jump">02 Jump Attack</button>
-  <button data-tab="correr">03 Correr</button>
-  <button data-tab="gym">04 Gimnasio</button>
-  <button data-tab="movilidad">05 Movilidad</button>
+  <div class="tabs-scroll">
+    <button data-tab="basico" class="active">01 Básico</button>
+    <button data-tab="jump">02 Jump Attack</button>
+    <button data-tab="correr">03 Correr</button>
+    <button data-tab="gym">04 Gimnasio</button>
+    <button data-tab="movilidad">05 Movilidad</button>
+  </div>
+  <button id="searchOpenBtn" aria-label="Buscar ejercicio">
+    <span class="material-symbols-outlined">search</span>
+  </button>
 </nav>
+
+<div id="searchOverlay" class="search-overlay">
+  <div class="search-topbar">
+    <span class="material-symbols-outlined search-icon">search</span>
+    <input type="text" id="searchInput" placeholder="Buscar ejercicio... (ej: sentadilla, curl, hidrantes)" autocomplete="off">
+    <button id="searchCloseBtn" aria-label="Cerrar buscador"><span class="material-symbols-outlined">close</span></button>
+  </div>
+  <div id="searchResults" class="search-results"></div>
+  <div id="searchDetail" class="search-detail"></div>
+</div>
 
 <main>
 
@@ -793,9 +844,9 @@ footer{text-align:center; color:var(--text-faint); font-family:'Inter',sans-seri
 
 <script>
 // ---- Tabs ----
-document.querySelectorAll('#tabnav button').forEach(btn=>{
+document.querySelectorAll('#tabnav .tabs-scroll button').forEach(btn=>{
   btn.addEventListener('click', ()=>{
-    document.querySelectorAll('#tabnav button').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('#tabnav .tabs-scroll button').forEach(b=>b.classList.remove('active'));
     document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
     btn.classList.add('active');
     document.getElementById('tab-'+btn.dataset.tab).classList.add('active');
@@ -953,6 +1004,244 @@ if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('sw.js').catch(()=>{});
   });
 }
+
+// ============================================================
+// BUSCADOR DE EJERCICIOS
+// ============================================================
+const SRC_GROVER = "Tim Grover — libro \"Jump Attack\"";
+const SRC_PATRICK = "Ben Patrick — \"Knees Over Toes Guy\"";
+const SRC_CAVALIERE = "Jeff Cavaliere — Athlean-X";
+const SRC_CAVALIERE_BB = "Jeff Cavaliere — Athlean-X (\"The Bicep Black Book\")";
+const SRC_NORUEGO = "Método noruego de doble umbral (equipo de fondismo de los hermanos Ingebrigtsen)";
+const SRC_GENERAL = "Compilación de buenas prácticas de entrenamiento y fisioterapia deportiva general";
+
+const EXERCISE_DB = [
+  // ---------- BÁSICO ----------
+  {name:"Flexiones de brazos", tab:"Básico", images:["images/flexiones-brazos.png"], source:SRC_CAVALIERE,
+   desc:"Apoyá las manos un poco más anchas que los hombros, con los codos formando ~45° respecto al torso (ni pegados al cuerpo, ni en cruz) — es la posición que protege el hombro. Cuerpo en línea recta desde la cabeza hasta los talones, glúteos y core apretados como una tabla. Bajá controlado hasta que el pecho casi toque el piso, pausá medio segundo abajo, y subí sin perder la alineación de la cadera. Si te resulta fácil, elevá los pies sobre un banco o agregá una pausa de 1-2 segundos abajo antes de pensar en sumar peso."},
+  {name:"Halo con Kettlebell", tab:"Básico", images:["images/halo-kettlebell.png"], source:SRC_GENERAL,
+   desc:"Sostené la kettlebell invertida (por el cuerpo, no por el asa) cerca del mentón con ambas manos. Trazá un círculo lento alrededor de tu cabeza, pasando la pesa por detrás de la nuca y volviendo al frente, manteniendo el core firme para que la zona lumbar no se arquee cuando la pesa pasa por atrás. Es un ejercicio de movilidad, no de fuerza: usá un peso liviano y priorizá la fluidez del círculo por sobre la velocidad. Alterná el sentido de giro cada serie."},
+  {name:"Abdominales — Dead Bug", tab:"Básico", images:["images/abdominales-dead-bug.png"], source:SRC_GENERAL,
+   desc:"Acostado boca arriba, brazos extendidos hacia el techo y piernas a 90° (rodilla sobre cadera). Bajá lentamente el brazo derecho y la pierna izquierda hacia el piso al mismo tiempo, exhalando en el descenso, sin que la zona lumbar se despegue del suelo — ese es el punto clave del ejercicio, no la velocidad. Volvé al centro con control y repetí del otro lado. Si notás que la lumbar se arquea, reducí el rango de movimiento hasta que puedas controlarlo del todo."},
+
+  // ---------- KOT (Ben Patrick) ----------
+  {name:"Reverse Nordic (Lean Back)", tab:"Básico · Rutina KOT", images:["images/kot-reverse-nordic.png"], source:SRC_PATRICK,
+   desc:"Arrodillado sobre una superficie blanda, rodillas al ancho de la cadera, glúteos y abdomen apretados. Mantené una línea recta entre rodillas, cadera y hombros (sin doblar la cadera) e inclinate hacia atrás lo más lento posible, dejando que el cuádriceps controle el descenso — cuanto más lejos llegues sin doblar la cadera, más estiramiento bajo carga generás en la parte del músculo que casi nadie entrena. Subí con el mismo control. Para empezar: reducí el rango, o poné un sillón detrás tuyo como red de seguridad para animarte a ir más atrás sin miedo a caer."},
+  {name:"ATG Split Squat", tab:"Básico · Rutina KOT", images:["images/kot-atg-split-squat.png"], source:SRC_PATRICK,
+   desc:"Pie de adelante apoyado sobre una cuña o disco chico (talón elevado unos centímetros), pie de atrás relajado y apoyado en la punta detrás tuyo. Bajá dejando que la rodilla de adelante viaje hacia adelante, más allá de la punta del pie ('knees over toes' — el nombre del método), hasta donde te resulte cómodo sin dolor. No hace falta tocar el piso las primeras semanas. Subí controlado, sin rebotar abajo. Para empezar: hacelo sin elevar el talón y con rango parcial, sumando profundidad progresivamente semana a semana."},
+  {name:"Tibialis Raise", tab:"Básico · Rutina KOT", images:["images/kot-tibialis-raise.png"], source:SRC_PATRICK,
+   desc:"Parado, espalda apoyada contra la pared, talones a unos 20-30cm de distancia de la pared. Sin mover el resto de la pierna, llevá la punta del pie hacia arriba (hacia la espinilla) tan lejos como puedas, sostené un segundo arriba, y bajá controlado sin dejar que el pie golpee el piso. Es un ejercicio que casi nadie entrena y que, según Ben Patrick, protege la espinilla y el tobillo en saltos y carrera — el complemento perfecto de los gemelos, que se sí entrena todo el mundo."},
+  {name:"Caminata hacia atrás (Backward Walking)", tab:"Básico · Rutina KOT", images:["images/kot-caminata-atras.png"], source:SRC_PATRICK,
+   desc:"Caminá hacia atrás en línea recta — afuera, en una cinta, o yendo y viniendo en una habitación libre de obstáculos. Pasos cortos y controlados, apoyando primero la punta y rodando hacia el talón, mirando por encima del hombro cada tanto para orientarte y evitar tropezar. Es uno de los ejercicios más simples que recomienda Ben Patrick: al caminar hacia atrás, la rodilla nunca se traba con fuerza como al caminar hacia adelante, así que reduce la fuerza de corte sobre la articulación — ideal para gente con dolor de rodilla activo o en rehabilitación."},
+  {name:"Nordic Curl asistido (\"Poor Man's Nordic\")", tab:"Básico · Rutina KOT", images:["images/kot-nordic-curl-asistido.png"], source:SRC_PATRICK,
+   desc:"Arrodillado, con alguien sosteniéndote los tobillos (o los pies trabados debajo de un mueble pesado o sofá), bajá el torso hacia adelante lo más lento posible, controlando el descenso con los isquiotibiales — no con los brazos. Cuando ya no puedas frenar más con las piernas, usá las manos para amortiguar el último tramo contra el piso. Con solo 5 repeticiones alcanza: es un ejercicio muy intenso incluso para gente entrenada. Para empezar: apoyate en las manos desde antes en el recorrido, cuanto menos rango uses, más fácil resulta."},
+
+  // ---------- JUMP ATTACK — FASE 1 ----------
+  {name:"Secuencia 1 — Sentadilla de puntillas", tab:"Jump Attack · Fase 1", images:["images/hidrantes.png","images/f1-seq1-hold-sentadilla-puntillas.png","images/f1-seq1-bomba-sentadilla-puntillas.png","images/estiramiento-flexor-cadera.png"], source:SRC_GROVER,
+   desc:"Secuencia de 4 pasos, según el libro Jump Attack de Tim Grover. <b>Hidrantes:</b> apoyo en cuatro puntos, levantá la rodilla hacia el costado sin rotar la cadera, empujando con el glúteo medio (10 adelante, 10 atrás, 10 al costado, por pierna) — activa el glúteo antes del trabajo principal. <b>Hold:</b> sentadilla parcial parado en la punta de los pies, core firme, peso repartido en los metatarsos — sostenido 60s en semana 1, 90s en semana 2, 120s en semana 3. <b>Bomba:</b> mismo rango de movimiento pero en pulsos cortos, sin perder la altura del talón — 15 reps semana 1, bajando a 10 y luego 5 mientras sube el hold. <b>Estiramiento:</b> flexor de cadera, 30s por lado, sin rebotar."},
+  {name:"Secuencia 2 — Estocada (Lunge)", tab:"Jump Attack · Fase 1", images:["images/hidrantes.png","images/f1-seq2-hold-estocada.png","images/f1-seq2-bomba-estocada.png","images/estiramiento-flexor-cadera.png"], source:SRC_GROVER,
+   desc:"Después de los hidrantes de activación, el <b>hold de estocada</b>: rodilla de adelante alineada con el pie (nunca colapsando hacia adentro), torso alto, sostenés la posición baja sin apoyar la rodilla trasera en el piso — 60/90/120 segundos según la semana del ciclo de Fase 1. La <b>bomba</b> repite el mismo rango en pulsos pequeños (15→10→5 reps), sin bloquear la respiración en ningún momento. Cerrás con el mismo estiramiento de flexor de cadera de 30 segundos por lado."},
+  {name:"Secuencia 3 — Estocada búlgara elevada", tab:"Jump Attack · Fase 1", images:["images/hidrantes.png","images/f1-seq3-hold-bulgara.png","images/f1-seq3-bomba-bulgara.png","images/estiramiento-flexor-cadera.png"], source:SRC_GROVER,
+   desc:"Pie trasero apoyado sobre un banco, casi todo el peso corporal en la pierna de adelante. En el <b>hold</b>, torso ligeramente inclinado hacia adelante sin perder el equilibrio, sosteniendo la posición baja (60/90/120s según semana). En la <b>bomba</b>, pulsos cortos controlando que la rodilla de adelante no colapse hacia adentro (15→10→5 reps). Mismo cierre con hidrantes al inicio y estiramiento de flexor de cadera al final."},
+  {name:"Secuencia 4 — Peso muerto piernas rectas", tab:"Jump Attack · Fase 1", images:["images/hidrantes.png","images/f1-seq4-hold-peso-muerto.png","images/f1-seq4-bomba-peso-muerto.png","images/estiramiento-flexor-cadera.png"], source:SRC_GROVER,
+   desc:"Bisagra de cadera con las piernas casi rectas (no completamente trabadas), espalda neutra en todo momento — el movimiento sale de la cadera, nunca de la zona lumbar redondeándose. En el <b>hold</b>, sostené el punto de máximo estiramiento de isquiotibiales que puedas controlar con técnica perfecta (60/90/120s). La <b>bomba</b> son pulsos cortos en ese mismo rango bajo, sin perder la espalda neutra (15→10→5 reps)."},
+  {name:"Secuencia 5 — V-Up (core + pantorrilla)", tab:"Jump Attack · Fase 1", images:["images/hidrantes.png","images/f1-seq5-hold-vup.png","images/f1-seq5-bomba-vup.png","images/f1-seq5-estiramiento-pantorrilla-v.png"], source:SRC_GROVER,
+   desc:"Acostado boca arriba, elevás tronco y piernas simultáneamente formando una V, con los brazos buscando los pies. En el <b>hold</b>, la lumbar se mantiene pegada al piso — si se arquea, es señal de que el rango es demasiado exigente todavía (60/90/120s según semana). La <b>bomba</b> repite el movimiento en pulsos controlados (15→10→5). A diferencia de las secuencias 1-4, esta cierra con estiramiento de pantorrilla en posición de V en vez del estiramiento de cadera."},
+  {name:"Cuerpo Total Implacable — Mantener la flexión (push-up hold)", tab:"Jump Attack · Fase 1", images:["images/ja-f1-tb-1-flexion-hold.png"], source:SRC_GROVER,
+   desc:"Uno de los 7 holds encadenados del día de Cuerpo Total de la Fase 1 (sin secuencias, sin estiramiento entre medio). Sostené la posición baja de la flexión de brazos, codos cerca del cuerpo (~45°), cuerpo en línea recta de cabeza a talones, sin que la cadera se hunda ni se eleve. El tiempo sube cada semana: 30 segundos en semana 1, 60 en semana 2, 90 en semana 3."},
+  {name:"Cuerpo Total Implacable — Soporte de dominada (pull-up hold)", tab:"Jump Attack · Fase 1", images:["images/ja-f1-tb-2-dominada-hold.png"], source:SRC_GROVER,
+   desc:"Mentón sobre la barra, escápulas activas hacia abajo y atrás (no encogidas hacia las orejas). Sostené la posición sin balancearte, respirando de forma controlada. Progresión de tiempo igual al resto de los 7 holds: 30s / 60s / 90s en las semanas 1, 2 y 3 de la Fase 1."},
+  {name:"Cuerpo Total Implacable — Soporte aéreo", tab:"Jump Attack · Fase 1", images:["images/ja-f1-tb-3-aereo-hold.png"], source:SRC_GROVER,
+   desc:"El core y los hombros sostienen la posición, no el cuello — buscá la técnica más controlada que puedas mantener durante todo el tiempo marcado sin perder la forma. Como el resto del bloque de Cuerpo Total, progresa 30s → 60s → 90s a lo largo de las 3 primeras semanas de la Fase 1."},
+  {name:"Cuerpo Total Implacable — Mantener el bícep", tab:"Jump Attack · Fase 1", images:["images/ja-f1-tb-4-bicep-hold.png"], source:SRC_GROVER,
+   desc:"Codo fijo pegado al torso durante todo el mantenimiento — sostené el ángulo medio de flexión (a mitad de camino de un curl) sin que el brazo empiece a temblar y perder la posición. Mismo esquema de tiempo que el resto de los 7 holds: 30/60/90 segundos según la semana."},
+  {name:"Cuerpo Total Implacable — Mantener la flexión de tríceps", tab:"Jump Attack · Fase 1", images:["images/ja-f1-tb-5-triceps-hold.png"], source:SRC_GROVER,
+   desc:"Codos apuntando hacia atrás, no hacia los costados. Sostené el ángulo medio de extensión de codo sin que se abra ni se cierre de más. Progresión de tiempo idéntica al resto del bloque: 30s semana 1, 60s semana 2, 90s semana 3."},
+  {name:"Cuerpo Total Implacable — Soporte de tablón de rana", tab:"Jump Attack · Fase 1", images:["images/ja-f1-tb-6-rana-hold.png"], source:SRC_GROVER,
+   desc:"Rodillas abiertas hacia los costados con los pies juntos (posición de 'rana'), cadera baja y controlada, core firme sosteniendo el peso. Mismo esquema de progresión que el resto de los 7 holds del bloque: 30/60/90 segundos."},
+  {name:"Cuerpo Total Implacable — Soporte en plancha lateral", tab:"Jump Attack · Fase 1", images:["images/ja-f1-tb-7-lateral-hold.png"], source:SRC_GROVER,
+   desc:"Cadera elevada en línea recta con el torso — no dejes que se hunda hacia el piso. Repetí el tiempo completo marcado en cada lado (no es tiempo total dividido entre ambos). Cierra el bloque de 7 holds de Cuerpo Total Implacable, con la misma progresión de 30/60/90 segundos."},
+
+  // ---------- JUMP ATTACK — FASE 2 ----------
+  {name:"Secuencia 6 — Sentadillas sentadas + Estocada Buttkicker", tab:"Jump Attack · Fase 2", images:["images/puente-gluteos.png"], source:SRC_GROVER,
+   desc:"Empieza con <b>puente de glúteos</b> de activación: apretá fuerte arriba empujando con el talón, sin arquear la lumbar. Después el <b>hold de sentadilla sentada</b>: sentadilla profunda sostenida con el pecho arriba y las rodillas siguiendo la punta del pie — el tiempo baja cada semana (30s→20s→10s) en vez de subir, a diferencia de la Fase 1. Al cortar el hold, directo a las 10 repeticiones sin pausa. Cierra con <b>estocada buttkicker</b>: estocada dinámica combinada con el talón al glúteo, controlando bien el aterrizaje antes de repetir (10→8→6 reps según la semana)."},
+  {name:"Secuencia 7 — Estocada inversa + Salto Tuck", tab:"Jump Attack · Fase 2", images:["images/puente-gluteos.png"], source:SRC_GROVER,
+   desc:"Puente de glúteos de activación, seguido del <b>hold de estocada inversa</b>: paso hacia atrás, rodilla trasera casi al piso, peso concentrado en el talón delantero — el tiempo de hold baja cada semana (30s→20s→10s) mientras aumenta la exigencia del salto siguiente. El <b>salto tuck</b> es despegue con las dos piernas llevando las rodillas al pecho en el aire, aterrizando suave con las rodillas alineadas (10→8→6 reps)."},
+  {name:"Secuencia 8 — Levantamiento muerto burpee + Salto a caja sentada", tab:"Jump Attack · Fase 2", images:["images/puente-gluteos.png"], source:SRC_GROVER,
+   desc:"El <b>levantamiento muerto burpee</b> combina la bisagra de cadera del peso muerto con la bajada a plancha del burpee — mantené la espalda neutra en cada transición del movimiento. El <b>salto de caja sentada</b> arranca sentado, sin impulso de brazos, y saltás directo al cajón: la altura de la caja sube cada semana (18-24' → 24-36' → 36-42') mientras bajan las repeticiones (10→8→6) — menos volumen, más intensidad."},
+  {name:"Secuencia 9 — Peso muerto piernas rectas + Buttkicker 1 pierna", tab:"Jump Attack · Fase 2", images:["images/puente-gluteos.png"], source:SRC_GROVER,
+   desc:"El <b>hold de peso muerto</b> es igual al de Fase 1 pero con foco en tiempo bajo tensión decreciente (30s→20s→10s), seguido directo de repeticiones dinámicas. El <b>buttkicker a una pierna</b>: talón al glúteo en apoyo unilateral, controlando que la cadera no rote hacia el costado (10→8→6 reps según semana)."},
+  {name:"Secuencia 10 / 15 — Elevación de pantorrillas con peso", tab:"Jump Attack · Fase 2 / Fase 3", images:["images/elevacion-pantorrillas-peso.png","images/estiramiento-pantorrilla.png"], source:SRC_GROVER,
+   desc:"Subida completa hasta la punta del pie con peso, bajada lenta y controlada más allá del punto paralelo para trabajar el rango completo del gemelo. Este ejercicio se repite igual en la Secuencia 10 (Fase 2) y la Secuencia 15 (Fase 3) del programa. Cierra con estiramiento de pantorrilla en vez del estiramiento de cadera que usan el resto de las secuencias."},
+  {name:"Cuerpo Total — Flexión: hold + 10 reps", tab:"Jump Attack · Fase 2", images:["images/ja-f2-tba-1-flexion-10reps.png"], source:SRC_GROVER,
+   desc:"El bloque de Cuerpo Total de Fase 2 combina hold + 10 repeticiones dinámicas en cada ejercicio, con el hold bajando de tiempo semana a semana (30s→20s→10s) en vez de subir. Sostené abajo con los codos a 45°, y al cortar el tiempo hacé las 10 flexiones completas sin perder la técnica, aunque llegues fatigado del hold."},
+  {name:"Cuerpo Total — Dominada: hold + 10 reps", tab:"Jump Attack · Fase 2", images:["images/ja-f2-tba-2-dominada-10reps.png"], source:SRC_GROVER,
+   desc:"Mentón sobre la barra durante el hold (30s→20s→10s según semana), escápulas activas. Al cortar el tiempo, directo a las 10 repeticiones dinámicas priorizando el rango completo por sobre la velocidad, incluso con los brazos ya fatigados del hold previo."},
+  {name:"Cuerpo Total — Soporte aéreo: hold + 10 reps", tab:"Jump Attack · Fase 2", images:["images/ja-f2-tba-3-aereo-10reps.png"], source:SRC_GROVER,
+   desc:"El core sostiene la posición durante el hold decreciente (30s→20s→10s), nunca el cuello ni la lumbar. Bajá la exigencia si notás que perdés técnica antes de llegar a las 10 repeticiones que siguen al hold."},
+  {name:"Cuerpo Total — Bícep: hold + 10 reps", tab:"Jump Attack · Fase 2", images:["images/ja-f2-tba-4-bicep-10reps.png"], source:SRC_GROVER,
+   desc:"Codo fijo durante el hold (30s→20s→10s) y durante las 10 repeticiones que siguen — no lo dejes viajar hacia adelante para ayudarte con impulso, incluso ya fatigado."},
+  {name:"Cuerpo Total — Tríceps: hold + 10 reps", tab:"Jump Attack · Fase 2", images:["images/ja-f2-tba-5-triceps-10reps.png"], source:SRC_GROVER,
+   desc:"Codos apuntando hacia atrás durante todo el ejercicio, tanto en el hold decreciente (30s→20s→10s) como en las 10 repeticiones dinámicas que le siguen."},
+  {name:"Cuerpo Total — Plancha de rana: hold + 10 reps", tab:"Jump Attack · Fase 2", images:["images/ja-f2-tba-6-rana-10reps.png"], source:SRC_GROVER,
+   desc:"Cadera baja y controlada durante el hold (30s→20s→10s); en las 10 repeticiones que siguen, movés la cadera sin perder la posición de rodillas abiertas."},
+  {name:"Cuerpo Total — Plancha lateral: hold + 10 reps", tab:"Jump Attack · Fase 2", images:["images/ja-f2-tba-7-lateral-10reps.png"], source:SRC_GROVER,
+   desc:"Cadera elevada durante el hold decreciente (30s→20s→10s) de cada lado; en las 10 repeticiones que siguen, subís y bajás en rango corto sin tocar el piso. Se hace completo de ambos lados."},
+
+  // ---------- JUMP ATTACK — FASE 3 ----------
+  {name:"Secuencia 11 — Levantamiento muerto + Tijeras Buttkicker", tab:"Jump Attack · Fase 3", images:["images/hidrantes.png","images/puente-gluteos.png"], source:SRC_GROVER,
+   desc:"Combo de activación de hidrante + puente de glúteos en una sola serie continua. El <b>peso muerto</b> ahora se mide en repeticiones máximas dentro de una ventana de tiempo que se acorta cada semana (30s→20s→15s) en vez de un hold fijo. Las <b>tijeras alternadas buttkicker</b> alternan pierna adelante/atrás en el aire llevando el talón al glúteo — más exigente que el buttkicker a una pierna de la Fase 2 (10→8→6 repeticiones)."},
+  {name:"Secuencia 12 — Sentadillas + Salto con rodamiento atrás", tab:"Jump Attack · Fase 3", images:["images/hidrantes.png","images/puente-gluteos.png"], source:SRC_GROVER,
+   desc:"Mismo combo de activación hidrante + puente. Las <b>sentadillas</b> se hacen a repeticiones máximas en ventana decreciente (30s→20s→15s). El <b>salto con rodamiento hacia atrás</b>: después de saltar, absorbés el aterrizaje rodando suavemente hacia atrás sobre la espalda (sin golpear la cabeza) y volvés a pararte — trabaja el control del cuerpo en el aire y la desaceleración."},
+  {name:"Secuencia 13 — Estocada búlgara elevada + Bronco kick tuck", tab:"Jump Attack · Fase 3", images:["images/hidrantes.png","images/puente-gluteos.png"], source:SRC_GROVER,
+   desc:"Combo hidrante + puente de activación, seguido de <b>estocada búlgara elevada</b> a repeticiones máximas en ventana decreciente. El <b>salto bronco kick tuck</b> combina una patada tipo 'bronco' (manos al piso, patada de las piernas hacia atrás) con un salto tuck — de los ejercicios más exigentes de todo el programa, priorizá técnica antes que velocidad."},
+  {name:"Secuencia 14 — Peso muerto piernas rectas + Salto de profundidad de ataque", tab:"Jump Attack · Fase 3", images:["images/hidrantes.png","images/puente-gluteos.png"], source:SRC_GROVER,
+   desc:"Combo de activación hidrante + puente, seguido de peso muerto piernas rectas a repeticiones máximas en ventana decreciente. El <b>salto de profundidad de ataque</b>: caída controlada desde una superficie elevada con rebote inmediato hacia arriba con máxima intención, contacto mínimo con el piso — es el patrón 'reactivo' que más transfiere directo al salto vertical."},
+  {name:"Cuerpo Total Explosivo — Flexiones con palmada", tab:"Jump Attack · Fase 3", images:["images/ja-f2-tbb-1-flexiones-palmada.png"], source:SRC_GROVER,
+   desc:"El bloque de Cuerpo Total de Fase 3 es todo a repeticiones máximas en 30 segundos, sin holds. Empuje explosivo desde abajo de la flexión para despegar las manos del piso y dar la palmada en el aire, aterrizando suave con los codos listos para absorber antes de la siguiente repetición."},
+  {name:"Cuerpo Total Explosivo — Combo liberación de dominada", tab:"Jump Attack · Fase 3", images:["images/ja-f2-tbb-2-combo-dominada.png"], source:SRC_GROVER,
+   desc:"Alterná entre dominada estricta y el componente de liberación/impulso explosivo, siempre controlando la bajada para proteger el hombro, acumulando la mayor cantidad de repeticiones posible en 30 segundos."},
+  {name:"Cuerpo Total Explosivo — Limpio a la prensa aérea", tab:"Jump Attack · Fase 3", images:["images/ja-f2-tbb-3-limpio-prensa-aerea.png"], source:SRC_GROVER,
+   desc:"Tirón explosivo desde el piso o la cadera hasta la altura de los hombros ('limpio'), seguido de empuje directo arriba de la cabeza. La cadera y el core estabilizan todo el movimiento — máximas repeticiones en 30 segundos."},
+  {name:"Cuerpo Total Explosivo — Curl de bíceps", tab:"Jump Attack · Fase 3", images:["images/ja-f2-tbb-4-curl-biceps.png"], source:SRC_GROVER,
+   desc:"Codos fijos, rango completo, sin usar impulso de cadera — la velocidad tiene que salir de la contracción del bícep, no del balanceo del cuerpo. Repeticiones máximas en 30 segundos."},
+  {name:"Cuerpo Total Explosivo — Flexiones de pike elevadas", tab:"Jump Attack · Fase 3", images:["images/ja-f2-tbb-5-flexion-pike-elevada.png"], source:SRC_GROVER,
+   desc:"Pies elevados sobre una superficie, cadera alta formando una V invertida, cabeza entre los brazos sin colapsar el cuello. Repeticiones máximas en 30 segundos, es la variante que más carga pone sobre el hombro de todo el bloque."},
+  {name:"Cuerpo Total Explosivo — Plancha de rana alterna", tab:"Jump Attack · Fase 3", images:["images/ja-f2-tbb-6-rana-alterna.png"], source:SRC_GROVER,
+   desc:"Desde la posición de rana, alterná llevando una rodilla hacia el pecho y después la otra, con la cadera baja y estable durante todo el movimiento. Máximas repeticiones en 30 segundos."},
+  {name:"Cuerpo Total Explosivo — Plancha lateral eléctrica", tab:"Jump Attack · Fase 3", images:["images/ja-f2-tbb-7-plancha-lateral-dinamica.png"], source:SRC_GROVER,
+   desc:"Versión dinámica de la plancha lateral: subís y bajás la cadera en rango corto y rápido sin tocar el piso, manteniendo el torso alineado todo el tiempo. Máximas repeticiones en 30 segundos, de cada lado."},
+
+  // ---------- CORRER ----------
+  {name:"Calentamiento (Correr)", tab:"Correr", images:[], source:SRC_NORUEGO,
+   desc:"15 a 20 minutos: trote suave en zona 1 (con conversación fluida y sin esfuerzo), seguido de 4 a 6 progresiones cortas de 80 metros aumentando el ritmo gradualmente en cada una. Cerrá con movilidad dinámica de cadera y tobillo antes de entrar al bloque de intervalos principal."},
+  {name:"Bloque de intervalos — Umbral de lactato", tab:"Correr", images:[], source:SRC_NORUEGO,
+   desc:"4 a 6 repeticiones de 6 a 8 minutos cada una, a un esfuerzo 'cómodamente duro' (aproximadamente 2-3 mmol de lactato), no al máximo. La frecuencia cardíaca objetivo es 85-89% de tu FC máxima. Entre cada repetición, recuperación en trote muy suave de 1 a 2 minutos. La clave del método noruego es correr por debajo del punto de quiebre para poder acumular mucho volumen de calidad semana a semana sin quemarte."},
+  {name:"Vuelta a la calma (Correr)", tab:"Correr", images:[], source:SRC_NORUEGO,
+   desc:"10 a 15 minutos de trote muy suave en zona 1 para bajar las pulsaciones gradualmente, seguido de estiramientos activos de isquiotibiales, cuádriceps y gemelos. Cerrá con algunas respiraciones profundas y controladas para acelerar el arranque de la recuperación."},
+
+  // ---------- GIMNASIO ----------
+  {name:"Método: Reps Efectivas", tab:"Gimnasio", images:[], source:SRC_CAVALIERE,
+   desc:"El corazón del sistema de Cavaliere. No es '3 series de 10 fijas': elegís un peso, hacés una <b>serie de ignición</b> hasta el fallo real (no podés hacer una repetición más con técnica), descansás solo 15 segundos, y seguís sumando repeticiones en rondas cortas de rest-pause hasta acumular el número total de 'reps efectivas' marcado para ese ejercicio. Cuántas rondas te tome llegar ahí varía cada semana según tu fatiga — es intencional. Según Cavaliere, 'el estrés metabólico de esas últimas repeticiones, las más difíciles, es el verdadero motor del crecimiento'."},
+  {name:"Sentadilla (Gimnasio)", tab:"Gimnasio · Día A", images:["images/gym-sentadilla.png"], source:SRC_CAVALIERE,
+   desc:"Uno de sus 12 ejercicios esenciales declarados. Elegí un peso que te haga fallar entre 8-10 repeticiones para la serie de ignición, después sumá reps efectivas con rest-pause de 15 segundos hasta 15 reps totales. Cavaliere: 'hitea cuádriceps, glúteos, aductores e incluso isquiotibiales... es un patrón de movimiento fundamental que vas a necesitar toda tu vida, hasta para levantarte del inodoro'."},
+  {name:"Press banca con mancuernas", tab:"Gimnasio · Día A", images:["images/gym-press-banca-mancuernas.png"], source:SRC_CAVALIERE,
+   desc:"Prefiere mancuernas sobre barra porque cada hombro se mueve de forma independiente, respetando el ritmo escapular natural (algo que la barra fija no permite). Ignición a fallo (~8-10 reps) + rest-pause de 15 segundos hasta acumular 20 reps efectivas. Según él, 'es la mejor forma de construir el pecho, con el beneficio extra de trabajar hombro y tríceps al mismo tiempo'."},
+  {name:"Dominadas", tab:"Gimnasio · Día A", images:["images/gym-dominadas.png"], source:SRC_CAVALIERE,
+   desc:"Ignición a fallo + rest-pause de 15s hasta 15 reps efectivas. Si todavía no llegás a hacerlas sin asistencia, usá banda elástica o máquina asistida, manteniendo la misma técnica de fallo real. Cavaliere: 'uno de los mejores ejercicios de espalda que existen — exige no solo fuerza para levantar todo tu peso corporal, sino hacerlo con el torso rígido'. El curl de bíceps se entrena el mismo día que este ejercicio porque espalda y bíceps son sinergistas de tracción y necesitan las mismas 48hs de descanso conjunto."},
+  {name:"Zancada (Lunge)", tab:"Gimnasio · Día A", images:["images/gym-zancada.png"], source:SRC_CAVALIERE,
+   desc:"Ignición a fallo por pierna + rest-pause de 15s hasta 15 reps efectivas por lado. Cavaliere la describe como 'el complemento perfecto a los ejercicios de plano sagital' (sentadilla, press, remo) porque trabaja estabilidad unilateral que los movimientos bilaterales no cubren."},
+  {name:"Face Pull", tab:"Gimnasio · Día A y B", images:["images/gym-face-pull.png"], source:SRC_CAVALIERE,
+   desc:"No es para llevar al fallo — es activación: 2-3 series de 15-20 repeticiones, descanso corto (≤90s). Codos altos, tirá la cuerda o banda hacia la frente, apretando los omóplatos al final del recorrido. Según Cavaliere, 'no hace solo una cosa: entrena espalda alta, manguito rotador y retractores escapulares, tres zonas que casi nadie trabaja lo suficiente'. Se repite en ambos días de entrenamiento, no solo uno."},
+  {name:"Rotación externa con banda", tab:"Gimnasio · Día A y B", images:["images/gym-rotacion-externa-banda.png"], source:SRC_CAVALIERE,
+   desc:"Codo pegado al cuerpo a 90°, girás el antebrazo hacia afuera contra la resistencia de la banda — 2-3 series de 15-20, descanso ≤90s, sin llegar al fallo. Cavaliere es tajante: 'los músculos del manguito rotador son los únicos que rotan externamente el hombro — si no hacés un esfuerzo consciente por entrenar esto, no importa cómo sea el resto de tu programa, vas a tener un desbalance que no vas a poder superar'. Por eso se repite en las dos sesiones semanales, no en una sola."},
+  {name:"Curl de bíceps con barra", tab:"Gimnasio · Día A", images:["images/gym-curl-biceps-barra.png"], source:SRC_CAVALIERE_BB,
+   desc:"Prefiere la barra sobre mancuernas porque permite cargar más peso y aprovechar mejor la sobrecarga excéntrica, que él señala como 'el estímulo número uno detrás del crecimiento de mis bíceps'. <b>Tempo:</b> 1 segundo de subida explosiva y 3 segundos de bajada controlada (no simétrico). <b>Muñeca:</b> ligera extensión (15-20° hacia atrás) durante todo el recorrido — la posición biomecánicamente más fuerte, mantiene la tensión en el bíceps en vez de escaparse al antebrazo. Evitá las curl de concentración, las considera 'de bajo rendimiento'. Para estirar la serie de ignición podés sumar 2-3 reps con un 'cheat controlado': leve impulso de cadera hacia adelante, pero nunca inclinándote hacia atrás más allá de la vertical."},
+  {name:"Curl en dominada (Chin-Up Curl)", tab:"Gimnasio · Día A (opcional)", images:["images/gym-chin-up-curl.png"], source:SRC_CAVALIERE_BB,
+   desc:"Uno de sus ejercicios favoritos para bíceps: 'va a construir tus bíceps más rápido que cualquier otro'. Es una dominada modificada: agarre por debajo, un poco más ancho que los codos, muñeca ligeramente hacia atrás, la barra bien metida en la palma (no en los dedos, para no sobrecargar los flexores de los dedos). Al subir, mantené el ángulo del codo abierto y el cuerpo alejado de la barra, dejando que el torso se arquee levemente imitando la trayectoria curva de un curl con barra — la cabeza larga del bíceps cruza la articulación del hombro, así que solo se activa al 100% cuando el hombro también está en flexión. Usalo como reemplazo ocasional de las Dominadas normales cada 4-6 semanas para variar el estímulo."},
+  {name:"Peso muerto (o rumano)", tab:"Gimnasio · Día B", images:["images/gym-peso-muerto.png"], source:SRC_CAVALIERE,
+   desc:"Ignición a fallo (~8-12 reps) + rest-pause de 15s hasta 15 reps efectivas. Cavaliere: 'no hay mejor ejercicio para la cadena posterior que el peso muerto — entrena el patrón de bisagra de cadera, uno que vas a necesitar dominar no solo para el levantamiento, sino para la vida diaria'. La variante rumana (piernas semi-rígidas) es igual de válida si preferís cuidar más la zona lumbar."},
+  {name:"Press militar con mancuerna (a una mano)", tab:"Gimnasio · Día B", images:["images/gym-press-militar-mancuerna.png"], source:SRC_CAVALIERE,
+   desc:"Una mancuerna por vez en vez de las dos juntas — ignición a fallo + rest-pause hasta 20 reps efectivas por lado. Según Cavaliere, con este formato 'tenés mejor chance de alinear las articulaciones apropiadamente' que con el press bilateral tradicional."},
+  {name:"Remo con barra", tab:"Gimnasio · Día B", images:["images/gym-remo-barra.png"], source:SRC_CAVALIERE,
+   desc:"Ignición a fallo + rest-pause hasta 20 reps efectivas. La clave según Cavaliere: 'tenés que llevar las caderas hacia atrás para evitar simplemente inclinarte hacia adelante, lo que le pone estrés excesivo a la espalda baja'. Bisagra de cadera primero, remás después."},
+  {name:"Flexiones (variación desafiante)", tab:"Gimnasio · Día B", images:["images/gym-flexiones.png"], source:SRC_CAVALIERE,
+   desc:"Ignición a fallo + rest-pause hasta 15 reps efectivas. Su consejo: 'encontrá el nivel de dificultad correcto de la flexión — si buscás ganancias de hipertrofia, necesitás una variante que realmente te desafíe'. Si las flexiones normales ya no te cuestan, elevá los pies sobre un banco o agregá una pausa de 2 segundos abajo antes de subir peso o cambiar de variante."},
+  {name:"Extensión de tríceps acostado", tab:"Gimnasio · Día B", images:["images/gym-extension-triceps-acostado.png"], source:SRC_CAVALIERE,
+   desc:"Codos apuntando hacia atrás, no hacia los costados — es la modificación que Cavaliere insiste para proteger el hombro. Ignición a fallo + rest-pause hasta 20 reps efectivas. Sobre por qué le gusta este ejercicio en particular: 'pone la cabeza larga del tríceps, dos tercios del tamaño total del brazo, bajo un gran estiramiento en cada repetición'."},
+
+  // ---------- MOVILIDAD ----------
+  {name:"Couch Stretch", tab:"Movilidad", images:["images/couch-stretch.png"], source:SRC_PATRICK,
+   desc:"Estiramiento clásico de Ben Patrick (Knees Over Toes Guy) para el psoas y el cuádriceps. Rodilla trasera apoyada contra una pared o sillón, pie trasero apuntando hacia arriba, cadera del lado que estirás por debajo del torso (no adelantada). Apretá el glúteo de ese lado para profundizar el estiramiento sin forzar la zona lumbar. Sostené 60-90 segundos por lado, respirando de forma controlada — no es un estiramiento cómodo, pero no debería doler."},
+  {name:"Rotaciones torácicas (90/90)", tab:"Movilidad", images:["images/movilidad-rotaciones-toracicas.png"], source:SRC_GENERAL,
+   desc:"Acostado de costado, caderas y rodillas a 90°, brazos extendidos al frente juntos. Rotá el brazo de arriba llevándolo hacia atrás siguiendo el movimiento con la mirada, manteniendo la cadera completamente fija en el piso — la rotación sale solo de la espalda alta (columna torácica), no de la cadera ni de la zona lumbar. Movimiento lento y controlado, sin rebotes al final del recorrido, 2 series de 8 por lado."},
+  {name:"Perro boca abajo (descompresión)", tab:"Movilidad", images:["images/movilidad-perro-boca-abajo.png"], source:SRC_GENERAL,
+   desc:"Empujá el piso con las manos para alargar activamente la columna, talones buscando el piso sin forzar (rodillas ligeramente flexionadas si los isquiotibiales están cortos). Es ideal para descomprimir la columna después de sentadillas y saltos pesados, cuando la carga axial acumulada durante el entrenamiento necesita liberarse. 3 series de 30-45 segundos, respirando profundo."},
+  {name:"Rodilla al frente (dorsiflexión de tobillo)", tab:"Movilidad", images:["images/movilidad-tobillo.png"], source:SRC_GENERAL,
+   desc:"Parado frente a una pared, talón siempre pegado al piso, empujá la rodilla hacia adelante por sobre la punta del pie hasta sentir el estiramiento en la parte de atrás del tobillo. Es el rango de movimiento (dorsiflexión) sin el cual no hay buena técnica de aterrizaje en saltos ni de sentadilla profunda — complementa directamente el trabajo de tobillo que ya hacés con la Tibialis Raise en Básico. 2 series de 10 por lado."},
+  {name:"Isquiotibiales activo (pierna elevada)", tab:"Movilidad", images:["images/movilidad-isquios.png"], source:SRC_GENERAL,
+   desc:"Apoyá una pierna extendida sobre una superficie a la altura de la cadera (una silla, un cajón), con la espalda recta inclinándote desde la cadera hacia adelante, no redondeando la zona lumbar. Sostené 45 segundos por lado, sintiendo el estiramiento en la parte de atrás del muslo sin forzar hasta el dolor."},
+  {name:"Foam roller — cuádriceps/gemelos", tab:"Movilidad", images:["images/movilidad-foam-roller-cuadriceps.png"], source:SRC_GENERAL,
+   desc:"Pasadas lentas del rodillo sobre el músculo, pausando 15-20 segundos en los puntos de mayor tensión que encuentres, sin llegar a dolor agudo (una molestia tolerable está bien, dolor punzante no). Ayuda a la recuperación entre sesiones de salto intensas, 1-2 minutos por zona."},
+];
+
+// ---- Search UI logic ----
+const searchOpenBtn = document.getElementById('searchOpenBtn');
+const searchCloseBtn = document.getElementById('searchCloseBtn');
+const searchOverlay = document.getElementById('searchOverlay');
+const searchInput = document.getElementById('searchInput');
+const searchResults = document.getElementById('searchResults');
+const searchDetail = document.getElementById('searchDetail');
+
+function normalize(str){
+  return str.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+}
+
+function renderResults(query){
+  searchDetail.classList.remove('open');
+  searchResults.style.display = 'block';
+  const q = normalize(query.trim());
+  if(!q){
+    searchResults.innerHTML = '<div class="search-hint">Escribí el nombre de un ejercicio para empezar (por ejemplo: "sentadilla", "curl", "hidrantes", "face pull")...</div>';
+    return;
+  }
+  const matches = EXERCISE_DB.filter(ex => normalize(ex.name).includes(q));
+  if(matches.length === 0){
+    searchResults.innerHTML = '<div class="search-empty">No encontré ningún ejercicio con ese nombre. Probá con otra palabra.</div>';
+    return;
+  }
+  searchResults.innerHTML = '';
+  matches.forEach((ex, idx) => {
+    const item = document.createElement('div');
+    item.className = 'search-result-item';
+    const imgSrc = ex.images[0] || '';
+    item.innerHTML = `
+      ${imgSrc ? `<img src="${imgSrc}" alt="${ex.name}">` : `<div style="width:52px;height:52px;border-radius:6px;background:var(--bg2);flex:0 0 auto;"></div>`}
+      <div class="sri-text">
+        <div class="sri-name">${ex.name}</div>
+        <div class="sri-tab">${ex.tab}</div>
+      </div>`;
+    item.addEventListener('click', () => renderDetail(ex));
+    searchResults.appendChild(item);
+  });
+}
+
+function renderDetail(ex){
+  searchResults.style.display = 'none';
+  searchDetail.classList.add('open');
+  const imagesHtml = ex.images.length
+    ? `<div class="sd-images">${ex.images.map(src => `<img src="${src}" alt="${ex.name}">`).join('')}</div>`
+    : '';
+  searchDetail.innerHTML = `
+    <button class="sd-back" id="sdBackBtn"><span class="material-symbols-outlined">arrow_back</span> Volver a resultados</button>
+    ${imagesHtml}
+    <h2>${ex.name}</h2>
+    <div class="sd-tab-label">${ex.tab}</div>
+    <div class="sd-desc">${ex.desc}</div>
+    <div class="sd-source"><b>Basado en</b>${ex.source}</div>
+  `;
+  document.getElementById('sdBackBtn').addEventListener('click', () => {
+    searchDetail.classList.remove('open');
+    searchResults.style.display = 'block';
+  });
+}
+
+function openSearch(){
+  searchOverlay.classList.add('open');
+  searchInput.value = '';
+  renderResults('');
+  setTimeout(()=>searchInput.focus(), 50);
+}
+function closeSearch(){
+  searchOverlay.classList.remove('open');
+}
+
+searchOpenBtn.addEventListener('click', openSearch);
+searchCloseBtn.addEventListener('click', closeSearch);
+searchInput.addEventListener('input', (e) => renderResults(e.target.value));
+document.addEventListener('keydown', (e) => {
+  if(e.key === 'Escape' && searchOverlay.classList.contains('open')) closeSearch();
+});
 </script>
 </body>
 </html>
