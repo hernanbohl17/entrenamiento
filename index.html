@@ -32,7 +32,8 @@
 body{background:var(--bg); color:var(--text); line-height:1.6; padding-bottom:0; font-family:'Inter',sans-serif;}
 h1,h2,h3{font-family:'Inter',sans-serif; font-weight:800; letter-spacing:-.01em;}
 
-.app-shell{display:flex; min-height:100vh; align-items:stretch;}
+.app-shell{display:flex; flex-direction:column; min-height:100vh; align-items:stretch;}
+@media(min-width:900px){ .app-shell{flex-direction:row;} }
 .app-content{flex:1 1 auto; min-width:0; padding-bottom:60px;}
 
 header{padding:30px 20px 22px; text-align:center; border-bottom:1px solid var(--card-border); background:linear-gradient(180deg, #24140f, var(--bg));}
