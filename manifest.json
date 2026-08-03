@@ -1,7 +1,7 @@
 {
   "name": "Protocolo — Entrenamiento Personal",
   "short_name": "Protocolo",
-  "description": "Programa personal de fuerza, salto y movilidad — Básico, Jump Attack, Correr, Gimnasio y Movilidad.",
+  "description": "Programa personal de fuerza, salto y movilidad — Mi Semana, Básico, Jump Attack, Correr, Gimnasio y Movilidad.",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
