@@ -25,6 +25,9 @@
   --fuego:#C41E3A; --fuerza:#3BA7FF; --vuelo:#B26BFF;
   --rest:#2A2E36; --deload:#3A3120;
   --ok:#39D98A;
+  --down:#e5484d;
+  --basquet:#c8722e;
+  --partido:#8a6d3b;
   --radius:8px; --radius-btn:6px;
   font-family:'Inter',sans-serif;
 }
@@ -201,6 +204,92 @@ main{max-width:960px; margin:0 auto; padding:24px 16px 80px;}
 .week-cell:hover{filter:brightness(1.3);}
 .week-cell.filled{box-shadow:inset 0 0 0 9999px var(--cell-color);}
 .week-cell.filled.blocker{background:repeating-linear-gradient(45deg, var(--cell-color), var(--cell-color) 4px, rgba(0,0,0,.35) 4px, rgba(0,0,0,.35) 8px);}
+
+/* ---- Básquet: método repetible ---- */
+.metodo{margin-bottom:44px;}
+.metodo-header{border-left:3px solid var(--accent); padding-left:14px; margin:8px 0 16px;}
+.metodo-header h3{font-size:1.35rem; font-weight:800; margin-bottom:6px;}
+.metodo-header p{color:var(--text-dim); font-size:.92rem;}
+
+/* Registro de triples */
+.registro{background:var(--card); border:1px solid var(--card-border); border-radius:var(--radius); padding:18px; margin-bottom:32px;}
+.registro h3{font-size:1.1rem; margin-bottom:14px; display:flex; align-items:center; gap:7px;}
+.registro h3 .material-symbols-outlined{color:var(--accent); font-size:1.2rem;}
+.reg-summary{display:grid; grid-template-columns:repeat(auto-fit,minmax(130px,1fr)); gap:10px; margin-bottom:18px;}
+.reg-card{background:var(--bg2); border:1px solid var(--card-border); border-radius:6px; padding:12px 14px;}
+.reg-card .rc-label{font-size:.65rem; font-weight:700; letter-spacing:.07em; text-transform:uppercase; color:var(--text-faint); margin-bottom:5px;}
+.reg-card .rc-value{font-size:1.4rem; font-weight:800; color:var(--text); line-height:1.1;}
+.reg-card .rc-value.ok{color:var(--ok);}
+.reg-card .rc-sub{font-size:.68rem; color:var(--text-faint); margin-top:3px;}
+.reg-table-wrap{overflow-x:auto; margin-bottom:12px;}
+table.reg-table{width:100%; border-collapse:collapse; font-size:.82rem; min-width:840px;}
+table.reg-table th{color:var(--text-faint); font-weight:700; font-size:.62rem; text-transform:uppercase; letter-spacing:.05em; padding:8px 6px; text-align:left; border-bottom:1px solid var(--card-border); white-space:nowrap;}
+table.reg-table td{padding:6px; border-bottom:1px solid var(--card-border); vertical-align:middle;}
+table.reg-table input, table.reg-table select{background:var(--bg); border:1px solid var(--card-border); color:var(--text); border-radius:4px; padding:6px 7px; font-family:'Inter',sans-serif; font-size:.8rem; width:100%; min-width:64px;}
+table.reg-table input:focus, table.reg-table select:focus{outline:none; border-color:var(--accent);}
+table.reg-table input[disabled], table.reg-table select[disabled]{opacity:.3; cursor:not-allowed;}
+table.reg-table .reg-pct{font-weight:800; color:var(--accent); white-space:nowrap;}
+.reg-del{background:transparent; border:none; color:var(--text-faint); cursor:pointer; display:flex; padding:3px;}
+.reg-del:hover{color:var(--down);}
+.reg-del .material-symbols-outlined{font-size:1.05rem;}
+.reg-actions{display:flex; flex-wrap:wrap; gap:10px; justify-content:space-between; align-items:center;}
+.reg-add{display:inline-flex; align-items:center; gap:6px; background:var(--accent); border:none; color:#fff; border-radius:var(--radius-btn); padding:9px 15px; font-family:'Inter',sans-serif; font-weight:700; font-size:.76rem; text-transform:uppercase; letter-spacing:.04em; cursor:pointer;}
+.reg-add:hover{filter:brightness(1.12);}
+.reg-add .material-symbols-outlined{font-size:1rem;}
+.reg-empty{color:var(--text-faint); font-size:.85rem; padding:18px 4px; text-align:center;}
+.reg-compare{margin-top:24px; padding-top:18px; border-top:1px solid var(--card-border);}
+.reg-compare h4{font-size:.8rem; font-weight:800; text-transform:uppercase; letter-spacing:.06em; color:var(--text-dim); margin-bottom:12px;}
+.reg-verdict{margin-top:12px; background:var(--bg2); border-left:3px solid var(--card-border); border-radius:6px; padding:12px 15px; font-size:.88rem; color:var(--text-dim);}
+.reg-verdict.up{border-left-color:var(--ok);} .reg-verdict.up b{color:var(--ok);}
+.reg-verdict.down{border-left-color:var(--down);} .reg-verdict.down b{color:var(--down);}
+
+/* Mandamientos */
+.mandamientos{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:12px; margin-bottom:28px;}
+.mandamiento{background:var(--card); border:1px solid var(--card-border); border-top:3px solid var(--accent); border-radius:var(--radius); padding:16px;}
+.mandamiento .m-num{font-size:.65rem; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:var(--accent); margin-bottom:6px;}
+.mandamiento h4{font-size:.98rem; font-weight:800; margin-bottom:7px;}
+.mandamiento p{font-size:.85rem; color:var(--text-dim); line-height:1.6;}
+
+/* Cancha SVG */
+.cancha{background:var(--card); border:1px solid var(--card-border); border-radius:var(--radius); padding:16px; margin-bottom:12px; color:var(--text-dim);}
+.cancha svg{width:100%; height:auto; display:block;}
+.cancha-nota{font-size:.83rem; color:var(--text-dim); background:var(--bg2); border-left:3px solid var(--accent); border-radius:6px; padding:12px 15px; margin-bottom:28px;}
+
+/* Bloques de sesión */
+.bloque{background:var(--card); border:1px solid var(--card-border); border-radius:var(--radius); padding:18px 20px; margin-bottom:14px;}
+.bloque.medido{border-color:var(--accent); border-width:2px;}
+.bloque-head{display:flex; flex-wrap:wrap; align-items:center; gap:9px; margin-bottom:12px;}
+.bloque-head h4{font-size:1.05rem; font-weight:800;}
+.badge-medido{background:var(--accent); color:#fff; font-size:.6rem; font-weight:800; letter-spacing:.07em; text-transform:uppercase; padding:4px 9px; border-radius:4px;}
+.bloque-part{margin-bottom:11px;}
+.bloque-part:last-child{margin-bottom:0;}
+.bloque-part .bp-label{font-size:.63rem; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:var(--accent); margin-bottom:4px;}
+.bloque-part p, .bloque-part ol{font-size:.88rem; color:var(--text-dim); line-height:1.65;}
+.bloque-part ol{padding-left:19px;}
+.bloque-part ol li{margin-bottom:4px;}
+
+/* Semana ejemplos + diagnóstico */
+table.mini{width:100%; border-collapse:collapse; font-size:.8rem; margin-bottom:22px; min-width:520px;}
+table.mini th, table.mini td{padding:8px 7px; border-bottom:1px solid var(--card-border); text-align:left;}
+table.mini th{color:var(--text-faint); font-weight:700; font-size:.63rem; text-transform:uppercase; letter-spacing:.05em;}
+table.mini td:first-child{font-weight:700; color:var(--text); white-space:nowrap;}
+table.diag{width:100%; border-collapse:collapse; font-size:.86rem; margin-bottom:20px;}
+table.diag th, table.diag td{padding:11px 9px; border-bottom:1px solid var(--card-border); text-align:left; vertical-align:top;}
+table.diag th{color:var(--text-faint); font-weight:700; font-size:.63rem; text-transform:uppercase; letter-spacing:.05em;}
+table.diag td{color:var(--text-dim); line-height:1.6;}
+table.diag td:first-child{color:var(--text); font-weight:700;}
+
+/* Acordeón "Por qué funciona" */
+.porque{background:var(--card); border:1px solid var(--card-border); border-radius:var(--radius); overflow:hidden; margin-bottom:20px;}
+.porque-toggle{width:100%; display:flex; justify-content:space-between; align-items:center; gap:10px; background:var(--bg2); border:none; cursor:pointer; padding:15px 18px; font-family:'Inter',sans-serif; font-weight:800; font-size:.92rem; color:var(--text); text-align:left;}
+.porque-toggle .chev{color:var(--text-faint); transition:transform .2s ease;}
+.porque.open .chev{transform:rotate(180deg);}
+.porque-body{max-height:0; overflow:hidden; transition:max-height .35s ease;}
+.porque.open .porque-body{max-height:3000px;}
+.porque-inner{padding:16px 20px 20px; font-size:.88rem; color:var(--text-dim); line-height:1.7;}
+.porque-inner p{margin-bottom:13px;}
+.porque-inner b{color:var(--text);}
+.porque-fuentes{font-size:.78rem; color:var(--text-faint); border-top:1px solid var(--card-border); padding-top:12px; margin-top:4px;}
 .day-header::before{content:"exercise"; font-family:'Material Symbols Outlined'; font-variation-settings:'FILL' 0,'wght' 300; font-size:1.05rem; color:var(--accent);}
 
 .table-wrap{overflow-x:auto;}
@@ -224,6 +313,7 @@ footer{text-align:center; color:var(--text-faint); font-family:'Inter',sans-seri
     <button data-tab="correr">03 Correr</button>
     <button data-tab="gym">04 Gimnasio</button>
     <button data-tab="movilidad">05 Movilidad</button>
+    <button data-tab="basquet"><span class="material-symbols-outlined">sports_basketball</span> 06 Básquet</button>
   </div>
   <button id="searchOpenBtn" aria-label="Buscar ejercicio">
     <span class="material-symbols-outlined">search</span>
@@ -904,6 +994,229 @@ footer{text-align:center; color:var(--text-faint); font-family:'Inter',sans-seri
   <div class="card"><img src="images/movilidad-foam-roller-cuadriceps.png" alt="Foam roller cuádriceps"><h3>Foam roller — cuádriceps/gemelos</h3><div class="tags"><span class="tag">1–2 min x zona</span></div><span class="tips-label">Tips Pro</span><p class="tips">Pasadas lentas, pausando 15–20s en puntos de mayor tensión sin llegar a dolor agudo. Ayuda a la recuperación entre sesiones de salto intensas.</p></div>
 </section>
 
+<!-- ===================== BÁSQUET ===================== -->
+<section class="tab" id="tab-basquet">
+  <h2 class="section-title">Básquet</h2>
+  <p class="section-sub">Métodos de desarrollo técnico individual.</p>
+
+  <!-- [A] REGISTRO -->
+  <div class="registro">
+    <h3><span class="material-symbols-outlined">monitoring</span> Registro de triples</h3>
+
+    <div class="reg-summary">
+      <div class="reg-card"><div class="rc-label">Semana actual</div><div class="rc-value" id="rcSemana">—</div></div>
+      <div class="reg-card"><div class="rc-label">Sesiones esta semana</div><div class="rc-value" id="rcSesiones">0 / 2</div><div class="rc-sub">mínimo semanal</div></div>
+      <div class="reg-card"><div class="rc-label">Triples acumulados</div><div class="rc-value" id="rcTriples">0</div><div class="rc-sub">histórico</div></div>
+      <div class="reg-card"><div class="rc-label">Tu porcentaje</div><div class="rc-value" id="rcPorcentaje">—</div><div class="rc-sub">Bloque 2, sesiones A</div></div>
+    </div>
+
+    <div class="reg-table-wrap">
+      <table class="reg-table">
+        <thead><tr>
+          <th>Fecha</th><th>Tipo</th><th>Bloque 2</th><th>%</th><th>Bloque 3</th><th>Peaje</th><th>Libres</th><th>Error</th><th>Corrección</th><th></th>
+        </tr></thead>
+        <tbody id="regBody"></tbody>
+      </table>
+    </div>
+    <div id="regEmpty" class="reg-empty">Todavía no cargaste ninguna sesión. Tocá "Agregar sesión" para empezar.</div>
+
+    <div class="reg-actions">
+      <button class="reg-add" id="regAddBtn"><span class="material-symbols-outlined">add</span> Agregar sesión</button>
+      <button class="week-action-btn" id="regClearBtn"><span class="material-symbols-outlined">delete_sweep</span> Vaciar registro</button>
+    </div>
+
+    <div class="reg-compare">
+      <h4>Comparativa de 5 semanas</h4>
+      <div class="reg-table-wrap">
+        <table class="mini" style="min-width:460px">
+          <thead><tr><th>Semana</th><th>Sesiones A</th><th>% prom. Bloque 2</th><th>Mejor Bloque 3</th><th>Triples tirados</th></tr></thead>
+          <tbody id="regCompareBody"></tbody>
+        </table>
+      </div>
+      <div class="reg-verdict" id="regVerdict">Faltan 5 semanas para tu primera comparación real. Seguí cargando.</div>
+    </div>
+  </div>
+
+  <!-- [B] MÉTODO 1 -->
+  <div class="metodo" id="metodo-triple">
+    <div class="metodo-header">
+      <h3>Método 1 · Entrenamiento para Triple</h3>
+      <p>Programa de tiro exterior para entrenar solo, en cancha abierta, sin rebotero. Basado en el volumen estructurado de Stephen Curry con Bruce Fraser, la repetición con variabilidad de Kyrie Irving, y los datos de arco y profundidad de Noah Basketball.</p>
+    </div>
+    <div class="tags">
+      <span class="tag">45 min</span><span class="tag">Solo, sin rebotero</span><span class="tag">~160 triples por sesión</span><span class="tag">Mínimo 2 veces por semana</span>
+    </div>
+
+    <!-- [C] -->
+    <div class="eli5"><b>Para entenderlo fácil</b> Este entrenamiento sirve para una sola cosa: que el triple te entre más seguido, incluso los días que estás con la cabeza en otro lado.<br><br>
+    La idea es simple. Tirás muchísimo, pero nunca al azar: cada bloque tiene un número que cumplir y un momento para parar. Uno de esos bloques (el Bloque 2) es siempre exactamente igual, todas las sesiones, para poder comparar cómo venís. Ese es tu examen.<br><br>
+    No busques mejorar de una semana a la otra. Se compara a las 5 semanas.</div>
+
+    <!-- [D] -->
+    <h2 class="section-title">Cómo armo mi semana</h2>
+    <div class="eli5"><b>Para entenderlo fácil</b> No hay días fijos. Vos elegís cuándo, según cómo te venga la semana. Lo único que no se negocia es el mínimo.</div>
+
+    <div class="bloque">
+      <div class="bloque-part"><div class="bp-label">Las reglas</div>
+        <ol>
+          <li><b>Mínimo 2 Sesiones A por semana</b>, de lunes a viernes.</li>
+          <li><b>Sábado y domingo son solo partidos.</b> No se entrena tiro el fin de semana.</li>
+          <li><b>No hagas Sesión A el mismo día que jugás.</b> Si ese día querés sumar algo, hacé la Sesión C antes de jugar.</li>
+          <li><b>Si te queda poco tiempo, dos Sesiones B valen por una A.</b> O sea: 1 A + 2 B también cumple la semana.</li>
+          <li><b>Sí podés hacer Sesión A el día antes de un partido.</b> No molesta, ayuda.</li>
+          <li>La Sesión C nunca cuenta para el mínimo. Es un extra.</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="table-wrap">
+      <table class="mini">
+        <thead><tr><th></th><th>Lun</th><th>Mar</th><th>Mié</th><th>Jue</th><th>Vie</th><th>Sáb</th><th>Dom</th></tr></thead>
+        <tbody>
+          <tr><td>Semana tranquila</td><td>Sesión A</td><td>Juego</td><td>Sesión A</td><td>—</td><td>Juego</td><td>Partido</td><td>—</td></tr>
+          <tr><td>Semana complicada</td><td>Sesión B</td><td>Juego + C</td><td>Sesión B</td><td>—</td><td>Sesión A</td><td>Partido</td><td>Partido</td></tr>
+          <tr><td>Semana buena</td><td>Sesión A</td><td>Juego + C</td><td>Sesión A</td><td>Sesión B</td><td>Juego</td><td>Partido</td><td>—</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- [E] -->
+    <h2 class="section-title">Los 3 mandamientos</h2>
+    <div class="mandamientos">
+      <div class="mandamiento"><div class="m-num">Mandamiento 1</div><h4>Una sola corrección por sesión.</h4><p>Elegís UNA cosa para arreglar (por ejemplo: aterrizar equilibrado). No agregás una segunda hasta que la primera te sale incluso cansado. Si pensás en tres cosas a la vez, no vas a arreglar ninguna.</p></div>
+      <div class="mandamiento"><div class="m-num">Mandamiento 2</div><h4>Contás lo que entra, no lo que tirás.</h4><p>Todos los números de este programa son conversiones. "Tiré 200" no significa nada. "Metí 27 de 45" sí.</p></div>
+      <div class="mandamiento"><div class="m-num">Mandamiento 3</div><h4>La rutina previa siempre igual.</h4><p>Mismos botes, misma respiración, mismo tiempo desde que agarrás la pelota hasta que la soltás. Esto es lo que te sostiene el día que estás mal: no dependés de cómo te sentís, dependés del guion.</p></div>
+    </div>
+
+    <!-- [F] -->
+    <h2 class="section-title">Los 5 spots</h2>
+    <div class="cancha">
+      <svg viewBox="0 0 680 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Media cancha con los cinco puestos de tiro de tres">
+        <rect x="140" y="40" width="400" height="280" rx="4" fill="none" stroke="currentColor" stroke-opacity=".35" stroke-width="1"/>
+        <rect x="274" y="40" width="132" height="155" fill="none" stroke="currentColor" stroke-opacity=".35" stroke-width="1"/>
+        <path d="M292 195 A 48 48 0 0 0 388 195" fill="none" stroke="currentColor" stroke-opacity=".35"/>
+        <line x1="164" y1="40" x2="164" y2="120" stroke="currentColor" stroke-opacity=".35"/>
+        <line x1="516" y1="40" x2="516" y2="120" stroke="currentColor" stroke-opacity=".35"/>
+        <path d="M164 120 A 180 180 0 1 0 516 120" fill="none" stroke="currentColor" stroke-opacity=".5" stroke-width="1.5"/>
+        <line x1="313" y1="62" x2="367" y2="62" stroke="currentColor" stroke-width="2"/>
+        <circle cx="340" cy="82" r="9" fill="none" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="150" cy="90"  r="15" fill="var(--accent)"/><text x="150" y="95"  text-anchor="middle" font-size="14" font-weight="600" fill="#1f0f0b">1</text>
+        <circle cx="205" cy="217" r="15" fill="var(--accent)"/><text x="205" y="222" text-anchor="middle" font-size="14" font-weight="600" fill="#1f0f0b">2</text>
+        <circle cx="340" cy="272" r="15" fill="var(--accent)"/><text x="340" y="277" text-anchor="middle" font-size="14" font-weight="600" fill="#1f0f0b">3</text>
+        <circle cx="475" cy="217" r="15" fill="var(--accent)"/><text x="475" y="222" text-anchor="middle" font-size="14" font-weight="600" fill="#1f0f0b">4</text>
+        <circle cx="530" cy="90"  r="15" fill="var(--accent)"/><text x="530" y="95"  text-anchor="middle" font-size="14" font-weight="600" fill="#1f0f0b">5</text>
+        <text x="128" y="94"  text-anchor="end"    font-size="12" fill="currentColor" opacity=".7">esquina izq</text>
+        <text x="205" y="248" text-anchor="middle" font-size="12" fill="currentColor" opacity=".7">ala izq</text>
+        <text x="340" y="303" text-anchor="middle" font-size="12" fill="currentColor" opacity=".7">frontal</text>
+        <text x="475" y="248" text-anchor="middle" font-size="12" fill="currentColor" opacity=".7">ala der</text>
+        <text x="552" y="94"  text-anchor="start"  font-size="12" fill="currentColor" opacity=".7">esquina der</text>
+      </svg>
+    </div>
+    <div class="cancha-nota">Si la cancha no tiene línea de tres, marcá con tiza: <b>6,75 m</b> desde la vertical del aro en los spots 2, 3 y 4, y <b>6,60 m</b> en las esquinas. No entrenes "más o menos ahí" — si la distancia cambia, el registro no sirve para nada.</div>
+
+    <!-- [G] SESIÓN A -->
+    <h2 class="section-title">Sesión A — Completa (45 min)</h2>
+    <div class="tags"><span class="tag">45 min</span><span class="tag">~160 triples</span><span class="tag">Mínimo 2 por semana</span></div>
+
+    <div class="bloque">
+      <div class="bloque-head"><h4>Bloque 0 — Prender el motor (5 min)</h4></div>
+      <div class="bloque-part"><div class="bp-label">Qué es</div><p>Despertar el cuerpo y la mano antes de tirar de lejos.</p></div>
+      <div class="bloque-part"><div class="bp-label">Cómo se hace</div><ol><li>Dos minutos moviendo tobillos y cadera, y dos piques cortos.</li><li>20 bandejas pegado al aro. Van en cuatro grupos de 5: saltás con la izquierda y tirás con la derecha, izquierda-izquierda, derecha-derecha, derecha-izquierda.</li><li>20 tiros a 2 metros del aro, con <b>una sola mano</b>, sin saltar. Tienen que entrar limpios.</li></ol></div>
+      <div class="bloque-part"><div class="bp-label">Terminás cuando</div><p>Hiciste las 20 bandejas y los 20 tiros de una mano.</p></div>
+      <div class="bloque-part"><div class="bp-label">Para qué sirve</div><p>Para que el primer triple del día no sea el primer tiro del día.</p></div>
+      <div class="bloque-part"><div class="bp-label">Error común</div><p>Saltearlo porque "ya estás caliente". Si arrancás tirando de lejos en frío, tirás con el hombro y arruinás la sesión entera.</p></div>
+    </div>
+
+    <div class="bloque">
+      <div class="bloque-head"><h4>Bloque 1 — La escalera (7 min)</h4></div>
+      <div class="bloque-part"><div class="bp-label">Qué es</div><p>Empezar cerca del aro e ir retrocediendo de a poco hasta la línea de tres.</p></div>
+      <div class="bloque-part"><div class="bp-label">Cómo se hace</div><ol><li>Parate en el spot 1, pero a 4 metros del aro (todavía no en la línea de tres).</li><li>Meté <b>3 tiros limpios</b> desde ahí. Limpio = entra sin tocar el aro.</li><li>Retrocedé a 5,5 metros. Meté 3 limpios.</li><li>Retrocedé a la línea de tres. Meté 2 limpios.</li><li>Si en cualquier escalón fallás <b>2 seguidos</b>, volvés un paso adelante y lo repetís.</li><li>Hacés lo mismo en los 5 spots, en orden.</li></ol></div>
+      <div class="bloque-part"><div class="bp-label">Terminás cuando</div><p>Pasaste por los 5 spots.</p></div>
+      <div class="bloque-part"><div class="bp-label">Para qué sirve</div><p>La distancia donde empezás a "empujar" la pelota es tu límite real. Este bloque te enseña a llegar al triple con las piernas y no con el brazo.</p></div>
+      <div class="bloque-part"><div class="bp-label">Error común</div><p>Apurar los escalones porque ya sabés tirar. Si te salteás uno, el bloque no sirve.</p></div>
+    </div>
+
+    <div class="bloque medido">
+      <div class="bloque-head"><h4>Bloque 2 — La serie madre (14 min)</h4><span class="badge-medido">Bloque medido</span></div>
+      <div class="bloque-part"><div class="bp-label">Qué es</div><p>El examen. Es siempre igual, siempre 45 tiros, y su porcentaje es el número que comparás a las 5 semanas.</p></div>
+      <div class="bloque-part"><div class="bp-label">Cómo se hace</div><ol><li>Spot 1: 3 triples. Spot 2: 3 triples. Spot 3: 3. Spot 4: 3. Spot 5: 3. <b>Eso es una vuelta = 15 tiros.</b></li><li>Hacés <b>3 vueltas</b>. Total: <b>45 tiros</b>.</li><li>Te pasás la pelota solo: la tirás hacia adelante con efecto de retroceso, va y vuelve a tus manos.</li><li>Elegí cómo entrás al tiro — paso 1-2 con el pie de adelante primero, <b>o</b> salto a dos pies — y <b>no lo cambiás en toda la sesión</b>.</li><li>Cada tiro que errás: vas al rebote, hacés una bandeja, y volvés al spot. El error te cuesta piernas.</li><li>Anotás cuántos entraron de los 45 en el registro.</li></ol></div>
+      <div class="bloque-part"><div class="bp-label">Terminás cuando</div><p>Completaste las 3 vueltas.</p></div>
+      <div class="bloque-part"><div class="bp-label">Para qué sirve</div><p>Como es idéntico todas las veces, el número de hoy se puede comparar con el de dentro de 5 semanas. Sin esto, no sabés si mejorás o si tuviste un buen día.</p></div>
+      <div class="bloque-part"><div class="bp-label">Error común</div><p>Cambiar la distancia o el pie de entrada. Si cambiás algo, el número deja de servir.</p></div>
+      <div class="bloque-part"><div class="bp-label">Tabla de referencia</div>
+        <table class="progress-table"><tr><th>Conversiones</th><th>%</th><th>Qué significa</th></tr>
+        <tr><td>18 / 45</td><td>40%</td><td>Punto de partida sano</td></tr>
+        <tr><td>22 / 45</td><td>49%</td><td>Sólido</td></tr>
+        <tr><td>27 / 45</td><td>60%</td><td>Tirador confiable</td></tr></table>
+      </div>
+    </div>
+
+    <div class="bloque">
+      <div class="bloque-head"><h4>Bloque 3 — El caos (8 min)</h4></div>
+      <div class="bloque-part"><div class="bp-label">Qué es</div><p>Tirar sin saber de dónde va a salir el próximo tiro, como pasa en un partido.</p></div>
+      <div class="bloque-part"><div class="bp-label">Cómo se hace</div><ol><li>Poné el cronómetro en 8 minutos.</li><li>Tirás un triple desde donde estés.</li><li>Corrés a buscar la pelota.</li><li>Desde donde la agarraste, vas al <b>punto más cercano de la línea de tres</b> y tirás ya.</li><li>Nunca dos tiros seguidos desde el mismo lugar.</li><li>Vas variando sin planificarlo: uno de recepción directa, otro con un bote y suspensión, otro con retroceso.</li><li>Contás cuántos metiste en los 8 minutos.</li></ol></div>
+      <div class="bloque-part"><div class="bp-label">Terminás cuando</div><p>Suena el cronómetro.</p></div>
+      <div class="bloque-part"><div class="bp-label">Para qué sirve</div><p>En un partido nunca sabés qué tiro te toca. Este bloque entrena exactamente eso, y además te deja las piernas cansadas para el bloque siguiente.</p></div>
+      <div class="bloque-part"><div class="bp-label">Error común</div><p>Frenar a acomodarte antes de tirar. La gracia es tirar apenas llegás al punto.</p></div>
+      <div class="bloque-part"><div class="bp-label">Objetivo</div><p>Romper tu propio número cada semana.</p></div>
+    </div>
+
+    <div class="bloque">
+      <div class="bloque-head"><h4>Bloque 4 — El peaje (6 min)</h4></div>
+      <div class="bloque-part"><div class="bp-label">Qué es</div><p>La prueba final, con las piernas ya cansadas. No te vas de la cancha hasta pagarla.</p></div>
+      <div class="bloque-part"><div class="bp-label">Cómo se hace</div><ol><li><b>Ala izquierda (spot 2):</b> metés 3 triples <b>seguidos</b>. Si fallás uno, ese spot vuelve a cero.</li><li>Cuando lo lográs, pasás al <b>frontal (spot 3)</b>: 3 seguidos.</li><li>Después <b>ala derecha (spot 4)</b>: 3 seguidos.</li><li>Cerrás con 10 tiros libres y anotás cuántos entraron.</li></ol></div>
+      <div class="bloque-part"><div class="bp-label">Terminás cuando</div><p>Completaste los 3 spots. No hay atajo, no hay "ya está, casi".</p></div>
+      <div class="bloque-part"><div class="bp-label">Para qué sirve</div><p>Es exactamente el escenario que te importa — tirar bien cuando estás cansado o con la cabeza en otro lado. Acá se construye eso, no en el bloque 2.</p></div>
+      <div class="bloque-part"><div class="bp-label">Error común</div><p>Negociar con vos mismo cuando llevás mucho rato trabado. Si te trabás, no bajes la exigencia: bajá el ritmo, respirá, y volvé a la rutina previa.</p></div>
+    </div>
+
+    <!-- [H] SESIÓN B -->
+    <h2 class="section-title">Sesión B — Corta (25 min)</h2>
+    <div class="tags"><span class="tag">25 min</span><span class="tag">~100 triples</span><span class="tag">2 sesiones B = 1 sesión A</span></div>
+    <div class="bloque">
+      <div class="bloque-part"><div class="bp-label">Para qué es</div><p>El día que no te da el tiempo pero no querés cortar la racha.</p></div>
+      <div class="bloque-part"><div class="bp-label">Qué hacés</div><ol><li><b>Bloque 0</b> completo (5 min).</li><li><b>Bloque 2 reducido:</b> 2 vueltas en vez de 3 = <b>30 tiros</b>. Anotás igual, sobre 30.</li><li><b>Bloque 3</b> de 6 minutos en vez de 8.</li><li><b>Bloque 4</b> completo, sin recortar.</li></ol></div>
+      <div class="bloque-part"><div class="bp-label">Se saltea el Bloque 1</div><p>Es el único que se puede sacar, porque el Bloque 0 ya te dejó la mano armada.</p></div>
+    </div>
+    <div class="cancha-nota">⚠️ El porcentaje de una Sesión B <b>no entra</b> en la comparativa de 5 semanas. Se registra igual para el conteo de triples, pero el examen oficial es siempre el Bloque 2 completo de 45 tiros.</div>
+
+    <!-- [I] SESIÓN C -->
+    <h2 class="section-title">Sesión C — Pre-partido (12 min)</h2>
+    <div class="tags"><span class="tag">12 min</span><span class="tag">~35 triples</span><span class="tag">No cuenta para el mínimo</span></div>
+    <div class="bloque">
+      <div class="bloque-part"><div class="bp-label">Para qué es</div><p>Los días que vas a jugar y querés llegar con la mano caliente y el patrón fresco.</p></div>
+      <div class="bloque-part"><div class="bp-label">Qué hacés</div><ol><li><b>Bloque 0</b> completo.</li><li><b>Bloque 1</b> completo (la escalera).</li><li>20 triples sueltos, sin contar, tocando los 5 spots.</li></ol></div>
+      <div class="bloque-part"><div class="bp-label">Importante</div><p>No se registra porcentaje. No es un entrenamiento, es una preparación.</p></div>
+    </div>
+
+    <!-- [J] DIAGNÓSTICO -->
+    <h2 class="section-title">Diagnóstico de errores</h2>
+    <div class="eli5"><b>Para entenderlo fácil</b> Mirá <b>dónde</b> te queda la pelota cuando errás, no cuántas errás. El lugar del error te dice qué arreglar.</div>
+    <div class="table-wrap">
+      <table class="diag">
+        <thead><tr><th>Dónde falla</th><th>Qué significa</th><th>Qué corregir</th></tr></thead>
+        <tbody>
+          <tr><td>Corto o largo (pega adelante o atrás del aro)</td><td>Problema de piernas y de ritmo. El arco te queda plano o cambia tiro a tiro. Es el error más común en el triple.</td><td>Bajá más antes de subir. Que la velocidad de subida sea siempre la misma. La fuerza sale de las piernas, no del hombro.</td></tr>
+          <tr><td>Izquierda o derecha</td><td>Problema de alineación.</td><td>Mirá dónde aterrizás: si caés corrido para un lado, ahí está el problema. Mano guía quieta, sin empujar.</td></tr>
+          <tr><td>De todo un poco</td><td>No estás tirando el mismo tiro dos veces.</td><td>Esta semana el Bloque 1 pasa a ser el 40% de la sesión, hasta que el tiro se ordene.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- [K] POR QUÉ FUNCIONA -->
+    <div class="porque" id="porqueBox">
+      <button class="porque-toggle" id="porqueToggle">Por qué funciona <span class="material-symbols-outlined chev">expand_more</span></button>
+      <div class="porque-body"><div class="porque-inner">
+        <p><b>El volumen de Curry está estructurado, no es tirar por tirar.</b> Bruce Fraser, el asistente de Golden State que le pasa la pelota, cuenta que la sesión posterior a la práctica va de 300 a 500 intentos y siempre termina con 100 triples. Su preparador Brandon Payne lo resume mejor: cada ejercicio es un juego, todo va contra tiempo y contra marcador — siempre hay un número que superar. Si superás el número pero no el tiempo, perdiste igual. De ahí sale la lógica de este programa: todos los bloques tienen un número, no una duración vaga.</p>
+        <p><b>Kyrie no repite: repite variando.</b> Cuando explica su trabajo de definición, dice que usa el Mikan quedándose cerca del aro para meter muchísimas repeticiones en poco tiempo, pero cambia todo el tiempo: distintos ángulos, tablero alto y bajo, saltando de una pierna u otra y terminando con una mano u otra. Eso es lo que copia el Bloque 0, y el Bloque 3 lleva la misma idea al triple.</p>
+        <p><b>Por qué el Bloque 2 tiene 3 tiros por spot y no 15.</b> La investigación de aprendizaje motor es clara en esto: practicar en bloque (mismo lugar, muchas veces seguidas) da mejores números <i>durante</i> la sesión, pero la práctica variada transfiere mejor al partido. Landin y Hebert compararon tres esquemas con seis posiciones de tiro y el grupo de interferencia media — tres intentos por posición antes de moverse, repitiendo esos micro-bloques — le ganó en retención tanto al bloque puro como al esquema serial. Tres tiros y te movés: ese es el punto exacto.</p>
+        <p><b>45 grados y 11 pulgadas.</b> Noah Basketball trackeó cientos de millones de tiros y llegó a dos números: un ángulo de entrada de 45° equilibra un área de entrada más ancha con el menor margen de error, y una profundidad de 11 pulgadas (apuntar un poco más atrás del centro del aro, no al frente). Durante años se enseñó que más arco es mejor; la realidad es que nadie repite exactamente el mismo arco, y cuanto más alto tirás, más se amplifican las pequeñas inconsistencias de arco en inconsistencias grandes de profundidad. La referencia de cómo se ve eso bien: Chris Mullin tiró 25 triples para la investigación de Noah, metió 24, con ángulo promedio de 44,5° y un rango de 43 a 46. Un gran tirador no varía más de ±2 grados.</p>
+        <div class="porque-fuentes"><b>Fuentes:</b> Bruce Fraser / Brandon Payne (Golden State Warriors, vía NBA.com y Heavy Sports) · Kyrie Irving (Breakthrough Basketball) · Landin &amp; Hebert, interferencia contextual en tiro de básquet · Noah Basketball, "The Art and Science of 45/11" · Drew Hanlen / Pure Sweat Basketball.</div>
+      </div></div>
+    </div>
+  </div>
+</section>
+
 </main>
 
 <footer>PROTOCOLO DE ENTRENAMIENTO — USO PERSONAL</footer>
@@ -1084,7 +1397,8 @@ const WEEK_CATEGORIES = [
   {id:'movilidad', name:'Movilidad', color:'#2dd4bf', icon:'self_improvement'},
   {id:'correr', name:'Correr', color:'#3BA7FF', icon:'directions_run'},
   {id:'gym', name:'Gimnasio', color:'#B26BFF', icon:'fitness_center'},
-  {id:'basquet', name:'Básquet', color:'#f5c518', icon:'sports_basketball'},
+  {id:'basquet', name:'Básquet — Triple', color:'#c8722e', icon:'sports_basketball'},
+  {id:'partido', name:'Partido', color:'#8a6d3b', icon:'scoreboard'},
 ];
 const WEEK_STORAGE_KEY = 'miSemana_v1';
 
@@ -1233,6 +1547,230 @@ function initWeekPlanner(){
 initWeekPlanner();
 
 // ============================================================
+// BÁSQUET — Registro de triples
+// ============================================================
+const REG_KEY = 'protocolo-basquet-triple-registro';
+const REG_TOTALS = {A:45, B:30, C:0};          // total de tiros del Bloque 2 según tipo
+const REG_TRIPLES = {A:160, B:100, C:35};      // triples tirados por sesión (valores fijos)
+const REG_ERRORES = ['Corto','Largo','Izquierda','Derecha','Mezclado'];
+
+let regData = [];
+
+function loadReg(){
+  try{ const raw = localStorage.getItem(REG_KEY); regData = raw ? JSON.parse(raw) : []; }
+  catch(e){ regData = []; }
+}
+function saveReg(){
+  try{ localStorage.setItem(REG_KEY, JSON.stringify(regData)); }catch(e){}
+}
+
+// Semana ISO-ish: cuenta de semanas desde el primer registro cargado
+function firstRegDate(){
+  const fechas = regData.map(r => r.fecha).filter(Boolean).sort();
+  return fechas.length ? new Date(fechas[0] + 'T00:00:00') : null;
+}
+function mondayOf(d){
+  const dt = new Date(d);
+  const dow = dt.getDay();
+  const diff = (dow === 0) ? -6 : (1 - dow);
+  dt.setDate(dt.getDate() + diff);
+  dt.setHours(0,0,0,0);
+  return dt;
+}
+function weekIndexOf(fechaStr){
+  const first = firstRegDate();
+  if(!first || !fechaStr) return null;
+  const base = mondayOf(first);
+  const target = mondayOf(new Date(fechaStr + 'T00:00:00'));
+  return Math.floor((target - base) / (7*24*60*60*1000)) + 1;
+}
+function currentWeekIndex(){
+  const first = firstRegDate();
+  if(!first) return null;
+  const base = mondayOf(first);
+  const target = mondayOf(new Date());
+  const idx = Math.floor((target - base) / (7*24*60*60*1000)) + 1;
+  return idx < 1 ? 1 : idx;
+}
+
+function renderReg(){
+  const body = document.getElementById('regBody');
+  const empty = document.getElementById('regEmpty');
+  if(!body) return;
+  body.innerHTML = '';
+  empty.style.display = regData.length ? 'none' : 'block';
+
+  regData.forEach((row, idx) => {
+    const tr = document.createElement('tr');
+    const total = REG_TOTALS[row.tipo] || 0;
+    const esC = row.tipo === 'C';
+    const pct = (!esC && total && row.b2 !== '' && row.b2 != null)
+      ? Math.round((Number(row.b2) / total) * 100) + '%' : '—';
+
+    tr.innerHTML = `
+      <td><input type="date" data-i="${idx}" data-f="fecha" value="${row.fecha||''}"></td>
+      <td><select data-i="${idx}" data-f="tipo">
+        <option value="A"${row.tipo==='A'?' selected':''}>A — Completa</option>
+        <option value="B"${row.tipo==='B'?' selected':''}>B — Corta</option>
+        <option value="C"${row.tipo==='C'?' selected':''}>C — Pre-partido</option>
+      </select></td>
+      <td style="white-space:nowrap">
+        <input type="number" min="0" max="${total||0}" data-i="${idx}" data-f="b2" value="${row.b2??''}" ${esC?'disabled':''} style="width:60px;display:inline-block">
+        <span style="color:var(--text-faint);font-size:.75rem"> / ${esC?'—':total}</span>
+      </td>
+      <td class="reg-pct">${pct}</td>
+      <td><input type="number" min="0" data-i="${idx}" data-f="b3" value="${row.b3??''}" ${esC?'disabled':''}></td>
+      <td style="text-align:center"><input type="checkbox" data-i="${idx}" data-f="peaje" ${row.peaje?'checked':''} ${esC?'disabled':''} style="width:auto;min-width:0"></td>
+      <td><input type="number" min="0" max="10" data-i="${idx}" data-f="libres" value="${row.libres??''}"></td>
+      <td><select data-i="${idx}" data-f="error">
+        <option value=""></option>
+        ${REG_ERRORES.map(e=>`<option value="${e}"${row.error===e?' selected':''}>${e}</option>`).join('')}
+      </select></td>
+      <td><input type="text" data-i="${idx}" data-f="correccion" value="${(row.correccion||'').replace(/"/g,'&quot;')}" placeholder="cue de la sesión" style="min-width:120px"></td>
+      <td><button class="reg-del" data-del="${idx}" aria-label="Borrar fila"><span class="material-symbols-outlined">close</span></button></td>
+    `;
+    body.appendChild(tr);
+  });
+
+  body.querySelectorAll('input, select').forEach(el => {
+    el.addEventListener('change', (e) => {
+      const i = Number(e.target.dataset.i);
+      const f = e.target.dataset.f;
+      if(f === 'peaje') regData[i][f] = e.target.checked;
+      else regData[i][f] = e.target.value;
+      saveReg(); renderReg(); renderRegSummary(); renderRegCompare();
+    });
+  });
+  body.querySelectorAll('.reg-del').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const i = Number(e.currentTarget.dataset.del);
+      regData.splice(i, 1);
+      saveReg(); renderReg(); renderRegSummary(); renderRegCompare();
+    });
+  });
+}
+
+function renderRegSummary(){
+  const semanaEl = document.getElementById('rcSemana');
+  const sesionesEl = document.getElementById('rcSesiones');
+  const triplesEl = document.getElementById('rcTriples');
+  const pctEl = document.getElementById('rcPorcentaje');
+  if(!semanaEl) return;
+
+  const wIdx = currentWeekIndex();
+  semanaEl.textContent = wIdx ? ('Semana ' + wIdx) : '—';
+
+  // sesiones de la semana actual: A cuenta 1, B cuenta 0.5 (2 B = 1 A)
+  const thisWeek = regData.filter(r => r.fecha && weekIndexOf(r.fecha) === wIdx);
+  const equivalentes = thisWeek.reduce((acc,r) => acc + (r.tipo==='A' ? 1 : (r.tipo==='B' ? 0.5 : 0)), 0);
+  const mostrado = Number.isInteger(equivalentes) ? equivalentes : equivalentes.toFixed(1);
+  sesionesEl.textContent = mostrado + ' / 2';
+  sesionesEl.classList.toggle('ok', equivalentes >= 2);
+
+  const totalTriples = regData.reduce((acc,r) => acc + (REG_TRIPLES[r.tipo] || 0), 0);
+  triplesEl.textContent = totalTriples.toLocaleString('es-AR');
+
+  // porcentaje: solo Bloque 2 de sesiones A de la semana actual
+  const sesionesA = thisWeek.filter(r => r.tipo === 'A' && r.b2 !== '' && r.b2 != null);
+  if(sesionesA.length){
+    const prom = sesionesA.reduce((a,r) => a + (Number(r.b2)/45)*100, 0) / sesionesA.length;
+    pctEl.textContent = Math.round(prom) + '%';
+  } else {
+    pctEl.textContent = '—';
+  }
+}
+
+function renderRegCompare(){
+  const body = document.getElementById('regCompareBody');
+  const verdict = document.getElementById('regVerdict');
+  if(!body) return;
+  body.innerHTML = '';
+
+  const semanas = {};
+  regData.forEach(r => {
+    const w = weekIndexOf(r.fecha);
+    if(!w) return;
+    if(!semanas[w]) semanas[w] = {sesionesA:0, pcts:[], mejorB3:null, triples:0};
+    semanas[w].triples += (REG_TRIPLES[r.tipo] || 0);
+    if(r.tipo === 'A'){
+      semanas[w].sesionesA++;
+      if(r.b2 !== '' && r.b2 != null) semanas[w].pcts.push((Number(r.b2)/45)*100);
+    }
+    if(r.b3 !== '' && r.b3 != null){
+      const v = Number(r.b3);
+      if(semanas[w].mejorB3 === null || v > semanas[w].mejorB3) semanas[w].mejorB3 = v;
+    }
+  });
+
+  const keys = Object.keys(semanas).map(Number).sort((a,b)=>a-b);
+  const ultimas = keys.slice(-5);
+
+  if(!ultimas.length){
+    body.innerHTML = '<tr><td colspan="5" style="color:var(--text-faint)">Sin datos todavía.</td></tr>';
+  } else {
+    ultimas.forEach(w => {
+      const s = semanas[w];
+      const prom = s.pcts.length ? Math.round(s.pcts.reduce((a,b)=>a+b,0)/s.pcts.length) + '%' : '—';
+      const tr = document.createElement('tr');
+      tr.innerHTML = `<td>Semana ${w}</td><td>${s.sesionesA}</td><td>${prom}</td><td>${s.mejorB3 ?? '—'}</td><td>${s.triples.toLocaleString('es-AR')}</td>`;
+      body.appendChild(tr);
+    });
+  }
+
+  // veredicto
+  const conPct = keys.filter(w => semanas[w].pcts.length);
+  verdict.className = 'reg-verdict';
+  if(conPct.length < 5){
+    const faltan = 5 - conPct.length;
+    verdict.textContent = `Faltan ${faltan} ${faltan===1?'semana':'semanas'} para tu primera comparación real. Seguí cargando.`;
+  } else {
+    const w1 = conPct[0], wN = conPct[conPct.length-1];
+    const p1 = semanas[w1].pcts.reduce((a,b)=>a+b,0)/semanas[w1].pcts.length;
+    const pN = semanas[wN].pcts.reduce((a,b)=>a+b,0)/semanas[wN].pcts.length;
+    const delta = Math.round(pN - p1);
+    if(delta > 0){
+      verdict.classList.add('up');
+      verdict.innerHTML = `<b>+${delta} puntos</b> desde la semana ${w1}. Vas mejorando — seguí con el mismo esquema.`;
+    } else if(delta < 0){
+      verdict.classList.add('down');
+      verdict.innerHTML = `<b>${delta} puntos</b> desde la semana ${w1}. Revisá el diagnóstico de errores y elegí una sola corrección.`;
+    } else {
+      verdict.innerHTML = `<b>Sin cambios</b> desde la semana ${w1}. Mantené el volumen y revisá si estás cambiando algo del Bloque 2.`;
+    }
+  }
+}
+
+function initReg(){
+  loadReg();
+  renderReg(); renderRegSummary(); renderRegCompare();
+
+  const addBtn = document.getElementById('regAddBtn');
+  if(addBtn){
+    addBtn.addEventListener('click', () => {
+      const hoy = new Date().toISOString().slice(0,10);
+      regData.push({fecha:hoy, tipo:'A', b2:'', b3:'', peaje:false, libres:'', error:'', correccion:''});
+      saveReg(); renderReg(); renderRegSummary(); renderRegCompare();
+    });
+  }
+  const clearBtn = document.getElementById('regClearBtn');
+  if(clearBtn){
+    clearBtn.addEventListener('click', () => {
+      if(confirm('¿Vaciar todo el registro de triples? Esta acción no se puede deshacer.')){
+        regData = []; saveReg(); renderReg(); renderRegSummary(); renderRegCompare();
+      }
+    });
+  }
+  const porqueToggle = document.getElementById('porqueToggle');
+  if(porqueToggle){
+    porqueToggle.addEventListener('click', () => {
+      document.getElementById('porqueBox').classList.toggle('open');
+    });
+  }
+}
+
+initReg();
+
+// ============================================================
 // BUSCADOR DE EJERCICIOS
 // ============================================================
 const SRC_GROVER = "Tim Grover — libro \"Jump Attack\"";
@@ -1241,6 +1779,7 @@ const SRC_CAVALIERE = "Jeff Cavaliere — Athlean-X";
 const SRC_CAVALIERE_BB = "Jeff Cavaliere — Athlean-X (\"The Bicep Black Book\")";
 const SRC_NORUEGO = "Marius Bakken, MD — creador del método de doble umbral noruego";
 const SRC_GENERAL = "Compilación de buenas prácticas de entrenamiento y fisioterapia deportiva general";
+const SRC_TRIPLE = "Bruce Fraser / Brandon Payne (Golden State) · Kyrie Irving · Landin & Hebert (interferencia contextual) · Noah Basketball (45/11) · Drew Hanlen";
 
 const EXERCISE_DB = [
   // ---------- BÁSICO ----------
@@ -1390,6 +1929,26 @@ const EXERCISE_DB = [
    desc:"Apoyá una pierna extendida sobre una superficie a la altura de la cadera (una silla, un cajón), con la espalda recta inclinándote desde la cadera hacia adelante, no redondeando la zona lumbar. Sostené 45 segundos por lado, sintiendo el estiramiento en la parte de atrás del muslo sin forzar hasta el dolor."},
   {name:"Foam roller — cuádriceps/gemelos", tab:"Movilidad", images:["images/movilidad-foam-roller-cuadriceps.png"], source:SRC_GENERAL,
    desc:"Pasadas lentas del rodillo sobre el músculo, pausando 15-20 segundos en los puntos de mayor tensión que encuentres, sin llegar a dolor agudo (una molestia tolerable está bien, dolor punzante no). Ayuda a la recuperación entre sesiones de salto intensas, 1-2 minutos por zona."},
+
+  // ---------- BÁSQUET — Método 1: Triple ----------
+  {name:"Bloque 0 — Prender el motor", tab:"Básquet · Sesión A", images:[], source:SRC_TRIPLE,
+   desc:"Despertar el cuerpo y la mano antes de tirar de lejos (5 min). Dos minutos moviendo tobillos y cadera más dos piques cortos. Después 20 bandejas pegado al aro, en cuatro grupos de 5 combinando pierna de salto y mano de tiro (izquierda-derecha, izquierda-izquierda, derecha-derecha, derecha-izquierda). Cerrás con 20 tiros a 2 metros del aro con una sola mano, sin saltar, que tienen que entrar limpios. Terminás cuando hiciste las 20 bandejas y los 20 tiros de una mano. Sirve para que el primer triple del día no sea el primer tiro del día. Error común: saltearlo porque 'ya estás caliente' — si arrancás tirando de lejos en frío, tirás con el hombro y arruinás la sesión entera."},
+  {name:"Bloque 1 — La escalera", tab:"Básquet · Sesión A", images:[], source:SRC_TRIPLE,
+   desc:"Empezar cerca del aro e ir retrocediendo de a poco hasta la línea de tres (7 min). Te parás en el spot 1 a 4 metros del aro y metés 3 tiros limpios (limpio = entra sin tocar el aro). Retrocedés a 5,5 metros, 3 limpios. Retrocedés a la línea de tres, 2 limpios. Si en cualquier escalón fallás 2 seguidos, volvés un paso adelante y lo repetís. Hacés lo mismo en los 5 spots, en orden. La distancia donde empezás a 'empujar' la pelota es tu límite real — este bloque te enseña a llegar al triple con las piernas y no con el brazo. Error común: apurar los escalones porque ya sabés tirar."},
+  {name:"Bloque 2 — La serie madre (el bloque medido)", tab:"Básquet · Sesión A", images:[], source:SRC_TRIPLE,
+   desc:"El examen del programa (14 min). Es siempre igual, siempre 45 tiros, y su porcentaje es el único número que comparás a las 5 semanas. Una vuelta son 15 tiros: 3 triples en cada uno de los 5 spots. Hacés 3 vueltas, total 45. Te pasás la pelota solo tirándola hacia adelante con efecto de retroceso. Elegí cómo entrás al tiro (paso 1-2 con el pie de adelante, o salto a dos pies) y no lo cambiás en toda la sesión. Cada tiro que errás: vas al rebote, hacés una bandeja y volvés al spot — el error te cuesta piernas. Referencia: 18/45 (40%) es punto de partida sano, 22/45 (49%) sólido, 27/45 (60%) tirador confiable. Error común: cambiar la distancia o el pie de entrada — si cambiás algo, el número deja de servir."},
+  {name:"Bloque 3 — El caos", tab:"Básquet · Sesión A", images:[], source:SRC_TRIPLE,
+   desc:"Tirar sin saber de dónde va a salir el próximo tiro, como pasa en un partido (8 min). Ponés el cronómetro, tirás un triple desde donde estés, corrés a buscar la pelota, y desde donde la agarraste vas al punto más cercano de la línea de tres y tirás ya. Nunca dos tiros seguidos desde el mismo lugar. Vas variando sin planificarlo: uno de recepción directa, otro con un bote y suspensión, otro con retroceso. Contás cuántos metiste en los 8 minutos. Además de entrenar la impredecibilidad del partido, te deja las piernas cansadas para el bloque siguiente. Error común: frenar a acomodarte antes de tirar — la gracia es tirar apenas llegás al punto. Objetivo: romper tu propio número cada semana."},
+  {name:"Bloque 4 — El peaje", tab:"Básquet · Sesión A", images:[], source:SRC_TRIPLE,
+   desc:"La prueba final, con las piernas ya cansadas (6 min). No te vas de la cancha hasta pagarla. Ala izquierda (spot 2): metés 3 triples seguidos — si fallás uno, ese spot vuelve a cero. Cuando lo lográs pasás al frontal (spot 3), 3 seguidos. Después ala derecha (spot 4), 3 seguidos. Cerrás con 10 tiros libres y anotás cuántos entraron. Terminás solo cuando completaste los 3 spots: no hay atajo. Es exactamente el escenario que importa — tirar bien cuando estás cansado o con la cabeza en otro lado. Error común: negociar con vos mismo cuando llevás mucho rato trabado; si te trabás no bajes la exigencia, bajá el ritmo, respirá y volvé a la rutina previa."},
+  {name:"Sesión A — Completa (Básquet)", tab:"Básquet", images:[], source:SRC_TRIPLE,
+   desc:"La sesión completa de 45 minutos, ~160 triples, mínimo 2 por semana. Corre los 5 bloques en orden: Bloque 0 (prender el motor), Bloque 1 (la escalera), Bloque 2 (la serie madre — el único que se mide), Bloque 3 (el caos) y Bloque 4 (el peaje). Es la única sesión cuyo porcentaje entra en la comparativa de 5 semanas, porque el Bloque 2 siempre es idéntico: 45 tiros en las mismas condiciones."},
+  {name:"Sesión B — Corta (Básquet)", tab:"Básquet", images:[], source:SRC_TRIPLE,
+   desc:"25 minutos, ~100 triples. Para el día que no te da el tiempo pero no querés cortar la racha: dos Sesiones B valen por una A para el mínimo semanal. Hacés el Bloque 0 completo, el Bloque 2 reducido a 2 vueltas (30 tiros, se anota sobre 30), el Bloque 3 de 6 minutos en vez de 8, y el Bloque 4 completo sin recortar. Se saltea el Bloque 1 — es el único que se puede sacar, porque el Bloque 0 ya te dejó la mano armada. Importante: el porcentaje de una Sesión B no entra en la comparativa de 5 semanas."},
+  {name:"Sesión C — Pre-partido (Básquet)", tab:"Básquet", images:[], source:SRC_TRIPLE,
+   desc:"12 minutos, ~35 triples. Para los días que vas a jugar y querés llegar con la mano caliente y el patrón fresco. Hacés el Bloque 0 completo, el Bloque 1 completo (la escalera), y 20 triples sueltos sin contar, tocando los 5 spots. No se registra porcentaje y nunca cuenta para el mínimo semanal: no es un entrenamiento, es una preparación."},
+  {name:"Diagnóstico de errores de tiro", tab:"Básquet", images:[], source:SRC_TRIPLE,
+   desc:"Mirá dónde te queda la pelota cuando errás, no cuántas errás — el lugar del error te dice qué arreglar. <b>Corto o largo</b> (pega adelante o atrás del aro): problema de piernas y de ritmo, el arco te queda plano o cambia tiro a tiro; es el error más común en el triple. Se corrige bajando más antes de subir, con la misma velocidad de subida siempre, sacando la fuerza de las piernas y no del hombro. <b>Izquierda o derecha</b>: problema de alineación; mirá dónde aterrizás, si caés corrido para un lado ahí está el problema, y mantené la mano guía quieta sin empujar. <b>De todo un poco</b>: no estás tirando el mismo tiro dos veces, esa semana el Bloque 1 pasa a ser el 40% de la sesión hasta que el tiro se ordene."},
 ];
 
 // ---- Search UI logic ----
